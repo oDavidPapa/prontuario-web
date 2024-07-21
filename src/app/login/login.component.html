@@ -1,0 +1,24 @@
+<div class="page">
+    <div class="formLogin">
+        <!-- Cabeçalho com logo e título -->
+        <div class="header">
+            <img src="assets/ufes70.png" alt="Logo da Aplicação">
+            <h1>
+                <span>Prontuário Médico</span>
+                <span>Eletrônico</span>
+            </h1>
+        </div>
+
+        <!-- Formulário de Login -->
+        <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+            <div class="input-container">
+                <input type="text" id="username" placeholder="Digite seu usuário" required [(ngModel)]="username" name="username">
+            </div>
+            <div class="input-container">
+                <input type="password" id="password" placeholder="Digite sua senha" required [(ngModel)]="password" name="password">
+            </div>
+            <a href="#">Esqueceu a senha?</a>
+            <button type="submit" class="btn">Entrar</button>
+        </form>
+    </div>
+</div>
