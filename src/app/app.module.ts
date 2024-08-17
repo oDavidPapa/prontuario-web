@@ -11,6 +11,12 @@ import { HeaderComponent } from './dashboard/header/header.component';
 import { HomeComponent } from './dashboard/home/home.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
 import { SettingsComponent } from './dashboard/settings/settings.component';
+import { DataGridComponent } from './dashboard/base/data-grid.component';
+import { PacientesComponent } from './dashboard/pacientes/pacientes.component';
+import { MedicosComponent } from './dashboard/medicos/medicos.component';
+import { ConsultasComponent } from './dashboard/consultas/consultas.component';
+import { CpfPipe } from './pipes/cpf.pipe';
+import { DatePipe } from './pipes/date.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +26,13 @@ import { SettingsComponent } from './dashboard/settings/settings.component';
     HeaderComponent,
     HomeComponent,
     ProfileComponent,
-    SettingsComponent
+    SettingsComponent,
+    DataGridComponent,
+    PacientesComponent,
+    MedicosComponent,
+    ConsultasComponent,
+    CpfPipe,
+    DatePipe
   ],
   imports: [
     BrowserModule,
