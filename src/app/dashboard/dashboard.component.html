@@ -1,0 +1,32 @@
+<div class="dashboard-container">
+  <nav class="sidebar">
+    <a routerLink="/dashboard/home" class="menu-item">
+      <i class="fa fa-home"></i>
+      <span class="menu-text">Home</span>
+    </a>
+    <a routerLink="/dashboard/consultas" class="menu-item">
+      <i class="fa fa-calendar"></i>
+      <span class="menu-text">Consultas</span>
+    </a>
+    <a routerLink="/dashboard/pacientes" class="menu-item">
+      <i class="fa fa-user-md"></i>
+      <span class="menu-text">Pacientes</span>
+    </a>
+    <a routerLink="/dashboard/medicos" class="menu-item">
+      <i class="fa fa-stethoscope"></i>
+      <span class="menu-text">Médicos</span>
+    </a>
+    <a routerLink="/dashboard/profile" class="menu-item">
+      <i class="fa fa-user"></i>
+      <span class="menu-text">Profile</span>
+    </a>
+    <a routerLink="/dashboard/settings" class="menu-item">
+      <i class="fa fa-cogs"></i>
+      <span class="menu-text">Settings</span>
+    </a>
+  </nav>
+  <div class="content">
+    <app-header></app-header>
+    <router-outlet></router-outlet>
+  </div>
+</div>
