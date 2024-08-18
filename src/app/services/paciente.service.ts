@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { PaginatedResponse } from '../models/pagination.model';
 import { Paciente } from '../models/paciente.model';
 import { environment } from '../../environments/environment';
+import { PacienteCadastroDTO } from '../models/paciente-cadastro.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class PacienteService {
     return this.http.get<Paciente>(`${this.apiUrl}pacientes/${id}`);
   }
 
-  updatePaciente(id: number, paciente: Paciente): Observable<void> {
+  updatePaciente(id: number, paciente: PacienteCadastroDTO): Observable<any> {
     return this.http.put<void>(`${this.apiUrl}pacientes/${id}`, paciente);
   }
 

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PacienteService } from '../../../services/paciente.service';
 import { Paciente } from '../../../models/paciente.model';
 import { catchError, of, tap } from 'rxjs';
+import { PacienteCadastroDTO } from '../../../models/paciente-cadastro.model';
 
 @Component({
   selector: 'app-editar-paciente',
@@ -67,7 +68,9 @@ export class EditarPacienteComponent implements OnInit {
 
   onSubmit(): void {
     if (this.pacienteForm.valid) {
-      this.pacienteService.updatePaciente(this.pacienteId, this.pacienteForm.value).pipe(
+      var pacienteCadastroDTO = this.createDataForm(this.pacienteForm);
+
+      this.pacienteService.updatePaciente(this.pacienteId, pacienteCadastroDTO).pipe(
         tap(() => {
           this.router.navigate(['/pacientes']);
         }),
@@ -82,4 +85,21 @@ export class EditarPacienteComponent implements OnInit {
   cancel(): void {
     this.router.navigate(['/prontuario/pacientes']);
   }
+
+  createDataForm(form: any): PacienteCadastroDTO {
+    const pacienteCadastro: PacienteCadastroDTO = {
+      peso: parseFloat(form.controls.peso.value),
+      altura: parseFloat(form.controls.altura.value),
+      pessoaCadastroDTO: {
+        nome: form.controls.nome.value,
+        cpf: form.controls.cpf.value,
+        //sexo: form.controls.sexo.value,
+        dataNascimento: form.controls.dataNascimento.value 
+      }
+    };
+
+    return pacienteCadastro;
+  }
 }
+
+
