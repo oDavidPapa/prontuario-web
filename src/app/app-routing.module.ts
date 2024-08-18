@@ -8,20 +8,23 @@ import { SettingsComponent } from './dashboard/settings/settings.component';
 import { PacientesComponent } from './dashboard/pacientes/pacientes.component';
 import { MedicosComponent } from './dashboard/medicos/medicos.component';
 import { ConsultasComponent } from './dashboard/consultas/consultas.component';
+import { EditarPacienteComponent } from './dashboard/pacientes/editar-pacientes/editar-pacientes.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
-    path: 'dashboard', component: DashboardComponent, children: [
-      { path: 'home', component: HomeComponent },
-      { path: 'profile', component: ProfileComponent },
-      { path: 'settings', component: SettingsComponent },
-      { path: 'pacientes', component: PacientesComponent },
-      { path: 'medicos', component: MedicosComponent },
-      { path: 'consultas', component: ConsultasComponent },
-      { path: '', redirectTo: 'home', pathMatch: 'full' }
-    ]
+    path: 'prontuario', component: DashboardComponent, children:
+      [
+        { path: 'home', component: HomeComponent },
+        { path: 'profile', component: ProfileComponent },
+        { path: 'settings', component: SettingsComponent },
+        { path: 'pacientes', component: PacientesComponent },
+        { path: 'pacientes/editar/:id', component: EditarPacienteComponent }, //
+        { path: 'medicos', component: MedicosComponent },
+        { path: 'consultas', component: ConsultasComponent },
+        { path: '', redirectTo: 'home', pathMatch: 'full' }
+      ]
   },
   { path: '**', redirectTo: '/login' }
 

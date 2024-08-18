@@ -4,6 +4,7 @@ import { PacienteService } from '../../services/paciente.service';
 import { PaginatedResponse } from '../../models/pagination.model';
 import { Paciente } from '../../models/paciente.model';
 import { Column } from '../base/column';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pacientes',
@@ -24,7 +25,7 @@ export class PacientesComponent implements OnInit {
   pageSize: number = 10; // Tamanho da página
   totalPages: number = 1; // Total de páginas
 
-  constructor(private pacienteService: PacienteService) {}
+  constructor(private pacienteService: PacienteService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadPacientes();
@@ -69,7 +70,6 @@ export class PacientesComponent implements OnInit {
   }
 
   editPaciente(paciente: Paciente): void {
-    console.log('Editar paciente:', paciente);
-    // Aqui você pode navegar para uma tela de edição ou abrir um modal de edição
+    this.router.navigate([`/prontuario/pacientes/editar/${paciente.id}`]);
   }
 }

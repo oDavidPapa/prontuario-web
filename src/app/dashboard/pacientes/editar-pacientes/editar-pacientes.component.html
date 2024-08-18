@@ -1,0 +1,35 @@
+<div class="form-container">
+  <form [formGroup]="pacienteForm" (ngSubmit)="onSubmit()" class="form">
+
+    <div class="form-group-row">
+      <div class="form-group cpf-group">
+        <label for="cpf">CPF</label>
+        <input id="cpf" formControlName="cpf" placeholder="Digite o CPF" class="form-control" />
+      </div>
+      <div class="form-group nome-group">
+        <label for="nome">Nome</label>
+        <input id="nome" formControlName="nome" placeholder="Digite o nome" class="form-control" />
+      </div>
+    </div>
+
+    <div class="form-group-row">
+      <div class="form-group">
+        <label for="dataNascimento">Data de Nascimento</label>
+        <input id="dataNascimento" formControlName="dataNascimento" placeholder="Digite a data de nascimento" type="date" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="altura">Altura</label>
+        <input id="altura" formControlName="altura" placeholder="Digite a altura" type="text" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="peso">Peso</label>
+        <input id="peso" formControlName="peso" placeholder="Digite o peso" type="text" class="form-control" />
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
+    </div>
+  </form>
+</div>

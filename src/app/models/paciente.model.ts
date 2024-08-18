@@ -1,7 +1,8 @@
+import { Pessoa } from "./pessoa.model";
+
 export interface Paciente {
-    id: number;
-    nome: string;
-    cpf: string;
-    dataNascimento: string;
-  }
-  
+  id: number;
+  peso: number;
+  altura: number;
+  pessoa: Pessoa;
+}

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';  // Necessário para ngModel
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';  // Necessário para ngModel
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';  // Corrigir o nome e a exportação
@@ -18,6 +18,7 @@ import { ConsultasComponent } from './dashboard/consultas/consultas.component';
 import { CpfPipe } from './pipes/cpf.pipe';
 import { DatePipe } from './pipes/date.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { EditarPacienteComponent } from './dashboard/pacientes/editar-pacientes/editar-pacientes.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     PacientesComponent,
     MedicosComponent,
     ConsultasComponent,
+    EditarPacienteComponent,
     CpfPipe,
     DatePipe
   ],
@@ -40,7 +42,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule, 
     AppRoutingModule,
     HttpClientModule,
-    FontAwesomeModule  
+    FontAwesomeModule,
+    ReactiveFormsModule 
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
