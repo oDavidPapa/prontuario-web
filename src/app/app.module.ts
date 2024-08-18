@@ -17,6 +17,7 @@ import { MedicosComponent } from './dashboard/medicos/medicos.component';
 import { ConsultasComponent } from './dashboard/consultas/consultas.component';
 import { CpfPipe } from './pipes/cpf.pipe';
 import { DatePipe } from './pipes/date.pipe';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { DatePipe } from './pipes/date.pipe';
     BrowserModule,
     FormsModule, 
     AppRoutingModule,
-    HttpClientModule  
+    HttpClientModule,
+    FontAwesomeModule  
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

@@ -45,3 +45,18 @@ thead {
 tfoot {
     background-color: #f9faff; /* Azul muito claro para o rodapé */
 }
+
+.edit-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #007bff; /* Azul, por exemplo */
+  }
+  
+  .edit-button:hover {
+    color: #0056b3; /* Azul mais escuro ao passar o mouse */
+  }
+  
+  .edit-button fa-icon {
+    font-size: 1.2rem; /* Tamanho do ícone */
+  }

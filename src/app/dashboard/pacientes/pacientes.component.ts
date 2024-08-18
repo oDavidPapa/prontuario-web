@@ -67,4 +67,9 @@ export class PacientesComponent implements OnInit {
       this.loadPacientes(this.page);
     }
   }
+
+  editPaciente(paciente: Paciente): void {
+    console.log('Editar paciente:', paciente);
+    // Aqui você pode navegar para uma tela de edição ou abrir um modal de edição
+  }
 }
