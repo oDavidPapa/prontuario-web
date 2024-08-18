@@ -19,6 +19,8 @@ import { CpfPipe } from './pipes/cpf.pipe';
 import { DatePipe } from './pipes/date.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EditarPacienteComponent } from './dashboard/pacientes/editar-pacientes/editar-pacientes.component';
+import { NgxMaskModule } from 'ngx-mask';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { EditarPacienteComponent } from './dashboard/pacientes/editar-pacientes/
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot()
+    
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
