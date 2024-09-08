@@ -12,6 +12,8 @@
         <ng-container [ngSwitch]="column.format">
           <span *ngSwitchCase="'cpf'">{{ getNestedValue(item, column.field) | cpf }}</span>
           <span *ngSwitchCase="'date'">{{ getNestedValue(item, column.field) | date }}</span>
+          <span *ngSwitchCase="'celular'">{{ getNestedValue(item, column.field) | phoneMask:'celular' }}</span>
+          <span *ngSwitchCase="'telefone'">{{ getNestedValue(item, column.field) | phoneMask:'telefone' }}</span>
           <span *ngSwitchDefault>{{ getNestedValue(item, column.field) }}</span>
         </ng-container>
       </td>

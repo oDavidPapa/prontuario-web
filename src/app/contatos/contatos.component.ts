@@ -1,5 +1,10 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ContatoService } from '../services/contato.service';
+import { catchError, of, tap } from 'rxjs';
+import { Column } from '../dashboard/base/column';
+import { Contato } from '../models/contato.model';
+import { PaginatedResponse } from '../models/pagination.model';
 
 @Component({
   selector: 'app-contatos',
@@ -8,37 +13,75 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ContatosComponent implements OnInit {
   contatoForm!: FormGroup;
-  contatos: any[] = [];
+  contatos: Contato[] = [];
+  @Input() idPaciente!: number; // Recebe o ID do paciente
+
 
   @Output() contatosAtualizados = new EventEmitter<any[]>();
 
-  columns = [
-    { header: 'Celular', field: 'celular' },
-    { header: 'Telefone', field: 'telefone' },
+  columns: Column[] = [
+    { header: 'Celular', field: 'celular', format: 'celular' },
+    { header: 'Telefone', field: 'telefone', format: 'telefone' },
     { header: 'Email', field: 'email' },
-    { header: 'Tipo', field: 'tipo' }
+    { header: 'Tipo', field: 'tipoContato' }
   ];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private contatoService: ContatoService) { }
 
   ngOnInit(): void {
     this.initializeForm();
+    this.loadContatos()
   }
 
   private initializeForm(): void {
     this.contatoForm = this.fb.group({
-      celular: ['', [Validators.required, Validators.pattern(/^\(\d{2}\) \d{5}-\d{4}$/)]],
+      celular: ['', [Validators.required]],
+      telefone: [''],
       email: ['', [Validators.required, Validators.email]],
-      tipo: ['', Validators.required]
+      tipoContato: ['', Validators.required],
+      idPessoa: [this.idPaciente, Validators.required]
+    });
+  }
+
+  private loadContatos(): void {
+    this.contatoService.getContatosByPessoa(this.idPaciente).pipe(
+      catchError(error => {
+        console.error('Erro ao carregar contatos', error);
+        return of({
+          data: {
+            list: [],
+            total: 0,
+            page: 0,
+            pageSize: 0
+          },
+          success: false
+        } as PaginatedResponse<Contato>);
+      })
+    ).subscribe(response => {
+      if (response && response.success) {
+        this.contatos = response.data.list;
+      }
     });
   }
 
   onAddContato(): void {
     if (this.contatoForm.valid) {
       const novoContato = this.contatoForm.value;
-      this.contatos.push(novoContato);
-      this.contatoForm.reset();
-      this.contatosAtualizados.emit(this.contatos);
+
+      this.contatoService.saveContato(novoContato).pipe(
+        tap(response => {
+          // Manipule a resposta se necessário
+          console.log('Contato salvo com sucesso:', response);
+          this.contatos.push(response.data); // Supondo que a resposta tenha uma propriedade 'data'
+          this.contatoForm.reset();
+        }),
+        catchError(error => {
+          // Manipule o erro e exiba uma mensagem de erro
+          const errorMsg = 'Erro ao salvar contato. Por favor, tente novamente.';
+          console.error('Erro ao salvar contato:', error);
+          return of(null); // Retorna um Observable vazio para continuar o fluxo
+        })
+      ).subscribe();
     }
   }
 

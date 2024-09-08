@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PacienteService } from '../../../services/paciente.service';
-import { Paciente } from '../../../models/paciente.model';
 import { catchError, of, tap } from 'rxjs';
 import { PacienteCadastroDTO } from '../../../models/paciente-cadastro.model';
+import { ContatoService } from '../../../services/contato.service';
+import { Contato } from '../../../models/contato.model';
 
 @Component({
   selector: 'app-editar-paciente',
@@ -18,9 +19,11 @@ export class EditarPacienteComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private fb: FormBuilder,
-    private pacienteService: PacienteService
+    private router: Router,
+    private pacienteService: PacienteService,
+    private contatoService: ContatoService,
+
   ) { }
 
   ngOnInit(): void {

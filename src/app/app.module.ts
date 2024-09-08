@@ -21,6 +21,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EditarPacienteComponent } from './dashboard/pacientes/editar-pacientes/editar-pacientes.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { ContatosComponent } from './contatos/contatos.component';
+import { PhoneMaskPipe } from './pipes/phone.pipe';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { ContatosComponent } from './contatos/contatos.component';
     EditarPacienteComponent,
     CpfPipe,
     DatePipe,
+    PhoneMaskPipe,
     ContatosComponent
   ],
   imports: [
