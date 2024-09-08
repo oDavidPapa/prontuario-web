@@ -1,6 +1,7 @@
 <div class="form-container">
   <form [formGroup]="pacienteForm" (ngSubmit)="onSubmit()" class="form">
 
+    <!-- Dados do Paciente -->
     <div class="form-group-row">
       <div class="form-group cpf-group">
         <label for="cpf">CPF</label>
@@ -27,9 +28,19 @@
       </div>
     </div>
 
+    <!-- Botão Salvar -->
     <div class="form-actions">
       <button type="submit" class="btn btn-primary">Salvar</button>
       <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
+    </div>
+
+    <!-- Linha Separadora -->
+    <div class="separator"></div>
+
+    <!-- Dados de Contatos -->
+    <div class="contatos-section">
+      <h3>Contatos</h3>
+      <app-contatos (contatosAtualizados)="onContatosAtualizados($event)"></app-contatos>
     </div>
   </form>
 </div>

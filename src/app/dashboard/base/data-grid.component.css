@@ -60,3 +60,17 @@ tfoot {
   .edit-button fa-icon {
     font-size: 1.2rem; /* Tamanho do ícone */
   }
+
+  .remove-button {
+    background: transparent; /* Remove o fundo do botão */
+    border: none;            /* Remove as bordas do botão */
+    color: #dc3545;          /* Define a cor do ícone como vermelho */
+    cursor: pointer;         /* Define o cursor como ponteiro para indicar que o botão é clicável */
+    padding: 0;             /* Remove o padding para o ícone ocupar o mínimo espaço possível */
+    font-size: 1.2em;        /* Ajusta o tamanho do ícone conforme necessário */
+  }
+  
+  .remove-button:hover {
+    opacity: 0.7;           /* Adiciona um efeito de hover para melhorar a usabilidade */
+  }
+  

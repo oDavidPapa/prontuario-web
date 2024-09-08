@@ -1,0 +1,97 @@
+.contato-container {
+    margin-top: 20px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column; /* Manter os itens em uma coluna */
+  }
+  
+  .form-group-row {
+    display: flex;
+    align-items: center; /* Alinha os itens verticalmente */
+    gap: 10px; /* Espaço entre os campos */
+    margin-bottom: 20px; /* Espaço abaixo da linha dos campos */
+  }
+  
+  .form-group {
+    flex: 1;
+    min-width: 150px; /* Ajuste para garantir que os campos não fiquem muito pequenos */
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    box-sizing: border-box;
+  }
+  
+  .form-group input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+  }
+  
+  .form-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: -2px;
+    padding: 10px;
+    font-size: 20px; /* Tamanho do ícone */
+    height: 38px;
+    width: 38px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    line-height: 1; /* Centraliza verticalmente o ícone */
+    cursor: pointer;
+    margin-left: 10px; /* Espaço entre o último campo e o botão */
+    margin-top: 22px;
+  }
+  
+  .separator {
+    border-top: 1px solid #ddd;
+    margin: 20px 0; /* Espaço acima e abaixo da linha separadora */
+  }
+  
+  .contatos-list {
+    margin-top: 20px;
+  }
+  
+  .contatos-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .contatos-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  

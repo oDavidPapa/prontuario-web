@@ -1,0 +1,35 @@
+<div class="contato-container">
+  <form [formGroup]="contatoForm" (ngSubmit)="onAddContato()" class="form">
+    <div class="form-group-row">
+      <div class="form-group">
+        <label for="celular">Celular</label>
+        <input id="celular" formControlName="celular" placeholder="(xx) xxxxx-xxxx" type="text" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="telefone">Telefone</label>
+        <input id="telefone" formControlName="telefone" placeholder="xxxx xxx" type="text" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" formControlName="email" placeholder="xxxxx@xxxxxxx" type="email" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="tipo">Tipo</label>
+        <input id="tipo" formControlName="tipo" placeholder="Tipo do contato" type="text" class="form-control" />
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="separator"></div>
+
+  <!-- Grid de contatos -->
+  <div class="data-grid">
+    <app-data-grid [columns]="columns" [data]="contatos" [showEdit]="false" (remove)="onRemoveContato($event)">
+    </app-data-grid>    
+  </div>
+</div>
