@@ -8,6 +8,7 @@ table {
     border-radius: 8px; /* Bordas arredondadas */
     overflow: hidden; /* Garante que as bordas arredondadas funcionem */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin-top: 10px
 }
 
 /* Estilo das células da tabela */
