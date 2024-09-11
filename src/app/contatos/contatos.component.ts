@@ -5,6 +5,7 @@ import { catchError, of, tap } from 'rxjs';
 import { Column } from '../dashboard/base/column';
 import { Contato } from '../models/contato.model';
 import { PaginatedResponse } from '../models/pagination.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contatos',
@@ -26,7 +27,10 @@ export class ContatosComponent implements OnInit {
     { header: 'Tipo', field: 'tipoContato' }
   ];
 
-  constructor(private fb: FormBuilder, private contatoService: ContatoService) { }
+  constructor(
+    private fb: FormBuilder,
+    private contatoService: ContatoService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -74,6 +78,7 @@ export class ContatosComponent implements OnInit {
           console.log('Contato salvo com sucesso:', response);
           this.contatos.push(response.data); // Supondo que a resposta tenha uma propriedade 'data'
           this.contatoForm.reset();
+          this.initializeForm();
         }),
         catchError(error => {
           // Manipule o erro e exiba uma mensagem de erro
@@ -85,12 +90,17 @@ export class ContatosComponent implements OnInit {
     }
   }
 
-  onRemoveContato(contato: any): void {
+  onRemoveContato(contato: Contato): void {
     this.contatos = this.contatos.filter(c => c !== contato);
-  }
 
-  onEditContato(contato: any): void {
-    // Lógica para editar o contato selecionado
-    console.log('Editar contato:', contato);
+    this.contatoService.delete(contato.id).subscribe(
+      () => {
+        console.log('Contato removido com sucesso');
+        this.loadContatos(); // Recarregar a lista de contatos após a exclusão
+      },
+      (error) => {
+        console.error('Erro ao remover contato:', error);
+      }
+    );
   }
 }

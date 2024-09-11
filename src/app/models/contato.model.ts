@@ -1,5 +1,5 @@
 export interface Contato {
-    id: number | null;
+    id: number;
     celular: string;
     telefone: string;
     email: string;

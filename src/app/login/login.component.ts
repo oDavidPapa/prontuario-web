@@ -15,7 +15,9 @@ export class LoginComponent {
 
   constructor(private router: Router,
     private authService: AuthService
-  ) { }
+  ) { 
+    localStorage.removeItem('token'); // Substitua 'token' pelo nome da chave usada
+  }
 
   onSubmit() {
     const authRequest: AuthRequest = {
@@ -37,7 +39,7 @@ export class LoginComponent {
   }
 
   private redirectToDashboard(): void {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/prontuario']);
   }
 
   private storeToken(token: string): void {
