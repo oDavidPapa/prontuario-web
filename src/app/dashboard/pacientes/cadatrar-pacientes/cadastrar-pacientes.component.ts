@@ -36,8 +36,8 @@ export class CadastraPacientesComponent implements OnInit {
         nome: ['', Validators.required],
         cpf: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
         dataNascimento: ['', Validators.required],
-        altura: ['', [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]],
-        peso: [''],
+        altura: ['', [Validators.required, Validators.pattern(/^\d+(\,\d+)?$/)]], 
+        peso: ['', [Validators.required, Validators.pattern(/^\d+(\,\d+)?$/)]],
         sexo:['']
       });
     }

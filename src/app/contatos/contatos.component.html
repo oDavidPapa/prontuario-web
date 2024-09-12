@@ -3,11 +3,13 @@
     <div class="form-group-row">
       <div class="form-group">
         <label for="celular">Celular</label>
-        <input id="celular" formControlName="celular" placeholder="Celular" type="text" class="form-control" mask="(00)00000-0000"/>
+        <input id="celular" formControlName="celular" placeholder="Celular" type="text" class="form-control"
+          mask="(00)00000-0000" />
       </div>
       <div class="form-group">
         <label for="telefone">Telefone</label>
-        <input id="telefone" formControlName="telefone" placeholder="Telefone Opicional" type="text" class="form-control" mask="(00)0000-0000" />
+        <input id="telefone" formControlName="telefone" placeholder="Telefone Opicional" type="text"
+          class="form-control" mask="(00)0000-0000" />
       </div>
       <div class="form-group">
         <label for="email">Email</label>
@@ -15,7 +17,11 @@
       </div>
       <div class="form-group">
         <label for="tipoContato">Tipo</label>
-        <input id="tipoContato" formControlName="tipoContato" placeholder="Tipo do contato" type="text" class="form-control" />
+        <select id="tipoContato" formControlName="tipoContato" class="form-control">
+          <option value="">Selecione o tipo</option>
+          <option value="PRINCIPAL">PRINCIPAL</option>
+          <option value="TERCEIRO">TERCEIRO</option>
+        </select>
       </div>
       <div class="form-actions">
         <button type="submit" class="btn btn-primary">
@@ -30,6 +36,6 @@
   <!-- Grid de contatos -->
   <div class="data-grid">
     <app-data-grid [columns]="columns" [data]="contatos" [showEdit]="false" (remove)="onRemoveContato($event)">
-    </app-data-grid>    
+    </app-data-grid>
   </div>
 </div>

@@ -23,18 +23,18 @@
             <div class="form-group">
                 <label for="sexo">Sexo</label>
                 <select id="sexo" formControlName="sexo" class="form-control">
+                    <option value="">Selecione o sexo</option>
                     <option value="M">Masculino</option>
                     <option value="F">Feminino</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="altura">Altura</label>
-                <input id="altura" formControlName="altura" placeholder="Digite a altura" type="text"
-                    class="form-control" />
+                <input id="altura" formControlName="altura" placeholder="Digite a altura" type="text" class="form-control" mask="0,00"/>
             </div>
             <div class="form-group">
                 <label for="peso">Peso</label>
-                <input id="peso" formControlName="peso" placeholder="Digite o peso" type="text" class="form-control" />
+                <input id="peso" formControlName="peso" placeholder="Digite o peso" type="text" class="form-control" mask="000,00" />
             </div>
         </div>
 
