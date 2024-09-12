@@ -3,8 +3,8 @@ import { catchError, of } from 'rxjs';
 import { PacienteService } from '../../services/paciente.service';
 import { PaginatedResponse } from '../../models/pagination.model';
 import { Paciente } from '../../models/paciente.model';
-import { Column } from '../base/column';
 import { Router } from '@angular/router';
+import { Column } from '../base/grid/column';
 
 @Component({
   selector: 'app-pacientes',

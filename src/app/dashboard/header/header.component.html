@@ -1,8 +1,9 @@
 <!-- header.component.html -->
-<div class="header">
-    <div class="title-container">
-      <h1>{{ title }}</h1>
-    </div>
-    <button *ngIf="showRegisterButton" class="register-button">Novo Registro</button>
+<div *ngIf="showHeader" class="header">
+  <div class="title-container">
+    <h1>{{ title }}</h1>
   </div>
-  
+  <button *ngIf="showRegisterButton" class="register-button" (click)="novoRegistro()">
+    Novo Registro
+  </button>
+</div>

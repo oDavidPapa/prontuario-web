@@ -9,6 +9,7 @@ import { PacientesComponent } from './dashboard/pacientes/pacientes.component';
 import { MedicosComponent } from './dashboard/medicos/medicos.component';
 import { ConsultasComponent } from './dashboard/consultas/consultas.component';
 import { EditarPacienteComponent } from './dashboard/pacientes/editar-pacientes/editar-pacientes.component';
+import { CadastraPacientesComponent } from './dashboard/pacientes/cadatrar-pacientes/cadastrar-pacientes.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
         { path: 'profile', component: ProfileComponent },
         { path: 'settings', component: SettingsComponent },
         { path: 'pacientes', component: PacientesComponent },
-        { path: 'pacientes/editar/:id', component: EditarPacienteComponent }, //
+        { path: 'pacientes/editar/:id', component: EditarPacienteComponent },
+        { path: 'pacientes/cadastrar', component: CadastraPacientesComponent }, // Rota para novo paciente
         { path: 'medicos', component: MedicosComponent },
         { path: 'consultas', component: ConsultasComponent },
         { path: '', redirectTo: 'home', pathMatch: 'full' }

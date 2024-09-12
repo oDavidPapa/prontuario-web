@@ -4,8 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PacienteService } from '../../../services/paciente.service';
 import { catchError, of, tap } from 'rxjs';
 import { PacienteCadastroDTO } from '../../../models/paciente-cadastro.model';
-import { ContatoService } from '../../../services/contato.service';
-import { Contato } from '../../../models/contato.model';
+import { AlertService } from '../../base/alert/alert.service';
 
 @Component({
   selector: 'app-editar-paciente',
@@ -22,8 +21,7 @@ export class EditarPacienteComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private pacienteService: PacienteService,
-    private contatoService: ContatoService,
-
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -40,7 +38,8 @@ export class EditarPacienteComponent implements OnInit {
       cpf: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
       dataNascimento: ['', Validators.required],
       altura: ['', [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]],
-      peso: ['']
+      peso: [''],
+      sexo:['']
     });
   }
 
@@ -55,7 +54,8 @@ export class EditarPacienteComponent implements OnInit {
             cpf: paciente.pessoa.cpf,
             dataNascimento: paciente.pessoa.dataNascimento,
             altura: paciente.altura,
-            peso: paciente.peso
+            peso: paciente.peso,
+            sexo: paciente.pessoa.sexo
           });
         } else {
           console.error('Erro ao carregar dados do paciente');
@@ -75,10 +75,10 @@ export class EditarPacienteComponent implements OnInit {
 
       this.pacienteService.updatePaciente(this.pacienteId, pacienteCadastroDTO).pipe(
         tap(() => {
-          this.router.navigate(['/pacientes']);
+          this.alertService.success('Sucesso!', 'Paciente atualizado com sucesso!');
         }),
         catchError(error => {
-          console.error('Erro ao atualizar dados do paciente', error);
+          this.alertService.error('Erro!', 'Erro ao atualizar dados do paciente.');
           return of(null);
         })
       ).subscribe();
@@ -96,7 +96,7 @@ export class EditarPacienteComponent implements OnInit {
       pessoaCadastroDTO: {
         nome: form.controls.nome.value,
         cpf: form.controls.cpf.value,
-        //sexo: form.controls.sexo.value,
+        sexo: form.controls.sexo.value,
         dataNascimento: form.controls.dataNascimento.value 
       }
     };

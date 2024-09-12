@@ -2,10 +2,11 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContatoService } from '../services/contato.service';
 import { catchError, of, tap } from 'rxjs';
-import { Column } from '../dashboard/base/column';
 import { Contato } from '../models/contato.model';
 import { PaginatedResponse } from '../models/pagination.model';
 import { Router } from '@angular/router';
+import { Column } from '../dashboard/base/grid/column';
+import { AlertService } from '../dashboard/base/alert/alert.service';
 
 @Component({
   selector: 'app-contatos',
@@ -30,7 +31,7 @@ export class ContatosComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private contatoService: ContatoService,
-    private router: Router) { }
+    private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -75,15 +76,13 @@ export class ContatosComponent implements OnInit {
       this.contatoService.saveContato(novoContato).pipe(
         tap(response => {
           // Manipule a resposta se necessário
-          console.log('Contato salvo com sucesso:', response);
+          this.alertService.success('Sucesso!', 'Contato do Paciente cadastrado com sucesso!');
           this.contatos.push(response.data); // Supondo que a resposta tenha uma propriedade 'data'
           this.contatoForm.reset();
           this.initializeForm();
         }),
         catchError(error => {
-          // Manipule o erro e exiba uma mensagem de erro
-          const errorMsg = 'Erro ao salvar contato. Por favor, tente novamente.';
-          console.error('Erro ao salvar contato:', error);
+          this.alertService.error('Erro!', 'Erro ao cadastrar o contato do paciente.');
           return of(null); // Retorna um Observable vazio para continuar o fluxo
         })
       ).subscribe();
@@ -95,7 +94,7 @@ export class ContatosComponent implements OnInit {
 
     this.contatoService.delete(contato.id).subscribe(
       () => {
-        console.log('Contato removido com sucesso');
+        this.alertService.success('Sucesso!', 'Contato do Paciente removido com sucesso!');
         this.loadContatos(); // Recarregar a lista de contatos após a exclusão
       },
       (error) => {

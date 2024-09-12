@@ -10,6 +10,8 @@ import { filter } from 'rxjs/operators';
 export class HeaderComponent implements OnInit {
   title: string = '';
   showRegisterButton: boolean = false;
+  showHeader = false; 
+
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -29,35 +31,47 @@ export class HeaderComponent implements OnInit {
 
     if (currentUrl.startsWith('/prontuario/pacientes')) {
       this.title = 'Pacientes';
-      this.showRegisterButton = !currentUrl.includes('editar');
+      this.showRegisterButton = this.shouldShowRegisterButton();
+      this.showHeader = true;
+      
     } else if (currentUrl.startsWith('/prontuario/consultas')) {
       this.title = 'Consultas';
-      this.showRegisterButton = false; // Sem botão para consultas
+      this.showRegisterButton = this.shouldShowRegisterButton();
+      this.showHeader = true;
+
     } else if (currentUrl.startsWith('/prontuario/medicos')) {
       this.title = 'Médicos';
-      this.showRegisterButton = false; // Sem botão para médicos
+      this.showRegisterButton = this.shouldShowRegisterButton();
+      this.showHeader = true;
+
     } else if (currentUrl.startsWith('/prontuario/home')) {
       this.title = 'Home';
-      this.showRegisterButton = false; // Sem botão para home
+      this.showRegisterButton = this.shouldShowRegisterButton();
+      this.showHeader = false;
+
     } else if (currentUrl.startsWith('/prontuario/profile')) {
       this.title = 'Profile';
-      this.showRegisterButton = false; // Sem botão para profile
+      this.showRegisterButton = this.shouldShowRegisterButton();
+      this.showHeader = true;
+
     } else if (currentUrl.startsWith('/prontuario/settings')) {
       this.title = 'Settings';
-      this.showRegisterButton = false; // Sem botão para settings
+      this.showRegisterButton = this.shouldShowRegisterButton();
+      this.showHeader = true;
+
     } else {
       this.title = '';
       this.showRegisterButton = false;
     }
   }
 
-  // onButtonClick(): void {
-  //   // Lógica para o botão
-  //   console.log('Botão clicado');
-  //   // Redirecionar para a página de cadastro, dependendo do contexto
-  //   if (this.title === 'Pacientes') {
-  //     this.router.navigate(['/prontuario/pacientes/cadastrar']);
-  //   }
-  //   // Adicione redirecionamentos para outros títulos se necessário
-  // }
+  private shouldShowRegisterButton(): boolean {
+    return !this.router.url.includes('editar') && !this.router.url.includes('cadastrar');
+  }
+
+  novoRegistro(): void {
+    const currentRoute = this.router.url;
+    const redirectTo = currentRoute + '/cadastrar'
+    this.router.navigate([redirectTo]);
+  }
 }

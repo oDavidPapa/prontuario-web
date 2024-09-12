@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';  // Necessário para ngModel
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -11,7 +12,6 @@ import { HeaderComponent } from './dashboard/header/header.component';
 import { HomeComponent } from './dashboard/home/home.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
 import { SettingsComponent } from './dashboard/settings/settings.component';
-import { DataGridComponent } from './dashboard/base/data-grid.component';
 import { PacientesComponent } from './dashboard/pacientes/pacientes.component';
 import { MedicosComponent } from './dashboard/medicos/medicos.component';
 import { ConsultasComponent } from './dashboard/consultas/consultas.component';
@@ -22,6 +22,9 @@ import { EditarPacienteComponent } from './dashboard/pacientes/editar-pacientes/
 import { NgxMaskModule } from 'ngx-mask';
 import { ContatosComponent } from './contatos/contatos.component';
 import { PhoneMaskPipe } from './pipes/phone.pipe';
+import { CadastraPacientesComponent } from './dashboard/pacientes/cadatrar-pacientes/cadastrar-pacientes.component';
+import { DataGridComponent } from './dashboard/base/grid/data-grid.component';
+import { AlertService } from './dashboard/base/alert/alert.service';
 
 
 @NgModule({
@@ -38,6 +41,7 @@ import { PhoneMaskPipe } from './pipes/phone.pipe';
     MedicosComponent,
     ConsultasComponent,
     EditarPacienteComponent,
+    CadastraPacientesComponent,
     CpfPipe,
     DatePipe,
     PhoneMaskPipe,
@@ -45,15 +49,15 @@ import { PhoneMaskPipe } from './pipes/phone.pipe';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule, 
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
     ReactiveFormsModule,
-    NgxMaskModule.forRoot()
-    
+    NgxMaskModule.forRoot()   
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

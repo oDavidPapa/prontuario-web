@@ -30,4 +30,8 @@ export class PacienteService {
     return this.http.put<void>(`${this.apiUrl}pacientes/${id}`, paciente);
   }
 
+  cadastrarPaciente(paciente: PacienteCadastroDTO): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}pacientes`, paciente);
+  }
+
 }
