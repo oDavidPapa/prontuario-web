@@ -37,9 +37,9 @@ export class EditarPacienteComponent implements OnInit {
       nome: ['', Validators.required],
       cpf: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
       dataNascimento: ['', Validators.required],
-      altura: ['', [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]],
-      peso: [''],
-      sexo:['']
+      altura: ['', [Validators.required]],
+      peso: ['', [Validators.required]],
+      sexo: ['']
     });
   }
 
@@ -97,7 +97,7 @@ export class EditarPacienteComponent implements OnInit {
         nome: form.controls.nome.value,
         cpf: form.controls.cpf.value,
         sexo: form.controls.sexo.value,
-        dataNascimento: form.controls.dataNascimento.value 
+        dataNascimento: form.controls.dataNascimento.value
       }
     };
 

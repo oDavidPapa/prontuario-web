@@ -136,4 +136,14 @@ html, body {
     outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
   }
+
+  .is-invalid {
+    border-color: #dc3545 !important; /* Cor vermelha para borda de erro */
+    border-width: 1px !important; /* Espessura da borda */
+  }
   
+  .invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+  }
