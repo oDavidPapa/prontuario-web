@@ -1,0 +1,42 @@
+.data-grid {
+    margin-bottom: 20px;
+  }
+  
+  .pagination-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin: 0 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s, opacity 0.3s;
+  }
+  
+  .pagination-button:disabled {
+    background-color: #b0b0b0;
+    cursor: not-allowed;
+  }
+  
+  .pagination-button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  .pagination-button i {
+    font-size: 14px;
+  }
+  
+  .page-info {
+    font-size: 14px;
+    margin: 0 8px;
+    color: #333;
+  }
+  

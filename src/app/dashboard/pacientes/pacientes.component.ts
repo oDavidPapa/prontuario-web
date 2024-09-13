@@ -21,7 +21,7 @@ export class PacientesComponent implements OnInit {
   ];
 
   totalItems: number = 0; // Para paginação
-  page: number = 1; // Página atual
+  page: number = 0; // Página atual
   pageSize: number = 10; // Tamanho da página
   totalPages: number = 1; // Total de páginas
 

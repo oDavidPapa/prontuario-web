@@ -1,0 +1,85 @@
+<div class="form-container">
+  <form [formGroup]="medicoForm" (ngSubmit)="onSubmit()" class="form">
+      <!-- Dados do Paciente -->
+      <div class="form-group-row">
+          <div class="form-group cpf-group">
+              <label for="cpf">CPF</label>
+              <input id="cpf" formControlName="cpf" placeholder="Digite o CPF" class="form-control"
+                  mask="000.000.000-00"
+                  [ngClass]="{'is-invalid': medicoForm.get('cpf')?.invalid && medicoForm.get('cpf')?.touched}" />
+              <div *ngIf="medicoForm.get('cpf')?.invalid && medicoForm.get('cpf')?.touched"
+                  class="invalid-feedback">
+                  CPF é obrigatório e deve estar no formato correto.
+              </div>
+          </div>
+          <div class="form-group nome-group">
+              <label for="nome">Nome</label>
+              <input id="nome" formControlName="nome" placeholder="Digite o nome" class="form-control"
+                  [ngClass]="{'is-invalid': medicoForm.get('nome')?.invalid && medicoForm.get('nome')?.touched}" />
+              <div *ngIf="medicoForm.get('nome')?.invalid && medicoForm.get('nome')?.touched"
+                  class="invalid-feedback">
+                  Nome é obrigatório.
+              </div>
+          </div>
+      </div>
+
+      <div class="form-group-row">
+          <div class="form-group">
+              <label for="dataNascimento">Data de Nascimento</label>
+              <input id="dataNascimento" formControlName="dataNascimento" placeholder="Digite a data de nascimento"
+                  type="date" class="form-control"
+                  [ngClass]="{'is-invalid': medicoForm.get('dataNascimento')?.invalid && medicoForm.get('dataNascimento')?.touched}" />
+              <div *ngIf="medicoForm.get('dataNascimento')?.invalid && medicoForm.get('dataNascimento')?.touched"
+                  class="invalid-feedback">
+                  Data de nascimento é obrigatória.
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="sexo">Sexo</label>
+              <select id="sexo" formControlName="sexo" class="form-control"
+                  [ngClass]="{'is-invalid': medicoForm.get('sexo')?.invalid && medicoForm.get('sexo')?.touched}">
+                  <option value="">Selecione o sexo</option>
+                  <option value="M">Masculino</option>
+                  <option value="F">Feminino</option>
+              </select>
+              <div *ngIf="medicoForm.get('sexo')?.invalid && medicoForm.get('sexo')?.touched"
+                  class="invalid-feedback">
+                  Sexo é obrigatório.
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="especialidade">Especialidade</label>
+              <input id="especialidade" formControlName="especialidade" placeholder="Digite a especialidade" type="text"
+                  class="form-control"
+                  [ngClass]="{'is-invalid': medicoForm.get('especialidade')?.invalid && medicoForm.get('especialidade')?.touched}" />
+              <div *ngIf="medicoForm.get('especialidade')?.invalid && medicoForm.get('especialidade')?.touched"
+                  class="invalid-feedback">
+                  Especialidade é obrigatória.
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="crm">CRM</label>
+              <input id="crm" formControlName="crm" placeholder="Digite o crm" type="text" class="form-control"
+                  [ngClass]="{'is-invalid': medicoForm.get('crm')?.invalid && medicoForm.get('crm')?.touched}" />
+              <div *ngIf="medicoForm.get('crm')?.invalid && medicoForm.get('crm')?.touched"
+                  class="invalid-feedback">
+                  CRM é obrigatório.
+              </div>
+          </div>
+      </div>
+
+    <!-- Botão Salvar -->
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
+    </div>
+
+    <!-- Linha Separadora -->
+    <div class="separator"></div>
+
+    <!-- Dados de Contatos -->
+    <div class="contatos-section">
+      <app-contatos [idPaciente]="medicoId" (contatosAtualizados)="onContatosAtualizados($event)"></app-contatos>
+    </div>
+  </form>
+</div>

@@ -25,6 +25,8 @@ import { PhoneMaskPipe } from './pipes/phone.pipe';
 import { CadastraPacientesComponent } from './dashboard/pacientes/cadatrar-pacientes/cadastrar-pacientes.component';
 import { DataGridComponent } from './dashboard/base/grid/data-grid.component';
 import { AlertService } from './dashboard/base/alert/alert.service';
+import { CadastraMedicosComponent } from './dashboard/medicos/cadastrar-medicos/cadastrar-medicos.component';
+import { EditarMedicoComponent } from './dashboard/medicos/editar-medicos/editar-medicos.component';
 
 
 @NgModule({
@@ -40,22 +42,28 @@ import { AlertService } from './dashboard/base/alert/alert.service';
     PacientesComponent,
     MedicosComponent,
     ConsultasComponent,
+
     EditarPacienteComponent,
     CadastraPacientesComponent,
+
+    CadastraMedicosComponent,
+    EditarMedicoComponent,
+
     CpfPipe,
     DatePipe,
     PhoneMaskPipe,
     ContatosComponent
   ],
+  
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule, 
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
     ReactiveFormsModule,
-    NgxMaskModule.forRoot()   
+    NgxMaskModule.forRoot()
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, AlertService],
   bootstrap: [AppComponent]
