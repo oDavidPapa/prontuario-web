@@ -76,13 +76,13 @@ export class ContatosComponent implements OnInit {
       this.contatoService.saveContato(novoContato).pipe(
         tap(response => {
           // Manipule a resposta se necessário
-          this.alertService.success('Sucesso!', 'Contato do Paciente cadastrado com sucesso!');
+          this.alertService.success('Sucesso!', 'Contato cadastrado com sucesso!');
           this.contatos.push(response.data); // Supondo que a resposta tenha uma propriedade 'data'
           this.contatoForm.reset();
           this.initializeForm();
         }),
         catchError(error => {
-          this.alertService.error('Erro!', 'Erro ao cadastrar o contato do paciente.');
+          this.alertService.error('Erro!', 'Erro ao cadastrar o contato.');
           return of(null); // Retorna um Observable vazio para continuar o fluxo
         })
       ).subscribe();
@@ -94,7 +94,7 @@ export class ContatosComponent implements OnInit {
 
     this.contatoService.delete(contato.id).subscribe(
       () => {
-        this.alertService.success('Sucesso!', 'Contato do Paciente removido com sucesso!');
+        this.alertService.success('Sucesso!', 'Contato removido com sucesso!');
         this.loadContatos(); // Recarregar a lista de contatos após a exclusão
       },
       (error) => {

@@ -17,6 +17,7 @@ export class MedicosComponent {
   columns: Column[] = [
     { header: '#', field: 'id' },
     { header: 'CPF', field: 'pessoa.cpf', format: 'cpf' },
+    { header: 'CRM', field: 'crm' },
     { header: 'Nome', field: 'pessoa.nome' },
     { header: 'Data Nascimento', field: 'pessoa.dataNascimento', format: 'date' }
   ];

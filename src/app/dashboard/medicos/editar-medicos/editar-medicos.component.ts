@@ -53,8 +53,8 @@ export class EditarMedicoComponent implements OnInit {
             nome: medico.pessoa.nome,
             cpf: medico.pessoa.cpf,
             dataNascimento: medico.pessoa.dataNascimento,
-            altura: medico.altura,
-            peso: medico.peso,
+            especialidade: medico.especialidade,
+            crm: medico.crm,
             sexo: medico.pessoa.sexo
           });
         } else {
@@ -91,8 +91,8 @@ export class EditarMedicoComponent implements OnInit {
 
   createDataForm(form: any): MedicoCadastroDTO {
     const medicoCadastro: MedicoCadastroDTO = {
-      especialidade: form.controls.especialidade,
-      crm: form.controls.crm,
+      especialidade: form.controls.especialidade.value,
+      crm: form.controls.crm.value,
       pessoaCadastroDTO: {
         nome: form.controls.nome.value,
         cpf: form.controls.cpf.value,
