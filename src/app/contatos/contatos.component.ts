@@ -40,6 +40,7 @@ export class ContatosComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['idPessoa'] && this.idPessoa) {
       this.initializeForm();
+      this.loadContatos()
     }
   }
 
