@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Column } from './column';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faTimesCircle, faCheckCircle  } from '@fortawesome/free-solid-svg-icons';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 
 @Component({
@@ -19,10 +19,13 @@ export class DataGridComponent {
 
   faEdit = faEdit; // Adiciona o ícone de lápis
   faTrash = faTrash; // Adiciona o ícone de lixeira
+  faCheckCircle = faCheckCircle;
+  faTimesCircle = faTimesCircle;
+
 
   constructor(private library: FaIconLibrary) {
     // Adiciona os ícones à biblioteca
-    this.library.addIcons(faEdit, faTrash);
+    this.library.addIcons(faEdit, faTrash, faTimesCircle, faTimesCircle);
   }
 
   getNestedValue(obj: any, path: string): any {

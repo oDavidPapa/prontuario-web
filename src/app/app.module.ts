@@ -10,8 +10,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptors';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './dashboard/header/header.component';
 import { HomeComponent } from './dashboard/home/home.component';
-import { ProfileComponent } from './dashboard/profile/profile.component';
-import { SettingsComponent } from './dashboard/settings/settings.component';
+import { SettingsComponent } from './dashboard/configuracao/settings.component';
 import { PacientesComponent } from './dashboard/pacientes/pacientes.component';
 import { MedicosComponent } from './dashboard/medicos/medicos.component';
 import { ConsultasComponent } from './dashboard/consultas/consultas.component';
@@ -27,6 +26,7 @@ import { DataGridComponent } from './dashboard/base/grid/data-grid.component';
 import { AlertService } from './dashboard/base/alert/alert.service';
 import { CadastraMedicosComponent } from './dashboard/medicos/cadastrar-medicos/cadastrar-medicos.component';
 import { EditarMedicoComponent } from './dashboard/medicos/editar-medicos/editar-medicos.component';
+import { UsuarioComponent } from './dashboard/usuarios/usuario.component';
 
 
 @NgModule({
@@ -36,7 +36,7 @@ import { EditarMedicoComponent } from './dashboard/medicos/editar-medicos/editar
     DashboardComponent,
     HeaderComponent,
     HomeComponent,
-    ProfileComponent,
+    UsuarioComponent,
     SettingsComponent,
     DataGridComponent,
     PacientesComponent,
@@ -49,12 +49,14 @@ import { EditarMedicoComponent } from './dashboard/medicos/editar-medicos/editar
     CadastraMedicosComponent,
     EditarMedicoComponent,
 
+    UsuarioComponent,
+
     CpfPipe,
     DatePipe,
     PhoneMaskPipe,
     ContatosComponent
   ],
-  
+
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

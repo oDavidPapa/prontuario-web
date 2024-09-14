@@ -1,0 +1,14 @@
+<div class="data-grid">
+    <app-data-grid [columns]="columns" [data]="usuarios" (edit)="editUsuario($event)" [showDelete]="false">
+    </app-data-grid>
+</div>
+
+<div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="page <= 1" class="pagination-button pagination-button-prev">
+        <i class="fa fa-chevron-left"></i>
+    </button>
+    <span class="page-info">Página {{page}} de {{totalPages}}</span>
+    <button (click)="nextPage()" [disabled]="page >= totalPages" class="pagination-button pagination-button-next">
+        <i class="fa fa-chevron-right"></i>
+    </button>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContatoService } from '../services/contato.service';
 import { catchError, of, tap } from 'rxjs';
@@ -13,11 +13,10 @@ import { AlertService } from '../dashboard/base/alert/alert.service';
   templateUrl: './contatos.component.html',
   styleUrls: ['./contatos.component.css']
 })
-export class ContatosComponent implements OnInit {
+export class ContatosComponent implements OnInit, OnChanges {
   contatoForm!: FormGroup;
   contatos: Contato[] = [];
-  @Input() idPaciente!: number; // Recebe o ID do paciente
-
+  @Input() idPessoa!: number;
 
   @Output() contatosAtualizados = new EventEmitter<any[]>();
 
@@ -38,18 +37,24 @@ export class ContatosComponent implements OnInit {
     this.loadContatos()
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['idPessoa'] && this.idPessoa) {
+      this.initializeForm();
+    }
+  }
+
   private initializeForm(): void {
     this.contatoForm = this.fb.group({
       celular: ['', [Validators.required]],
       telefone: [''],
       email: ['', [Validators.required, Validators.email]],
       tipoContato: ['', Validators.required],
-      idPessoa: [this.idPaciente, Validators.required]
+      idPessoa: [this.idPessoa, Validators.required]
     });
   }
 
   private loadContatos(): void {
-    this.contatoService.getContatosByPessoa(this.idPaciente).pipe(
+    this.contatoService.getContatosByPessoa(this.idPessoa).pipe(
       catchError(error => {
         console.error('Erro ao carregar contatos', error);
         return of({

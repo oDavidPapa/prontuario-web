@@ -14,7 +14,8 @@ import { AlertService } from '../../base/alert/alert.service';
 
 export class EditarPacienteComponent implements OnInit {
   pacienteForm!: FormGroup;
-  pacienteId!: number;
+  idPaciente!: number;
+  idPessoa!: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,7 +26,7 @@ export class EditarPacienteComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.pacienteId = Number(this.route.snapshot.paramMap.get('id'));
+    this.idPaciente = Number(this.route.snapshot.paramMap.get('id'));
     this.initializeForm();
     this.loadPaciente();
   }
@@ -44,7 +45,7 @@ export class EditarPacienteComponent implements OnInit {
   }
 
   private loadPaciente(): void {
-    this.pacienteService.getPacienteById(this.pacienteId).pipe(
+    this.pacienteService.getPacienteById(this.idPaciente).pipe(
       tap(response => {
         if (response.success) {
           const paciente = response.data;
@@ -57,6 +58,9 @@ export class EditarPacienteComponent implements OnInit {
             peso: paciente.peso,
             sexo: paciente.pessoa.sexo
           });
+
+          this.idPessoa = paciente.pessoa.id;
+
         } else {
           console.error('Erro ao carregar dados do paciente');
         }
@@ -73,7 +77,7 @@ export class EditarPacienteComponent implements OnInit {
     if (this.pacienteForm.valid) {
       var pacienteCadastroDTO = this.createDataForm(this.pacienteForm);
 
-      this.pacienteService.updatePaciente(this.pacienteId, pacienteCadastroDTO).pipe(
+      this.pacienteService.updatePaciente(this.idPaciente, pacienteCadastroDTO).pipe(
         tap(() => {
           this.alertService.success('Sucesso!', 'Paciente atualizado com sucesso!');
         }),

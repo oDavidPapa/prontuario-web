@@ -14,6 +14,14 @@
           <span *ngSwitchCase="'date'">{{ getNestedValue(item, column.field) | date }}</span>
           <span *ngSwitchCase="'celular'">{{ getNestedValue(item, column.field) | phoneMask:'celular' }}</span>
           <span *ngSwitchCase="'telefone'">{{ getNestedValue(item, column.field) | phoneMask:'telefone' }}</span>
+          <span *ngSwitchCase="'status'">
+            <ng-container *ngIf="getNestedValue(item, column.field) === 'ATIVO'; else inactiveStatus">
+              <fa-icon [icon]="faCheckCircle" class="text-success status-icon"></fa-icon>
+            </ng-container>
+            <ng-template #inactiveStatus>
+              <fa-icon [icon]="faTimesCircle" class="text-muted status-icon"></fa-icon>
+            </ng-template>
+          </span>
           <span *ngSwitchDefault>{{ getNestedValue(item, column.field) }}</span>
         </ng-container>
       </td>

@@ -49,13 +49,13 @@ export class HeaderComponent implements OnInit {
       this.showRegisterButton = this.shouldShowRegisterButton();
       this.showHeader = false;
 
-    } else if (currentUrl.startsWith('/prontuario/profile')) {
-      this.title = 'Profile';
+    } else if (currentUrl.startsWith('/prontuario/usuarios')) {
+      this.title = 'Usuários';
       this.showRegisterButton = this.shouldShowRegisterButton();
       this.showHeader = true;
 
-    } else if (currentUrl.startsWith('/prontuario/settings')) {
-      this.title = 'Settings';
+    } else if (currentUrl.startsWith('/prontuario/configuracoes')) {
+      this.title = 'Configurações';
       this.showRegisterButton = this.shouldShowRegisterButton();
       this.showHeader = true;
 

@@ -14,7 +14,8 @@ import { AlertService } from '../../base/alert/alert.service';
 
 export class EditarMedicoComponent implements OnInit {
   medicoForm!: FormGroup;
-  medicoId!: number;
+  idMedico!: number;
+  idPessoa!: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,7 +26,7 @@ export class EditarMedicoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.medicoId = Number(this.route.snapshot.paramMap.get('id'));
+    this.idMedico = Number(this.route.snapshot.paramMap.get('id'));
     this.initializeForm();
     this.loadMedico();
   }
@@ -44,7 +45,7 @@ export class EditarMedicoComponent implements OnInit {
   }
 
   private loadMedico(): void {
-    this.medicoService.getMedicoById(this.medicoId).pipe(
+    this.medicoService.getMedicoById(this.idMedico).pipe(
       tap(response => {
         if (response.success) {
           const medico = response.data;
@@ -57,6 +58,8 @@ export class EditarMedicoComponent implements OnInit {
             crm: medico.crm,
             sexo: medico.pessoa.sexo
           });
+
+          this.idPessoa = medico.pessoa.id;
         } else {
           console.error('Erro ao carregar dados do medico');
         }
@@ -73,7 +76,7 @@ export class EditarMedicoComponent implements OnInit {
     if (this.medicoForm.valid) {
       var medicoCadastroDTO = this.createDataForm(this.medicoForm);
 
-      this.medicoService.updateMedico(this.medicoId, medicoCadastroDTO).pipe(
+      this.medicoService.updateMedico(this.idMedico, medicoCadastroDTO).pipe(
         tap(() => {
           this.alertService.success('Sucesso!', 'Medico atualizado com sucesso!');
         }),

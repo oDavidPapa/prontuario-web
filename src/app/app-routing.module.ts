@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './dashboard/home/home.component';
-import { ProfileComponent } from './dashboard/profile/profile.component';
-import { SettingsComponent } from './dashboard/settings/settings.component';
+import { UsuarioComponent } from './dashboard/usuarios/usuario.component';
+import { SettingsComponent } from './dashboard/configuracao/settings.component';
 import { PacientesComponent } from './dashboard/pacientes/pacientes.component';
 import { MedicosComponent } from './dashboard/medicos/medicos.component';
 import { ConsultasComponent } from './dashboard/consultas/consultas.component';
@@ -20,16 +20,16 @@ const routes: Routes = [
     path: 'prontuario', component: DashboardComponent, children:
       [
         { path: 'home', component: HomeComponent },
-        { path: 'profile', component: ProfileComponent },
-        { path: 'settings', component: SettingsComponent },
+        { path: 'usuarios', component: UsuarioComponent },
+        { path: 'configuracoes', component: SettingsComponent },
 
         { path: 'pacientes', component: PacientesComponent },
         { path: 'pacientes/editar/:id', component: EditarPacienteComponent },
-        { path: 'pacientes/cadastrar', component: CadastraPacientesComponent }, 
-        
+        { path: 'pacientes/cadastrar', component: CadastraPacientesComponent },
+
         { path: 'medicos', component: MedicosComponent },
         { path: 'medicos/editar/:id', component: EditarMedicoComponent },
-        { path: 'medicos/cadastrar', component: CadastraMedicosComponent }, 
+        { path: 'medicos/cadastrar', component: CadastraMedicosComponent },
 
         { path: 'consultas', component: ConsultasComponent },
         { path: '', redirectTo: 'home', pathMatch: 'full' }

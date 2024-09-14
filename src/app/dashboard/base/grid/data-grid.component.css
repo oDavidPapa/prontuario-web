@@ -14,7 +14,7 @@ table {
 /* Estilo das células da tabela */
 th, td {
     padding: 12px; /* Espaçamento interno das células */
-    text-align: left; /* Alinhamento do texto à esquerda */
+    text-align: center; /* Alinhamento do texto à esquerda */
     border-bottom: 1px solid #eee; /* Linha separadora entre linhas, cor clara */
 }
 
@@ -74,4 +74,21 @@ tfoot {
   .remove-button:hover {
     opacity: 0.7;           /* Adiciona um efeito de hover para melhorar a usabilidade */
   }
+  
+  
+  .status-icon {
+    display: flex;
+    justify-content: center; /* Centraliza o ícone horizontalmente */
+    align-items: left;     /* Centraliza o ícone verticalmente */
+    font-size: 1.5em;        /* Aumenta o tamanho do ícone */
+  }
+  
+  .text-success {
+    color: green; /* Cor verde para o ícone ativo */
+  }
+  
+  .text-muted {
+    color: gray;  /* Cor cinza para o ícone inativo */
+  }
+  
   
