@@ -21,12 +21,13 @@ import { EditarPacienteComponent } from './dashboard/pacientes/editar-pacientes/
 import { NgxMaskModule } from 'ngx-mask';
 import { ContatosComponent } from './contatos/contatos.component';
 import { PhoneMaskPipe } from './pipes/phone.pipe';
-import { CadastraPacientesComponent } from './dashboard/pacientes/cadatrar-pacientes/cadastrar-pacientes.component';
+import { CadastraPacientesComponent } from './dashboard/pacientes/cadastrar-pacientes/cadastrar-pacientes.component';
 import { DataGridComponent } from './dashboard/base/grid/data-grid.component';
 import { AlertService } from './dashboard/base/alert/alert.service';
 import { CadastraMedicosComponent } from './dashboard/medicos/cadastrar-medicos/cadastrar-medicos.component';
 import { EditarMedicoComponent } from './dashboard/medicos/editar-medicos/editar-medicos.component';
 import { UsuarioComponent } from './dashboard/usuarios/usuario.component';
+import { CadastrarUsuariosComponent } from './dashboard/usuarios/cadastrar-usuarios/cadastrar-usuarios.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { UsuarioComponent } from './dashboard/usuarios/usuario.component';
     EditarMedicoComponent,
 
     UsuarioComponent,
+    CadastrarUsuariosComponent,
 
     CpfPipe,
     DatePipe,

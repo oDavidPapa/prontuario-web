@@ -1,3 +1,4 @@
+import { Contato } from "./contato.model";
 import { Pessoa } from "./pessoa.model";
 
 export interface Medico {
@@ -5,4 +6,5 @@ export interface Medico {
   crm: string;
   especialidade: string;
   pessoa: Pessoa;
+  contato: Contato;
 }

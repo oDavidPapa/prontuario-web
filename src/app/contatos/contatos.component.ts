@@ -4,7 +4,6 @@ import { ContatoService } from '../services/contato.service';
 import { catchError, of, tap } from 'rxjs';
 import { Contato } from '../models/contato.model';
 import { PaginatedResponse } from '../models/pagination.model';
-import { Router } from '@angular/router';
 import { Column } from '../dashboard/base/grid/column';
 import { AlertService } from '../dashboard/base/alert/alert.service';
 

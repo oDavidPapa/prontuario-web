@@ -22,6 +22,10 @@ export class MedicoService {
     return this.http.get<PaginatedResponse<Medico>>(this.apiUrl + "medicos", { params });
   }
 
+  getOptionsMedico(): Observable<any> {
+    return this.http.get<any>(this.apiUrl + "medicos/options");
+  }
+
   getMedicoById(id: number): Observable<any> {
     return this.http.get<Medico>(`${this.apiUrl}medicos/${id}`);
   }

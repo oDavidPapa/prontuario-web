@@ -9,9 +9,10 @@ import { PacientesComponent } from './dashboard/pacientes/pacientes.component';
 import { MedicosComponent } from './dashboard/medicos/medicos.component';
 import { ConsultasComponent } from './dashboard/consultas/consultas.component';
 import { EditarPacienteComponent } from './dashboard/pacientes/editar-pacientes/editar-pacientes.component';
-import { CadastraPacientesComponent } from './dashboard/pacientes/cadatrar-pacientes/cadastrar-pacientes.component';
+import { CadastraPacientesComponent } from './dashboard/pacientes/cadastrar-pacientes/cadastrar-pacientes.component';
 import { CadastraMedicosComponent } from './dashboard/medicos/cadastrar-medicos/cadastrar-medicos.component';
 import { EditarMedicoComponent } from './dashboard/medicos/editar-medicos/editar-medicos.component';
+import { CadastrarUsuariosComponent } from './dashboard/usuarios/cadastrar-usuarios/cadastrar-usuarios.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -21,6 +22,9 @@ const routes: Routes = [
       [
         { path: 'home', component: HomeComponent },
         { path: 'usuarios', component: UsuarioComponent },
+        { path: 'usuarios/editar/:id', component: CadastrarUsuariosComponent },
+        { path: 'usuarios/cadastrar', component: CadastrarUsuariosComponent },
+
         { path: 'configuracoes', component: SettingsComponent },
 
         { path: 'pacientes', component: PacientesComponent },

@@ -1,0 +1,174 @@
+<div class="form-container">
+    <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()" class="form">
+
+        <div class="form-group-row">
+            <div class="form-group">
+                <label for="perfil">Perfil de Cadastro</label>
+                <select id="perfil" formControlName="perfil" class="form-control"
+                    [ngClass]="{'is-invalid': usuarioForm.get('perfil')?.invalid && usuarioForm.get('perfil')?.touched}">
+                    <option value="">Selecione o Perfil</option>
+                    <option value="MEDICO">MÉDICO</option>
+                    <option value="ADMINISTRATIVO">ADMINISTRATIVO</option>
+                </select>
+                <div *ngIf="usuarioForm.get('perfil')?.invalid && usuarioForm.get('perfil')?.touched"
+                    class="invalid-feedback">
+                    Sexo é obrigatório.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group-row" *ngIf="mostrarMedicos">
+            <div class="form-group">
+                <label for="medico">Selecione o Médico</label>
+                <select id="medico" formControlName="idPessoa" class="form-control">
+                    <option value="">Selecione um Médico</option>
+                    <option *ngFor="let medico of medicosOptions" [value]="medico.id">{{ medico.nome }}</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Dados do Paciente -->
+        <div class="form-group-row">
+            <div class="form-group cpf-group">
+                <label for="cpf">CPF</label>
+                <input id="cpf" formControlName="cpf" placeholder="Digite o CPF" class="form-control"
+                    mask="000.000.000-00"
+                    [ngClass]="{'is-invalid': usuarioForm.get('cpf')?.invalid && usuarioForm.get('cpf')?.touched}" />
+                <div *ngIf="usuarioForm.get('cpf')?.invalid && usuarioForm.get('cpf')?.touched"
+                    class="invalid-feedback">
+                    CPF é obrigatório e deve estar no formato correto.
+                </div>
+            </div>
+            <div class="form-group nome-group">
+                <label for="nome">Nome</label>
+                <input id="nome" formControlName="nome" placeholder="Digite o nome" class="form-control"
+                    [ngClass]="{'is-invalid': usuarioForm.get('nome')?.invalid && usuarioForm.get('nome')?.touched}" />
+                <div *ngIf="usuarioForm.get('nome')?.invalid && usuarioForm.get('nome')?.touched"
+                    class="invalid-feedback">
+                    Nome é obrigatório.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group-row">
+            <div class="form-group">
+                <label for="dataNascimento">Data de Nascimento</label>
+                <input id="dataNascimento" formControlName="dataNascimento" placeholder="Digite a data de nascimento"
+                    type="date" class="form-control"
+                    [ngClass]="{'is-invalid': usuarioForm.get('dataNascimento')?.invalid && usuarioForm.get('dataNascimento')?.touched}" />
+                <div *ngIf="usuarioForm.get('dataNascimento')?.invalid && usuarioForm.get('dataNascimento')?.touched"
+                    class="invalid-feedback">
+                    Data de nascimento é obrigatória.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="sexo">Sexo</label>
+                <select id="sexo" formControlName="sexo" class="form-control"
+                    [ngClass]="{'is-invalid': usuarioForm.get('sexo')?.invalid && usuarioForm.get('sexo')?.touched}">
+                    <option value="">Selecione o sexo</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
+                </select>
+                <div *ngIf="usuarioForm.get('sexo')?.invalid && usuarioForm.get('sexo')?.touched"
+                    class="invalid-feedback">
+                    Sexo é obrigatório.
+                </div>
+            </div>
+            <div class="form-group" *ngIf="mostrarMedicos">
+                <label for="especialidade">Especialidade</label>
+                <input id="especialidade" formControlName="especialidade" placeholder="Digite a especialidade"
+                    type="text" class="form-control"
+                    [ngClass]="{'is-invalid': usuarioForm.get('especialidade')?.invalid && usuarioForm.get('especialidade')?.touched}" />
+                <div *ngIf="usuarioForm.get('especialidade')?.invalid && usuarioForm.get('especialidade')?.touched"
+                    class="invalid-feedback">
+                    Especialidade é obrigatória.
+                </div>
+            </div>
+            <div class="form-group" *ngIf="mostrarMedicos">
+                <label for="crm">CRM</label>
+                <input id="crm" formControlName="crm" placeholder="Digite o crm" type="text" class="form-control"
+                    [ngClass]="{'is-invalid': usuarioForm.get('crm')?.invalid && usuarioForm.get('crm')?.touched}" />
+                <div *ngIf="usuarioForm.get('crm')?.invalid && usuarioForm.get('crm')?.touched"
+                    class="invalid-feedback">
+                    CRM é obrigatório.
+                </div>
+            </div>
+        </div>
+
+        <div class="separator"></div>
+        <div class="form-group-row">
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" formControlName="email" placeholder="Digite o E-mail" type="email"
+                    [ngClass]="{'is-invalid': usuarioForm.get('email')?.invalid && usuarioForm.get('email')?.touched}"
+                    class="form-control" />
+                <div *ngIf="usuarioForm.get('email')?.invalid && usuarioForm.get('email')?.touched"
+                    class="invalid-feedback">
+                    E-mail é obrigatório.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="celular">Celular</label>
+                <input id="celular" formControlName="celular" placeholder="Celular" type="text" class="form-control"
+                    [ngClass]="{'is-invalid': usuarioForm.get('celular')?.invalid && usuarioForm.get('celular')?.touched}"
+                    mask="(00)00000-0000" />
+                <div *ngIf="usuarioForm.get('celular')?.invalid && usuarioForm.get('celular')?.touched"
+                    class="invalid-feedback">
+                    Celular é obrigatório.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input id="telefone" formControlName="telefone" placeholder="Telefone Opicional" type="text"
+                    class="form-control" mask="(00)0000-0000" />
+            </div>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="form-group-row">
+            <div class="form-group">
+                <label for="login">Login</label>
+                <input id="login" formControlName="login" placeholder="Digite o Login" type="text" class="form-control"
+                    [ngClass]="{'is-invalid': usuarioForm.get('login')?.invalid && usuarioForm.get('login')?.touched}" />
+                <div *ngIf="usuarioForm.get('login')?.invalid && usuarioForm.get('login')?.touched"
+                    class="invalid-feedback">
+                    Login é obrigatório.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input id="senha" formControlName="senha" placeholder="Digite a senha" type="password"
+                    class="form-control"
+                    [ngClass]="{'is-invalid': usuarioForm.get('senha')?.invalid && usuarioForm.get('senha')?.touched}" />
+                <div *ngIf="usuarioForm.get('senha')?.invalid && usuarioForm.get('senha')?.touched"
+                    class="invalid-feedback">
+                    Senha é obrigatória.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmacaoSenha">Confirmação da Senha</label>
+                <input id="confirmacaoSenha" formControlName="confirmacaoSenha"
+                    placeholder="Digite a confirmação da senha" type="password" class="form-control"
+                    [ngClass]="{'is-invalid': usuarioForm.get('confirmacaoSenha')?.invalid && usuarioForm.get('confirmacaoSenha')?.touched}" />
+                <div *ngIf="usuarioForm.get('confirmacaoSenha')?.invalid && usuarioForm.get('confirmacaoSenha')?.touched"
+                    class="invalid-feedback">
+                    Confirmação de senha é obrigatória.
+                </div>
+            </div>
+        </div>
+
+        <div class="separator"></div>
+
+
+        <!-- Botão Salvar -->
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
+        </div>
+    </form>
+</div>

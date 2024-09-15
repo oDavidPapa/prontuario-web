@@ -30,7 +30,6 @@ export class CadastraMedicosComponent implements OnInit {
   }
 
 
-
   private initializeForm(): void {
     this.medicoForm = this.fb.group({
       nome: ['', Validators.required],
@@ -68,8 +67,8 @@ export class CadastraMedicosComponent implements OnInit {
 
   createDataForm(form: any): MedicoCadastroDTO {
     const medicoCadastro: MedicoCadastroDTO = {
-      especialidade: form.controls.especialidade,
-      crm: form.controls.crm,
+      especialidade: form.controls.especialidade.value,
+      crm: form.controls.crm.value,
       pessoaCadastroDTO: {
         nome: form.controls.nome.value,
         cpf: form.controls.cpf.value,
