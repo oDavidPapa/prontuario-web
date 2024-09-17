@@ -28,6 +28,7 @@ import { CadastraMedicosComponent } from './dashboard/medicos/cadastrar-medicos/
 import { EditarMedicoComponent } from './dashboard/medicos/editar-medicos/editar-medicos.component';
 import { UsuarioComponent } from './dashboard/usuarios/usuario.component';
 import { CadastrarUsuariosComponent } from './dashboard/usuarios/cadastrar-usuarios/cadastrar-usuarios.component';
+import { EditarUsuariosComponent } from './dashboard/usuarios/editar-usuarios/editar-usuarios.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { CadastrarUsuariosComponent } from './dashboard/usuarios/cadastrar-usuar
 
     UsuarioComponent,
     CadastrarUsuariosComponent,
+    EditarUsuariosComponent,
 
     CpfPipe,
     DatePipe,

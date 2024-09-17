@@ -23,11 +23,11 @@ export class UsuarioService {
   }
 
   getUsuarioById(id: number): Observable<any> {
-    return this.http.get<Usuario>(`${this.apiUrl}api/auth/${id}`);
+    return this.http.get<Usuario>(`${this.apiUrl}/${id}`);
   }
 
   updateUsuario(id: number, usuario: UsuarioCadastroDTO): Observable<any> {
-    return this.http.put<void>(`${this.apiUrl}api/auth/${id}`, usuario);
+    return this.http.put<void>(`${this.apiUrl}/${id}`, usuario);
   }
 
   cadastrarUsuario(usuario: UsuarioCadastroDTO): Observable<any> {

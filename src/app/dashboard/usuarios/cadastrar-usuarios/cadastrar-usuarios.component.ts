@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of, tap } from 'rxjs';
 import { AlertService } from '../../base/alert/alert.service';
@@ -7,6 +7,8 @@ import { MedicoCadastroDTO } from '../../../models/medico-cadastro.model';
 import { MedicoService } from '../../../services/medico.service';
 import { MedicoOptions } from '../../../options/medico.option';
 import { Medico } from '../../../models/medico.model';
+import { UsuarioCadastroDTO } from '../../../models/usuario-cadastro';
+import { UsuarioService } from '../../../services/usuario.service';
 
 @Component({
     selector: 'app-cadastrar-usuarios',
@@ -27,6 +29,7 @@ export class CadastrarUsuariosComponent implements OnInit {
         private route: ActivatedRoute,
         private fb: FormBuilder,
         private router: Router,
+        private usuarioService: UsuarioService,
         private medicoService: MedicoService,
         private alertService: AlertService
     ) { }
@@ -41,24 +44,38 @@ export class CadastrarUsuariosComponent implements OnInit {
 
     onSubmit(): void {
         if (this.usuarioForm.valid) {
-            const medicoCadastroDTO = this.createDataForm(this.usuarioForm);
+            const usuarioCadastro = this.createDataForm(this.usuarioForm);
 
-            this.medicoService.cadastrarMedico(medicoCadastroDTO).pipe(
+            this.usuarioService.cadastrarUsuario(usuarioCadastro).pipe(
                 tap(response => {
-                    const medicoId = response.data.id;
-                    this.alertService.success('Sucesso!', 'medico cadastrado com sucesso!');
-                    this.router.navigate([`/prontuario/usuarios/editar/${medicoId}`]);
+                    const idUsuario = response.id;
+                    this.alertService.success('Sucesso!', 'Usuário cadastrado com sucesso!');
+                    this.router.navigate([`/prontuario/usuarios/editar/${idUsuario}`]);
                 }),
                 catchError(error => {
-                    this.alertService.error('Erro!', 'Erro ao cadastrar dados do medico.');
+                    this.alertService.error('Erro!', 'Erro ao cadastrar usuário!');
                     return of(null);
                 })
             ).subscribe();
+        } else {
+            this.markFormGroupTouched(this.usuarioForm);
         }
     }
 
     cancel(): void {
         this.router.navigate(['/prontuario/usuarios']);
+    }
+
+    private markFormGroupTouched(formGroup: FormGroup): void {
+        Object.keys(formGroup.controls).forEach(field => {
+            const control = formGroup.get(field);
+            if (control instanceof FormControl) {
+                control.markAsTouched({ onlySelf: true });
+                control.markAsDirty({ onlySelf: true });
+            } else if (control instanceof FormGroup) {
+                this.markFormGroupTouched(control);
+            }
+        });
     }
 
     private setInformacoesUsuarioMedico() {
@@ -86,10 +103,10 @@ export class CadastrarUsuariosComponent implements OnInit {
             nome: ['', Validators.required],
             cpf: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
             dataNascimento: ['', Validators.required],
-            crm: ['', [Validators.required]],
-            especialidade: ['', [Validators.required]],
             sexo: [''],
             perfil: ['', [Validators.required]],
+            crm: ['',],
+            especialidade: ['',],
             login: ['', [Validators.required]],
             senha: ['', [Validators.required]],
             confirmacaoSenha: ['', [Validators.required]],
@@ -103,19 +120,27 @@ export class CadastrarUsuariosComponent implements OnInit {
         });
     }
 
-    private createDataForm(form: any): MedicoCadastroDTO {
-        const medicoCadastro: MedicoCadastroDTO = {
-            especialidade: form.controls.especialidade.value,
-            crm: form.controls.crm.value,
+    private createDataForm(form: any): UsuarioCadastroDTO {
+        const usuarioCadastroDTO: UsuarioCadastroDTO = {
+            role: form.controls.perfil.value,
+            login: form.controls.login.value,
+            senha: form.controls.senha.value,
+            idPessoa: form.controls.idPessoa.value,
             pessoaCadastroDTO: {
                 nome: form.controls.nome.value,
                 cpf: form.controls.cpf.value,
                 sexo: form.controls.sexo.value,
                 dataNascimento: form.controls.dataNascimento.value
+            },
+            contatoCadastroDTO: {
+                celular: form.controls.celular.value,
+                telefone: form.controls.telefone.value,
+                email: form.controls.email.value,
+                tipoContato: form.controls.tipoContato.value,
             }
         };
 
-        return medicoCadastro;
+        return usuarioCadastroDTO;
     }
 
     private onMedicoSelected(idPessoa: number): void {
@@ -134,7 +159,6 @@ export class CadastrarUsuariosComponent implements OnInit {
 
         this.desabilitarDadosPessoais();
 
-        console.log(medicoSelecionado);
     }
 
     private desabilitarDadosPessoais() {

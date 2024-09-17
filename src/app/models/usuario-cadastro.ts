@@ -1,3 +1,4 @@
+import { ContatoCadastroDTO } from "./contato-cadastro.model";
 import { PessoaCadastroDTO } from "./pessoa-cadastro.model";
 
 export interface UsuarioCadastroDTO {
@@ -6,4 +7,5 @@ export interface UsuarioCadastroDTO {
     role: string; 
     idPessoa: number;
     pessoaCadastroDTO: PessoaCadastroDTO;
+    contatoCadastroDTO: ContatoCadastroDTO;
 }

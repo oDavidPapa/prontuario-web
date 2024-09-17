@@ -1,3 +1,4 @@
+import { Contato } from "./contato.model";
 import { Pessoa } from "./pessoa.model";
 
 export interface Usuario {
@@ -6,4 +7,5 @@ export interface Usuario {
     role: string;
     status: string;
     pessoa: Pessoa;
+    contato: Contato;
 }
