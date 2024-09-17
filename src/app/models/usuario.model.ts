@@ -8,4 +8,6 @@ export interface Usuario {
     status: string;
     pessoa: Pessoa;
     contato: Contato;
+    especialidade: string;
+    crm: string;
 }

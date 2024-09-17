@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { catchError, of } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 import { Column } from '../base/grid/column';
 import { PaginatedResponse } from '../../models/pagination.model';
 import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../services/usuario.service';
 import { Router } from '@angular/router';
+import { AlertService } from '../base/alert/alert.service';
 
 @Component({
   selector: 'app-usuario',
@@ -26,14 +27,17 @@ export class UsuarioComponent {
   pageSize: number = 10; // Tamanho da página
   totalPages: number = 1; // Total de páginas
 
-  constructor(private pacienteService: UsuarioService, private router: Router) { }
+  constructor(
+    private usuarioService: UsuarioService,
+    private router: Router,
+    private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.loadUsuarios();
   }
 
   loadUsuarios(page: number = 0): void {
-    this.pacienteService.getUsuarios(page, this.pageSize).pipe(
+    this.usuarioService.getUsuarios(page, this.pageSize).pipe(
       catchError(error => {
         console.error(error);
         // Ajuste a resposta para o formato esperado em caso de erro
@@ -72,6 +76,19 @@ export class UsuarioComponent {
 
   editUsuario(usuario: Usuario): void {
     this.router.navigate([`/prontuario/usuarios/editar/${usuario.id}`]);
+  }
+
+  toggleStatus(usuario: Usuario): void {
+    this.usuarioService.alterarStatusUsuario(usuario.id).pipe(
+      tap(() => {
+        this.alertService.success('Sucesso!', 'Status do usuário alterado com sucesso!');
+        this.loadUsuarios(this.page);
+      }),
+      catchError((error) => {
+        this.alertService.error('Erro!', 'Erro ao alterar o status do usuário.');
+        return of(null);
+      })
+    ).subscribe();
   }
 }
 

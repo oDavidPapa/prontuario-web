@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of, tap } from 'rxjs';
 import { AlertService } from '../../base/alert/alert.service';
-import { MedicoCadastroDTO } from '../../../models/medico-cadastro.model';
 import { MedicoService } from '../../../services/medico.service';
 import { MedicoOptions } from '../../../options/medico.option';
 import { Medico } from '../../../models/medico.model';
@@ -52,14 +51,14 @@ export class EditarUsuariosComponent implements OnInit {
                         nome: usuario.pessoa.nome,
                         cpf: usuario.pessoa.cpf,
                         dataNascimento: usuario.pessoa.dataNascimento,
-                        especialidade: '',
-                        crm: '',
+                        especialidade: usuario.especialidade,
+                        crm: usuario.crm,
                         sexo: usuario.pessoa.sexo,
                         login: usuario.login,
                         perfil: usuario.role,
-                        email: usuario.contato.email,
-                        telefone: usuario.contato.telefone,
-                        celular: usuario.contato.celular,
+                        email: usuario.contato?.email,
+                        telefone: usuario.contato?.telefone,
+                        celular: usuario.contato?.celular,
                         idPessoa: usuario.pessoa.id
                     });
 
@@ -81,14 +80,14 @@ export class EditarUsuariosComponent implements OnInit {
         if (this.usuarioForm.valid) {
             const usuarioCadastro = this.createDataForm(this.usuarioForm);
 
-            this.usuarioService.cadastrarUsuario(usuarioCadastro).pipe(
+            this.usuarioService.updateUsuario(this.idUsuario, usuarioCadastro).pipe(
                 tap(response => {
-                    const idUsuario = response.id;
-                    this.alertService.success('Sucesso!', 'Usuário cadastrado com sucesso!');
+                    const idUsuario = response.data.id;
+                    this.alertService.success('Sucesso!', 'Usuário alterado com sucesso!');
                     this.router.navigate([`/prontuario/usuarios/editar/${idUsuario}`]);
                 }),
                 catchError(error => {
-                    this.alertService.error('Erro!', 'Erro ao cadastrar usuário!');
+                    this.alertService.error('Erro!', 'Erro ao editar usuário!');
                     return of(null);
                 })
             ).subscribe();
@@ -136,7 +135,6 @@ export class EditarUsuariosComponent implements OnInit {
         const usuarioCadastroDTO: UsuarioCadastroDTO = {
             role: form.controls.perfil.value,
             login: form.controls.login.value,
-            senha: form.controls.senha.value,
             idPessoa: form.controls.idPessoa.value,
             pessoaCadastroDTO: {
                 nome: form.controls.nome.value,
@@ -155,24 +153,6 @@ export class EditarUsuariosComponent implements OnInit {
         return usuarioCadastroDTO;
     }
 
-    private onMedicoSelected(idPessoa: number): void {
-        const medicoSelecionado = this.medicos.find(medico => medico.pessoa.id === +idPessoa);
-        this.usuarioForm.get('nome')?.setValue(medicoSelecionado?.pessoa.nome);
-        this.usuarioForm.get('cpf')?.setValue(medicoSelecionado?.pessoa.cpf);
-        this.usuarioForm.get('dataNascimento')?.setValue(medicoSelecionado?.pessoa.dataNascimento);
-        this.usuarioForm.get('sexo')?.setValue(medicoSelecionado?.pessoa.sexo);
-        this.usuarioForm.get('especialidade')?.setValue(medicoSelecionado?.especialidade);
-        this.usuarioForm.get('crm')?.setValue(medicoSelecionado?.crm);
-
-        this.usuarioForm.get('email')?.setValue(medicoSelecionado?.contato.email);
-        this.usuarioForm.get('celular')?.setValue(medicoSelecionado?.contato.celular);
-        this.usuarioForm.get('telefone')?.setValue(medicoSelecionado?.contato.telefone);
-
-
-        this.desabilitarDadosPessoais();
-
-    }
-
     private desabilitarDadosPessoais() {
         this.usuarioForm.get('nome')?.disable();
         this.usuarioForm.get('cpf')?.disable();
@@ -180,9 +160,6 @@ export class EditarUsuariosComponent implements OnInit {
         this.usuarioForm.get('sexo')?.disable();
         this.usuarioForm.get('especialidade')?.disable();
         this.usuarioForm.get('crm')?.disable();
-        this.usuarioForm.get('email')?.disable();
-        this.usuarioForm.get('celular')?.disable();
-        this.usuarioForm.get('telefone')?.disable();
         this.usuarioForm.get('login')?.disable();
         this.usuarioForm.get('perfil')?.disable({ emitEvent: false });
         this.usuarioForm.get('idPessoa')?.disable({ emitEvent: false });

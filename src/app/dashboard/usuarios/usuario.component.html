@@ -1,5 +1,6 @@
 <div class="data-grid">
-    <app-data-grid [columns]="columns" [data]="usuarios" (edit)="editUsuario($event)" [showDelete]="false">
+    <app-data-grid [columns]="columns" [data]="usuarios" (edit)="editUsuario($event)"
+        (toggleStatus)="toggleStatus($event)" [showDelete]="false" [showToggle]="true">
     </app-data-grid>
 </div>
 

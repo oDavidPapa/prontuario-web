@@ -33,6 +33,14 @@
         <button *ngIf="showDelete" (click)="onRemove(item)" class="remove-button">
           <fa-icon [icon]="['fas', 'trash']"></fa-icon>
         </button>
+        <button *ngIf="showToggle" (click)="onToggleStatus(item)" class="toggle-button">
+          <ng-container *ngIf="item.status === 'ATIVO'; else inactive">
+            <fa-icon [icon]="['fas', 'toggle-on']" class="text-success toggle-icon-large"></fa-icon>
+          </ng-container>
+          <ng-template #inactive>
+            <fa-icon [icon]="['fas', 'toggle-off']" class="text-muted toggle-icon-large"></fa-icon>
+          </ng-template>
+        </button>
       </td>
     </tr>
   </tbody>

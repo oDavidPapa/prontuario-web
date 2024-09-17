@@ -34,4 +34,7 @@ export class UsuarioService {
     return this.http.post<any>(`${this.apiUrl}/registrar`, usuario);
   }
 
+  alterarStatusUsuario(id: number): Observable<any> {
+    return this.http.patch<void>(`${this.apiUrl}/alterar-status/${id}`, {});
+  }
 }
