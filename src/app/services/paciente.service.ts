@@ -10,7 +10,7 @@ import { PacienteCadastroDTO } from '../models/paciente-cadastro.model';
   providedIn: 'root'
 })
 export class PacienteService {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl + "pacientes";
 
   constructor(private http: HttpClient) { }
 
@@ -19,19 +19,23 @@ export class PacienteService {
       .set('page', page.toString())
       .set('size', size.toString());
 
-    return this.http.get<PaginatedResponse<Paciente>>(this.apiUrl + "pacientes", { params });
+    return this.http.get<PaginatedResponse<Paciente>>(this.apiUrl, { params });
   }
 
   getPacienteById(id: number): Observable<any> {
-    return this.http.get<Paciente>(`${this.apiUrl}pacientes/${id}`);
+    return this.http.get<Paciente>(`${this.apiUrl}/${id}`);
   }
 
   updatePaciente(id: number, paciente: PacienteCadastroDTO): Observable<any> {
-    return this.http.put<void>(`${this.apiUrl}pacientes/${id}`, paciente);
+    return this.http.put<void>(`${this.apiUrl}/${id}`, paciente);
   }
 
   cadastrarPaciente(paciente: PacienteCadastroDTO): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}pacientes`, paciente);
+    return this.http.post<any>(`${this.apiUrl}`, paciente);
+  }
+
+  getOptionsPaciente(): Observable<any> {
+    return this.http.get<any>(this.apiUrl + "/options");
   }
 
 }

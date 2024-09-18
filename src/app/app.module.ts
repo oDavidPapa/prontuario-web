@@ -29,6 +29,7 @@ import { EditarMedicoComponent } from './dashboard/medicos/editar-medicos/editar
 import { UsuarioComponent } from './dashboard/usuarios/usuario.component';
 import { CadastrarUsuariosComponent } from './dashboard/usuarios/cadastrar-usuarios/cadastrar-usuarios.component';
 import { EditarUsuariosComponent } from './dashboard/usuarios/editar-usuarios/editar-usuarios.component';
+import { CadastrarConsultasComponent } from './dashboard/consultas/cadastrar-consultas/cadastrar-consulta.component';
 
 
 @NgModule({
@@ -43,7 +44,9 @@ import { EditarUsuariosComponent } from './dashboard/usuarios/editar-usuarios/ed
     DataGridComponent,
     PacientesComponent,
     MedicosComponent,
+
     ConsultasComponent,
+    CadastrarConsultasComponent,
 
     EditarPacienteComponent,
     CadastraPacientesComponent,

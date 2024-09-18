@@ -14,6 +14,7 @@ import { CadastraMedicosComponent } from './dashboard/medicos/cadastrar-medicos/
 import { EditarMedicoComponent } from './dashboard/medicos/editar-medicos/editar-medicos.component';
 import { CadastrarUsuariosComponent } from './dashboard/usuarios/cadastrar-usuarios/cadastrar-usuarios.component';
 import { EditarUsuariosComponent } from './dashboard/usuarios/editar-usuarios/editar-usuarios.component';
+import { CadastrarConsultasComponent } from './dashboard/consultas/cadastrar-consultas/cadastrar-consulta.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -37,6 +38,8 @@ const routes: Routes = [
         { path: 'medicos/cadastrar', component: CadastraMedicosComponent },
 
         { path: 'consultas', component: ConsultasComponent },
+        { path: 'consultas/cadastrar', component: CadastrarConsultasComponent },
+
         { path: '', redirectTo: 'home', pathMatch: 'full' }
       ]
   },

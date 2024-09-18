@@ -1,0 +1,18 @@
+<div class="form-container">
+    <form [formGroup]="consultaForm" (ngSubmit)="onSubmit()" class="form">
+        <div class="form-group-row">
+            <div class="form-group">
+                <label for="paciente">Selecione o Paciente:</label>
+                <select id="paciente" formControlName="idPaciente" class="form-control">
+                    <option value="">Selecionar Paciente</option>
+                    <option *ngFor="let paciente of pacientesOptions" [value]="paciente.id">{{ paciente.nome }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
+        </div>
+    </form>
+</div>
