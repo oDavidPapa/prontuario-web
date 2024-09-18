@@ -72,7 +72,7 @@ import { CadastrarConsultasComponent } from './dashboard/consultas/cadastrar-con
     HttpClientModule,
     FontAwesomeModule,
     ReactiveFormsModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, AlertService],
   bootstrap: [AppComponent]

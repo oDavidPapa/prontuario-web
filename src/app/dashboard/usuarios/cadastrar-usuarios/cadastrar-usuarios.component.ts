@@ -1,9 +1,8 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of, tap } from 'rxjs';
 import { AlertService } from '../../base/alert/alert.service';
-import { MedicoCadastroDTO } from '../../../models/medico-cadastro.model';
 import { MedicoService } from '../../../services/medico.service';
 import { MedicoOptions } from '../../../options/medico.option';
 import { Medico } from '../../../models/medico.model';
