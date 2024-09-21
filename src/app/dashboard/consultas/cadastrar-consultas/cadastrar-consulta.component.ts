@@ -16,56 +16,80 @@ import { catchError, of, tap } from "rxjs";
 })
 
 export class CadastrarConsultasComponent implements OnInit {
-    consultaForm!: FormGroup;
-    pacientesOptions: PacienteOption[] = [];
-    pacientes: Paciente[] = [];
 
-    constructor(
-        private route: ActivatedRoute,
-        private fb: FormBuilder,
-        private router: Router,
-        private usuarioService: UsuarioService,
-        private pacienteService: PacienteService,
-        private alertService: AlertService
-    ) { }
+    pacientes: PacienteOption[] = [
+        { nome: 'João Silva', id: 45 },
+        { nome: 'Maria Santos', id: 34 },
+        // Adicione mais pacientes conforme necessário
+    ];
 
-    ngOnInit(): void {
-        this.initializeForm();
-        this.carregarPacientes();
+    selectedPaciente: PacienteOption | null = null;
+    anamnese: string = '';
+    tratamento: string = '';
+    examesSolicitados: string = '';
+    prescricoesMedicas: string = '';
+    diagnostico: string = '';
+
+    constructor() { }
+
+    ngOnInit(): void { }
+
+    onPacienteChange(event: any): void {
+        // Lógica ao mudar o paciente selecionado
+        console.log('Paciente selecionado:', this.selectedPaciente);
     }
-
-
-    private initializeForm(): void {
-        this.consultaForm = this.fb.group({
-            idPaciente: ['', Validators.required],
-        });
-    }
-
-    private carregarPacientes(): void {
-        this.pacienteService.getOptionsPaciente().pipe(
-            tap(response => {
-                this.pacientes = response.data.list;
-                this.pacientesOptions = response.data.list.map((paciente: any) => {
-                    return {
-                        id: paciente.pessoa.id,
-                        nome: `${paciente.pessoa.cpf} - ${paciente.pessoa.nome}`
-                    };
-                });
-            }),
-            catchError(error => {
-                this.alertService.error('Erro!', 'Erro ao carregar a listagem de pacientes.');
-                return of(null);
-            })
-        ).subscribe();
-    }
-
-
-    cancel() {
-
-    }
-
-    onSubmit() {
-
-    }
-
 }
+
+// consultaForm!: FormGroup;
+// pacientesOptions: PacienteOption[] = [];
+// pacientes: Paciente[] = [];
+
+// constructor(
+//     private route: ActivatedRoute,
+//     private fb: FormBuilder,
+//     private router: Router,
+//     private usuarioService: UsuarioService,
+//     private pacienteService: PacienteService,
+//     private alertService: AlertService
+// ) { }
+
+// ngOnInit(): void {
+//     this.initializeForm();
+//     this.carregarPacientes();
+// }
+
+
+// private initializeForm(): void {
+//     this.consultaForm = this.fb.group({
+//         idPaciente: ['', Validators.required],
+//     });
+// }
+
+// private carregarPacientes(): void {
+//     this.pacienteService.getOptionsPaciente().pipe(
+//         tap(response => {
+//             this.pacientes = response.data.list;
+//             this.pacientesOptions = response.data.list.map((paciente: any) => {
+//                 return {
+//                     id: paciente.pessoa.id,
+//                     nome: `${paciente.pessoa.cpf} - ${paciente.pessoa.nome}`
+//                 };
+//             });
+//         }),
+//         catchError(error => {
+//             this.alertService.error('Erro!', 'Erro ao carregar a listagem de pacientes.');
+//             return of(null);
+//         })
+//     ).subscribe();
+// }
+
+
+// cancel() {
+
+// }
+
+// onSubmit() {
+
+// }
+
+//}

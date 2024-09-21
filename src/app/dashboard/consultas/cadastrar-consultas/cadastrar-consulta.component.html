@@ -1,18 +1,74 @@
-<div class="form-container">
-    <form [formGroup]="consultaForm" (ngSubmit)="onSubmit()" class="form">
-        <div class="form-group-row">
-            <div class="form-group">
-                <label for="paciente">Selecione o Paciente:</label>
-                <select id="paciente" formControlName="idPaciente" class="form-control">
-                    <option value="">Selecionar Paciente</option>
-                    <option *ngFor="let paciente of pacientesOptions" [value]="paciente.id">{{ paciente.nome }}</option>
-                </select>
-            </div>
-        </div>
+<div class="consulta-container">
+    <mat-tab-group>
+        <!-- ABA 1: Vincular Paciente -->
+        <mat-tab label="Dados do Paciente">
+            <div class="form-container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Paciente</mat-label>
+                    <mat-select [(ngModel)]="selectedPaciente" (selectionChange)="onPacienteChange($event)">
+                        <mat-option *ngFor="let paciente of pacientes" [value]="paciente">{{ paciente.nome
+                            }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Salvar</button>
-            <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
-        </div>
-    </form>
+                <div *ngIf="selectedPaciente" class="resumo-paciente">
+                    <h3>Resumo do Paciente</h3>
+                    <p><strong>Nome:</strong> {{ selectedPaciente.nome }}</p>
+                    <!-- Adicione mais informações conforme necessário -->
+                </div>
+            </div>
+        </mat-tab>
+
+        <!-- ABA 2: Anamnese -->
+        <mat-tab label="Anamnèse">
+            <div class="form-container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Relato do Paciente</mat-label>
+                    <textarea matInput [(ngModel)]="anamnese" placeholder="Descreva o relato do paciente"></textarea>
+                </mat-form-field>
+            </div>
+        </mat-tab>
+
+        <!-- ABA 3: Tratamento da Consulta -->
+        <mat-tab label="Diagnóstico">
+            <div class="form-container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Diagnóstico</mat-label>
+                    <textarea matInput [(ngModel)]="diagnostico" placeholder="Descreva o diagnóstico"></textarea>
+                </mat-form-field>
+            </div>
+        </mat-tab>
+
+        <!-- ABA 4: Solicitação de Exames -->
+        <mat-tab label="Solicitação de Exames">
+            <div class="form-container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Exames Solicitados</mat-label>
+                    <textarea matInput [(ngModel)]="examesSolicitados"
+                        placeholder="Descreva os exames solicitados"></textarea>
+                </mat-form-field>
+            </div>
+        </mat-tab>
+
+        <!-- ABA 5: Prescrições Médicas -->
+        <mat-tab label="Prescrições Médicas">
+            <div class="form-container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Prescrições Médicas</mat-label>
+                    <textarea matInput [(ngModel)]="prescricoesMedicas"
+                        placeholder="Descreva as prescrições médicas"></textarea>
+                </mat-form-field>
+            </div>
+        </mat-tab>
+
+        <!-- ABA 6: Diagnóstico -->
+        <mat-tab label="Tratamento">
+            <div class="form-container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Tratamento</mat-label>
+                    <textarea matInput [(ngModel)]="tratamento" placeholder="Descreva o tratamento"></textarea>
+                </mat-form-field>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
 </div>

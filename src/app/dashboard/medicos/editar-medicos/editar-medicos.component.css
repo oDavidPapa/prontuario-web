@@ -15,7 +15,7 @@ html, body {
 
 .form-container {
   width: 100%;
-  max-width: 98%; /* Ajusta o tamanho máximo para 90% da largura da tela */
+  max-width: 96%; /* Ajusta o tamanho máximo para 90% da largura da tela */
   padding: 20px;
   background-color: white;
   border-radius: 8px;

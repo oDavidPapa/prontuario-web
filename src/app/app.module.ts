@@ -30,6 +30,11 @@ import { UsuarioComponent } from './dashboard/usuarios/usuario.component';
 import { CadastrarUsuariosComponent } from './dashboard/usuarios/cadastrar-usuarios/cadastrar-usuarios.component';
 import { EditarUsuariosComponent } from './dashboard/usuarios/editar-usuarios/editar-usuarios.component';
 import { CadastrarConsultasComponent } from './dashboard/consultas/cadastrar-consultas/cadastrar-consulta.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -73,6 +78,11 @@ import { CadastrarConsultasComponent } from './dashboard/consultas/cadastrar-con
     FontAwesomeModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
+    NgSelectModule,
+    MatTabsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, AlertService],
   bootstrap: [AppComponent]
