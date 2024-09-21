@@ -1,0 +1,44 @@
+<div *ngIf="selectedPaciente" class="resumo-paciente">
+    <h3>Resumo do Paciente</h3>
+
+    <div class="paciente-card">
+        <h4>Dados Pessoais</h4>
+        <div class="paciente-info">
+            <div class="linha-paciente">
+                <div><strong>CPF:</strong> {{ selectedPaciente.pessoa.cpf | cpf }}</div>
+                <div><strong>Nome:</strong> {{ selectedPaciente.pessoa.nome }}</div>
+                <div><strong>Data de Nascimento:</strong> {{ selectedPaciente.pessoa.dataNascimento | date:'dd/MM/yyyy'
+                    }}</div>
+                <div><strong>Sexo:</strong> {{ selectedPaciente.pessoa.sexo === 'M' ? 'Masculino' : 'Feminino' }}</div>
+                <div><strong>Peso:</strong> {{ selectedPaciente.peso }} kg</div>
+                <div><strong>Altura:</strong> {{ selectedPaciente.altura }} cm</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="paciente-card">
+        <h4>Contato</h4>
+        <div class="paciente-info">
+            <div class="linha-paciente">
+                <div><strong>Email:</strong> {{ selectedPaciente.contato?.email }}</div>
+                <div><strong>Celular:</strong> {{ selectedPaciente.contato?.celular | phoneMask:'celular' }}</div>
+                <div><strong>Telefone:</strong> {{ selectedPaciente.contato?.telefone | phoneMask:'telefone'}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="paciente-card">
+        <h4>Endereço</h4>
+        <div class="paciente-info">
+            <div class="linha-paciente">
+                <div><strong>Rua:</strong> {{ selectedPaciente.endereco?.rua }}</div>
+                <div><strong>Número:</strong> {{ selectedPaciente.endereco?.numero }}</div>
+                <div><strong>Complemento:</strong> {{ selectedPaciente.endereco?.complemento }}</div>
+                <div><strong>Cidade:</strong> {{ selectedPaciente.endereco?.cidade }}</div>
+                <div><strong>CEP:</strong> {{ selectedPaciente.endereco?.cep }}</div>
+                <div><strong>Estado:</strong> {{ selectedPaciente.endereco?.estado }}</div>
+                <div><strong>País:</strong> {{ selectedPaciente.endereco?.pais }}</div>
+            </div>
+        </div>
+    </div>
+</div>

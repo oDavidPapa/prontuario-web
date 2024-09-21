@@ -1,19 +1,24 @@
 <div class="consulta-container">
     <mat-tab-group>
+        <!-- ABA 0: Vincular Paciente -->
+        <mat-tab *ngIf="isEditing" label="Resumo">
+            <div class="form-container">
+
+            </div>
+        </mat-tab>
         <!-- ABA 1: Vincular Paciente -->
         <mat-tab label="Dados do Paciente">
             <div class="form-container">
                 <mat-form-field appearance="fill">
                     <mat-label>Paciente</mat-label>
-                    <mat-select [(ngModel)]="selectedPaciente" (selectionChange)="onPacienteChange($event)">
-                        <mat-option *ngFor="let paciente of pacientes" [value]="paciente">{{ paciente.nome
+                    <mat-select [(ngModel)]="optionSelect" (selectionChange)="onPacienteChange($event)">
+                        <mat-option *ngFor="let paciente of pacientesOptions" [value]="paciente">{{ paciente.nome
                             }}</mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <div *ngIf="selectedPaciente" class="resumo-paciente">
-                    <h3>Resumo do Paciente</h3>
-                    <p><strong>Nome:</strong> {{ selectedPaciente.nome }}</p>
+                    <app-paciente-resumo [selectedPaciente]="selectedPaciente"></app-paciente-resumo>
                     <!-- Adicione mais informações conforme necessário -->
                 </div>
             </div>
@@ -30,7 +35,7 @@
         </mat-tab>
 
         <!-- ABA 3: Tratamento da Consulta -->
-        <mat-tab label="Diagnóstico">
+        <mat-tab label="Diagnósticos">
             <div class="form-container">
                 <mat-form-field appearance="fill">
                     <mat-label>Diagnóstico</mat-label>
@@ -62,7 +67,7 @@
         </mat-tab>
 
         <!-- ABA 6: Diagnóstico -->
-        <mat-tab label="Tratamento">
+        <mat-tab label="Tratamentos">
             <div class="form-container">
                 <mat-form-field appearance="fill">
                     <mat-label>Tratamento</mat-label>

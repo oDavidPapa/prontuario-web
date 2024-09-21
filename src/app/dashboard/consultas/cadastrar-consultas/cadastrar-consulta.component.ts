@@ -17,79 +17,74 @@ import { catchError, of, tap } from "rxjs";
 
 export class CadastrarConsultasComponent implements OnInit {
 
-    pacientes: PacienteOption[] = [
-        { nome: 'João Silva', id: 45 },
-        { nome: 'Maria Santos', id: 34 },
-        // Adicione mais pacientes conforme necessário
-    ];
+    consultaForm!: FormGroup;
+    pacientesOptions: PacienteOption[] = [];
+    pacientes: Paciente[] = [];
+    isEditing: boolean = false;
 
-    selectedPaciente: PacienteOption | null = null;
+    selectedPaciente?: Paciente;
+    optionSelect?: PacienteOption;
+
+    detalhes: string = ''
     anamnese: string = '';
     tratamento: string = '';
     examesSolicitados: string = '';
     prescricoesMedicas: string = '';
     diagnostico: string = '';
 
-    constructor() { }
+    constructor(
+        private route: ActivatedRoute,
+        private fb: FormBuilder,
+        private router: Router,
+        private usuarioService: UsuarioService,
+        private pacienteService: PacienteService,
+        private alertService: AlertService
+    ) { }
 
-    ngOnInit(): void { }
 
+    ngOnInit(): void {
+        this.initializeForm();
+        this.carregarPacientes();
+    }
     onPacienteChange(event: any): void {
-        // Lógica ao mudar o paciente selecionado
-        console.log('Paciente selecionado:', this.selectedPaciente);
+        this.selectedPaciente = this.pacientes.find(p => p.pessoa.id == event.value.id);
+        console.log(this.selectedPaciente)
+    }
+
+    private initializeForm(): void {
+        this.consultaForm = this.fb.group({
+            idPaciente: ['', Validators.required],
+        });
+    }
+
+    private carregarPacientes(): void {
+        this.pacienteService.getOptionsPaciente().pipe(
+            tap(response => {
+                this.pacientes = response.data.list.map((paciente: any) => ({
+                    ...paciente,
+                    endereco: {
+                        rua: 'Rua Exemplo, 123',
+                        numero: '456',
+                        complemento: 'Apto 12',
+                        cidade: 'Cidade Exemplo',
+                        cep: '12345-678',
+                        estado: 'EX',
+                        pais: 'Brasil'
+                    }
+                }));
+                
+                this.pacientesOptions = response.data.list.map((paciente: any) => {
+                    return {
+                        id: paciente.pessoa.id,
+                        nome: `${paciente.pessoa.cpf} - ${paciente.pessoa.nome}`
+                    };
+                });
+            }),
+            catchError(error => {
+                this.alertService.error('Erro!', 'Erro ao carregar a listagem de pacientes.');
+                return of(null);
+            })
+        ).subscribe();
     }
 }
 
-// consultaForm!: FormGroup;
-// pacientesOptions: PacienteOption[] = [];
-// pacientes: Paciente[] = [];
-
-// constructor(
-//     private route: ActivatedRoute,
-//     private fb: FormBuilder,
-//     private router: Router,
-//     private usuarioService: UsuarioService,
-//     private pacienteService: PacienteService,
-//     private alertService: AlertService
-// ) { }
-
-// ngOnInit(): void {
-//     this.initializeForm();
-//     this.carregarPacientes();
-// }
-
-
-// private initializeForm(): void {
-//     this.consultaForm = this.fb.group({
-//         idPaciente: ['', Validators.required],
-//     });
-// }
-
-// private carregarPacientes(): void {
-//     this.pacienteService.getOptionsPaciente().pipe(
-//         tap(response => {
-//             this.pacientes = response.data.list;
-//             this.pacientesOptions = response.data.list.map((paciente: any) => {
-//                 return {
-//                     id: paciente.pessoa.id,
-//                     nome: `${paciente.pessoa.cpf} - ${paciente.pessoa.nome}`
-//                 };
-//             });
-//         }),
-//         catchError(error => {
-//             this.alertService.error('Erro!', 'Erro ao carregar a listagem de pacientes.');
-//             return of(null);
-//         })
-//     ).subscribe();
-// }
-
-
-// cancel() {
-
-// }
-
-// onSubmit() {
-
-// }
-
-//}

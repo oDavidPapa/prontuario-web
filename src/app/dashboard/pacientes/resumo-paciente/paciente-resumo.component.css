@@ -1,0 +1,40 @@
+.resumo-paciente {
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.resumo-paciente h3 {
+    font-size: 24px; /* Aumenta o tamanho do título do resumo */
+    color: #222; /* Um tom mais escuro para maior destaque */
+}
+
+.paciente-card {
+    background-color: #ffffff; /* Fundo branco */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin-bottom: 15px; /* Espaçamento entre subcards */
+}
+
+.paciente-card h4 {
+    margin: 0 0 10px 0;
+    font-size: 16px; /* Diminui o tamanho dos títulos dos cards */
+    color: #666; /* Um tom de cinza mais claro para menos destaque */
+}
+
+.paciente-info {
+    color: #555; /* Cinza mais claro para informações */
+}
+
+.paciente-info div {
+    margin-right: 15px; /* Adicionar espaço entre os itens na mesma linha */
+}
+
+.linha-paciente {
+    display: inline-flex; /* Espaça os itens ao longo da linha */
+    margin-bottom: 4px; /* Reduzir o espaçamento entre as linhas */
+}
+
+.paciente-info strong {
+    color: #333; /* Cinza escuro */
+}
