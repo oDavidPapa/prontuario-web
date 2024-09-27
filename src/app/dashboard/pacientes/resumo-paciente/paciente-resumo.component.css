@@ -41,10 +41,11 @@ body {
 }
 
 .paciente-card h4 {
-    font-size: 18px;
+    font-size: 14px;
+    font-weight: 700;
     text-transform: uppercase;
-    color: #0a2ea3;
-    margin-bottom: 15px;
+    color: #3f51b5;
+    margin-bottom: 5px;
 }
 
 .paciente-info {
