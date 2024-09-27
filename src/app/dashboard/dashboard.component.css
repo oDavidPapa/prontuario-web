@@ -3,15 +3,21 @@ body {
     margin: 0;
     padding: 0;
     color: #023047;
+    height: 100%; /* Certifique-se de que o body ocupe 100% da altura */
+}
+
+html {
+    height: 100%; /* Garanta que o html ocupe 100% da altura */
 }
 
 .dashboard-container {
     display: flex;
-    height: 100vh;
+    height: 100vh; /* A altura da janela é 100% */
     background: #f5f5f5; /* Fundo branco */
 }
 
 .sidebar {
+    height: 100%; /* A sidebar deve ocupar 100% da altura do contêiner pai */
     width: 60px; /* Largura inicial menor */
     background-color: #007bb5; /* Azul pastel */
     padding: 10px 0; /* Padding superior e inferior */
@@ -87,8 +93,10 @@ body {
 }
 
 .content {
-    flex: 1;
+    flex: 1; /* O conteúdo se expande para ocupar o espaço restante */
     padding: 20px;
+    height: 100%; /* Garantindo que o conteúdo também ocupe 100% da altura */
+    overflow-y: auto; /* Adiciona rolagem se o conteúdo exceder a altura */
 }
 
 .header img {

@@ -63,7 +63,7 @@ export class CadastrarConsultasComponent implements OnInit {
                 this.pacientes = response.data.list.map((paciente: any) => ({
                     ...paciente,
                     endereco: {
-                        rua: 'Rua Exemplo, 123',
+                        rua: 'Rua Exemplo',
                         numero: '456',
                         complemento: 'Apto 12',
                         cidade: 'Cidade Exemplo',
