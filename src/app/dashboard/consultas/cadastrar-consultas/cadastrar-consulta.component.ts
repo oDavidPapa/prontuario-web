@@ -8,6 +8,8 @@ import { PacienteService } from "../../../services/paciente.service";
 import { PacienteOption } from "../../../options/paciente.option";
 import { Paciente } from "../../../models/paciente.model";
 import { catchError, of, tap } from "rxjs";
+import { ConsultaService } from "../../../services/consulta.service";
+import { ConsultaCadastroDTO } from "../../../models/consulta-cadastro.model";
 
 @Component({
     selector: 'app-cadastrar-consulta',
@@ -34,6 +36,8 @@ export class CadastrarConsultasComponent implements OnInit {
     diagnostico: string = '';
     alergia: string = '';
     arquivo: string = '';
+    tipoConsulta: string = '';
+
 
     constructor(
         private route: ActivatedRoute,
@@ -41,7 +45,8 @@ export class CadastrarConsultasComponent implements OnInit {
         private router: Router,
         private usuarioService: UsuarioService,
         private pacienteService: PacienteService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private consultaService: ConsultaService
     ) { }
 
     ngOnInit(): void {
@@ -50,7 +55,7 @@ export class CadastrarConsultasComponent implements OnInit {
     }
 
     onPacienteChange(event: any): void {
-        this.selectedPaciente = this.pacientes.find(p => p.pessoa.id == event.value.id);
+        this.selectedPaciente = this.pacientes.find(p => p.id == event.value.id);
         console.log(this.selectedPaciente);
 
         this.searchTerm = ''; // Limpa o campo de pesquisa ao selecionar um paciente
@@ -81,7 +86,7 @@ export class CadastrarConsultasComponent implements OnInit {
 
                 this.pacientesOptions = response.data.list.map((paciente: any) => {
                     return {
-                        id: paciente.pessoa.id,
+                        id: paciente.id,
                         nome: `${paciente.pessoa.cpf} - ${paciente.pessoa.nome}`
                     };
                 });
@@ -105,13 +110,31 @@ export class CadastrarConsultasComponent implements OnInit {
     }
 
     salvarPaciente(): void {
-        if (!this.selectedPaciente) {
-            this.alertService.error('Erro!', 'Nenhum paciente foi selecionado.');
+        if (!this.selectedPaciente || !this.tipoConsulta) {
+            this.alertService.error('Erro!', 'Selecione um paciente e um tipo de consulta.');
             return;
         }
 
-        console.log('Paciente salvo:', this.selectedPaciente);
-        this.alertService.success('Sucesso!', 'Paciente salvo com sucesso.');
+        const consultaData: ConsultaCadastroDTO = {
+            tipo: this.tipoConsulta, 
+            idPaciente: this.selectedPaciente.id, 
+        };
+
+        // Chama o serviço para salvar a consulta
+        this.consultaService.salvarConsulta(consultaData).pipe(
+            tap(response => {
+                if (response.success) {
+                    this.alertService.success('Sucesso!', 'Consulta salva com sucesso.');
+                    this.router.navigate(['/prontuario/pacientes']); // Navega para outra página após salvar
+                } else {
+                    this.alertService.error('Erro!', 'Falha ao salvar a consulta.');
+                }
+            }),
+            catchError(error => {
+                this.alertService.error('Erro!', 'Erro ao salvar a consulta.');
+                return of(null);
+            })
+        ).subscribe();
     }
 
     cancel(): void {

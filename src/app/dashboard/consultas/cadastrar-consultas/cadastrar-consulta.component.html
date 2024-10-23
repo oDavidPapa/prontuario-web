@@ -9,6 +9,17 @@
         <!-- ABA 1: Vincular Paciente -->
         <mat-tab label="Dados do Paciente">
             <div class="form-container">
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Tipo de Consulta</mat-label>
+                    <mat-select [(ngModel)]="tipoConsulta" placeholder="Selecione um tipo de consulta">
+                        <mat-option value="PRIMEIRA_CONSULTA">Primeira Consulta</mat-option>
+                        <mat-option value="ROTINA">Rotina</mat-option>
+                        <mat-option value="RETORNO">Retorno</mat-option>
+                        <mat-option value="EMERGENCIA">Emergência</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
                 <mat-form-field appearance="fill">
                     <mat-label>Paciente</mat-label>
                     <mat-select [(ngModel)]="optionSelect" (selectionChange)="onPacienteChange($event)">
