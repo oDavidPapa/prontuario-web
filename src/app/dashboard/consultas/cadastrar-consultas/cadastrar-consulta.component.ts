@@ -14,23 +14,26 @@ import { catchError, of, tap } from "rxjs";
     templateUrl: './cadastrar-consulta.component.html',
     styleUrls: ['./cadastrar-consulta.component.css']
 })
-
 export class CadastrarConsultasComponent implements OnInit {
 
     consultaForm!: FormGroup;
     pacientesOptions: PacienteOption[] = [];
+    filteredPacientes: PacienteOption[] = []; // Nova lista para pacientes filtrados
     pacientes: Paciente[] = [];
     isEditing: boolean = false;
 
     selectedPaciente?: Paciente;
     optionSelect?: PacienteOption;
+    searchTerm: string = ''; // Para armazenar o termo de pesquisa
 
-    detalhes: string = ''
+    detalhes: string = '';
     anamnese: string = '';
     tratamento: string = '';
     examesSolicitados: string = '';
     prescricoesMedicas: string = '';
     diagnostico: string = '';
+    alergia: string = '';
+    arquivo: string = '';
 
     constructor(
         private route: ActivatedRoute,
@@ -41,14 +44,17 @@ export class CadastrarConsultasComponent implements OnInit {
         private alertService: AlertService
     ) { }
 
-
     ngOnInit(): void {
         this.initializeForm();
         this.carregarPacientes();
     }
+
     onPacienteChange(event: any): void {
         this.selectedPaciente = this.pacientes.find(p => p.pessoa.id == event.value.id);
-        console.log(this.selectedPaciente)
+        console.log(this.selectedPaciente);
+
+        this.searchTerm = ''; // Limpa o campo de pesquisa ao selecionar um paciente
+
     }
 
     private initializeForm(): void {
@@ -72,13 +78,16 @@ export class CadastrarConsultasComponent implements OnInit {
                         pais: 'Brasil'
                     }
                 }));
-                
+
                 this.pacientesOptions = response.data.list.map((paciente: any) => {
                     return {
                         id: paciente.pessoa.id,
                         nome: `${paciente.pessoa.cpf} - ${paciente.pessoa.nome}`
                     };
                 });
+
+                // Inicializa a lista filtrada com todos os pacientes
+                this.filteredPacientes = this.pacientesOptions;
             }),
             catchError(error => {
                 this.alertService.error('Erro!', 'Erro ao carregar a listagem de pacientes.');
@@ -86,5 +95,31 @@ export class CadastrarConsultasComponent implements OnInit {
             })
         ).subscribe();
     }
-}
 
+    // Método para filtrar os pacientes com base no termo de pesquisa
+    filterPacientes(): void {
+        const term = this.searchTerm.toLowerCase();
+        this.filteredPacientes = this.pacientesOptions.filter(paciente =>
+            paciente.nome.toLowerCase().includes(term)
+        );
+    }
+
+    salvarPaciente(): void {
+        if (!this.selectedPaciente) {
+            this.alertService.error('Erro!', 'Nenhum paciente foi selecionado.');
+            return;
+        }
+
+        console.log('Paciente salvo:', this.selectedPaciente);
+        this.alertService.success('Sucesso!', 'Paciente salvo com sucesso.');
+    }
+
+    cancel(): void {
+        if (!this.selectedPaciente) {
+            this.alertService.error('Erro!', 'Nenhum paciente foi selecionado.');
+            return;
+        }
+
+        this.router.navigate(['/prontuario/pacientes']);
+    }
+}

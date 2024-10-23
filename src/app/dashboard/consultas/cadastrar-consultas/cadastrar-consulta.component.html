@@ -12,14 +12,29 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Paciente</mat-label>
                     <mat-select [(ngModel)]="optionSelect" (selectionChange)="onPacienteChange($event)">
-                        <mat-option *ngFor="let paciente of pacientesOptions" [value]="paciente">{{ paciente.nome
-                            }}</mat-option>
+                        <mat-select-trigger>
+                            {{ optionSelect?.nome || 'Selecione um paciente' }}
+                        </mat-select-trigger>
+
+                        <!-- Campo de pesquisa -->
+                        <mat-option>
+                            <input matInput [(ngModel)]="searchTerm" placeholder="Pesquisar paciente"
+                                (input)="filterPacientes()" (click)="$event.stopPropagation()" />
+                        </mat-option>
+
+                        <!-- Lista de opções filtradas -->
+                        <mat-option *ngFor="let paciente of filteredPacientes" [value]="paciente">
+                            {{ paciente.nome }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <div *ngIf="selectedPaciente" class="resumo-paciente">
                     <app-paciente-resumo [selectedPaciente]="selectedPaciente"></app-paciente-resumo>
-                    <!-- Adicione mais informações conforme necessário -->
+                    <div class="button-container">
+                        <button class="btn btn-primary" (click)="salvarPaciente()">Salvar</button>
+                        <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
+                    </div>
                 </div>
             </div>
         </mat-tab>
@@ -66,12 +81,28 @@
             </div>
         </mat-tab>
 
-        <!-- ABA 6: Diagnóstico -->
+        <!-- ABA 7: Diagnóstico -->
         <mat-tab label="Tratamentos">
             <div class="form-container">
                 <mat-form-field appearance="fill">
                     <mat-label>Tratamento</mat-label>
                     <textarea matInput [(ngModel)]="tratamento" placeholder="Descreva o tratamento"></textarea>
+                </mat-form-field>
+            </div>
+        </mat-tab>
+        <mat-tab label="Alergias">
+            <div class="form-container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Alergia</mat-label>
+                    <textarea matInput [(ngModel)]="alergia" placeholder="Informar alergia"></textarea>
+                </mat-form-field>
+            </div>
+        </mat-tab>
+        <mat-tab label="Arquivos">
+            <div class="form-container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Arquivos</mat-label>
+                    <textarea matInput [(ngModel)]="arquivo" placeholder="Informar alergia"></textarea>
                 </mat-form-field>
             </div>
         </mat-tab>
