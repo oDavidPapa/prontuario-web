@@ -171,6 +171,7 @@ export class ManterConsultasComponent implements OnInit {
                             if (response.success) {
                                 this.alertService.success('Sucesso!', 'Consulta salva com sucesso.');
                                 this.isEditing = true;
+                                this.idConsulta = response.data.id;
                             } else {
                                 this.alertService.error('Erro!', 'Falha ao salvar a consulta.');
                             }
