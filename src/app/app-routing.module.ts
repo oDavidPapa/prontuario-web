@@ -10,11 +10,11 @@ import { MedicosComponent } from './dashboard/medicos/medicos.component';
 import { ConsultasComponent } from './dashboard/consultas/consultas.component';
 import { EditarPacienteComponent } from './dashboard/pacientes/editar-pacientes/editar-pacientes.component';
 import { CadastraPacientesComponent } from './dashboard/pacientes/cadastrar-pacientes/cadastrar-pacientes.component';
-import { CadastraMedicosComponent } from './dashboard/medicos/cadastrar-medicos/cadastrar-medicos.component';
 import { EditarMedicoComponent } from './dashboard/medicos/editar-medicos/editar-medicos.component';
 import { CadastrarUsuariosComponent } from './dashboard/usuarios/cadastrar-usuarios/cadastrar-usuarios.component';
 import { EditarUsuariosComponent } from './dashboard/usuarios/editar-usuarios/editar-usuarios.component';
-import { CadastrarConsultasComponent } from './dashboard/consultas/cadastrar-consultas/cadastrar-consulta.component';
+import { ManterConsultasComponent } from './dashboard/consultas/cadastrar-consultas/manter-consulta.component';
+import { CadastraMedicosComponent } from './dashboard/medicos/cadastrar-medicos/cadastrar-medicos.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -38,7 +38,8 @@ const routes: Routes = [
         { path: 'medicos/cadastrar', component: CadastraMedicosComponent },
 
         { path: 'consultas', component: ConsultasComponent },
-        { path: 'consultas/cadastrar', component: CadastrarConsultasComponent },
+        { path: 'consultas/cadastrar', component: ManterConsultasComponent },
+        { path: 'consultas/editar/:id', component: ManterConsultasComponent },
 
         { path: '', redirectTo: 'home', pathMatch: 'full' }
       ]

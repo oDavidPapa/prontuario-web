@@ -27,14 +27,14 @@ export class MedicosComponent {
   pageSize: number = 10; // Tamanho da página
   totalPages: number = 1; // Total de páginas
 
-  constructor(private pacienteService: MedicoService, private router: Router) { }
+  constructor(private medicoService: MedicoService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadMedicos();
   }
 
   loadMedicos(page: number = 0): void {
-    this.pacienteService.getMedicos(page, this.pageSize).pipe(
+    this.medicoService.getMedicos(page, this.pageSize).pipe(
       catchError(error => {
         console.error(error);
         // Ajuste a resposta para o formato esperado em caso de erro

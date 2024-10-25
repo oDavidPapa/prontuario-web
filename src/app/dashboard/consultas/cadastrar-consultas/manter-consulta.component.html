@@ -10,9 +10,10 @@
         <mat-tab label="Dados do Paciente">
             <div class="form-container">
 
-                <mat-form-field appearance="fill">
+                <mat-form-field *ngIf="!isEditing" appearance="fill">
                     <mat-label>Tipo de Consulta</mat-label>
-                    <mat-select [(ngModel)]="tipoConsulta" placeholder="Selecione um tipo de consulta">
+                    <mat-select [(ngModel)]="tipoConsulta" placeholder="Selecione um tipo de consulta"
+                        [disabled]="isEditing">
                         <mat-option value="PRIMEIRA_CONSULTA">Primeira Consulta</mat-option>
                         <mat-option value="ROTINA">Rotina</mat-option>
                         <mat-option value="RETORNO">Retorno</mat-option>
@@ -20,9 +21,10 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field appearance="fill">
+                <mat-form-field *ngIf="!isEditing" appearance="fill">
                     <mat-label>Paciente</mat-label>
-                    <mat-select [(ngModel)]="optionSelect" (selectionChange)="onPacienteChange($event)">
+                    <mat-select [(ngModel)]="optionSelect" (selectionChange)="onPacienteChange($event)"
+                        [disabled]="isEditing">
                         <mat-select-trigger>
                             {{ optionSelect?.nome || 'Selecione um paciente' }}
                         </mat-select-trigger>
@@ -42,7 +44,7 @@
 
                 <div *ngIf="selectedPaciente" class="resumo-paciente">
                     <app-paciente-resumo [selectedPaciente]="selectedPaciente"></app-paciente-resumo>
-                    <div class="button-container">
+                    <div *ngIf="!isEditing" class="button-container">
                         <button class="btn btn-primary" (click)="salvarPaciente()">Salvar</button>
                         <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
                     </div>
@@ -57,6 +59,10 @@
                     <mat-label>Relato do Paciente</mat-label>
                     <textarea matInput [(ngModel)]="anamnese" placeholder="Descreva o relato do paciente"></textarea>
                 </mat-form-field>
+            </div>
+            <div class="button-container">
+                <button class="btn btn-primary" (click)="manterConsulta()">Salvar</button>
+                <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
             </div>
         </mat-tab>
 

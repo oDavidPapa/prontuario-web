@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AlertService {
-  
+
   success(title: string, message: string): void {
     Swal.fire({
       title: title,
@@ -22,5 +22,16 @@ export class AlertService {
       icon: 'error',
       confirmButtonText: 'OK'
     });
+  }
+
+  confirm(title: string, message: string): Promise<boolean> {
+    return Swal.fire({
+      title: title,
+      text: message,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não'
+    }).then((result) => result.isConfirmed);
   }
 }

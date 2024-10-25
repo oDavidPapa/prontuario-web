@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UsuarioService } from "../../../services/usuario.service";
-import { MedicoService } from "../../../services/medico.service";
 import { AlertService } from "../../base/alert/alert.service";
 import { PacienteService } from "../../../services/paciente.service";
 import { PacienteOption } from "../../../options/paciente.option";
@@ -12,17 +11,18 @@ import { ConsultaService } from "../../../services/consulta.service";
 import { ConsultaCadastroDTO } from "../../../models/consulta-cadastro.model";
 
 @Component({
-    selector: 'app-cadastrar-consulta',
-    templateUrl: './cadastrar-consulta.component.html',
-    styleUrls: ['./cadastrar-consulta.component.css']
+    selector: 'app-manter-consulta',
+    templateUrl: './manter-consulta.component.html',
+    styleUrls: ['./manter-consulta.component.css']
 })
-export class CadastrarConsultasComponent implements OnInit {
+export class ManterConsultasComponent implements OnInit {
 
     consultaForm!: FormGroup;
     pacientesOptions: PacienteOption[] = [];
     filteredPacientes: PacienteOption[] = []; // Nova lista para pacientes filtrados
     pacientes: Paciente[] = [];
     isEditing: boolean = false;
+    idConsulta: any;
 
     selectedPaciente?: Paciente;
     optionSelect?: PacienteOption;
@@ -52,6 +52,12 @@ export class CadastrarConsultasComponent implements OnInit {
     ngOnInit(): void {
         this.initializeForm();
         this.carregarPacientes();
+
+        this.idConsulta = this.route.snapshot.paramMap.get('id');
+        if (this.idConsulta) {
+            this.isEditing = true;
+            this.carregarConsulta(this.idConsulta);
+        }
     }
 
     onPacienteChange(event: any): void {
@@ -59,12 +65,47 @@ export class CadastrarConsultasComponent implements OnInit {
         console.log(this.selectedPaciente);
 
         this.searchTerm = ''; // Limpa o campo de pesquisa ao selecionar um paciente
+    }
 
+    private carregarConsulta(id: string): void {
+        this.consultaService.getConsultaById(+id).pipe(
+            tap(response => {
+                if (response.success) {
+                    const consulta = response.data;
+
+                    this.tipoConsulta = consulta.tipoEnum;
+                    this.selectedPaciente = this.pacientes.find(p => p.id === consulta.paciente.id);
+                    this.optionSelect = this.pacientesOptions.find(p => p.id === consulta.paciente.id);
+
+                    this.consultaForm.patchValue({
+                        idPaciente: consulta.paciente.id,
+                        tipoConsulta: consulta.tipoEnum
+                    });
+
+                    this.anamnese = consulta.anamnese || '';
+                    this.tratamento = consulta.tratamento || '';
+                    this.examesSolicitados = consulta.examesSolicitados || '';
+                    this.prescricoesMedicas = consulta.prescricoesMedicas || '';
+                    this.diagnostico = consulta.diagnostico || '';
+                    this.alergia = consulta.alergia || '';
+                    this.arquivo = consulta.arquivo || '';
+
+                } else {
+                    this.alertService.error('Erro!', 'Falha ao carregar a consulta.');
+                }
+            }),
+            catchError(error => {
+                this.alertService.error('Erro!', 'Erro ao carregar a consulta.');
+                return of(null);
+            })
+        ).subscribe();
     }
 
     private initializeForm(): void {
         this.consultaForm = this.fb.group({
             idPaciente: ['', Validators.required],
+            tipoConsulta: [''],
+            anamnese: ['']
         });
     }
 
@@ -115,17 +156,55 @@ export class CadastrarConsultasComponent implements OnInit {
             return;
         }
 
+        // Chama o método de confirmação do AlertService
+        this.alertService.confirm('Confirmação', 'Após a confirmação o paciente não poderá ser alterado. Deseja prosseguir?')
+            .then((confirmacao) => {
+                if (confirmacao) {
+                    const consultaData: ConsultaCadastroDTO = {
+                        tipo: this.tipoConsulta ?? '',
+                        idPaciente: this.selectedPaciente?.id ?? 0
+                    };
+
+                    // Chama o serviço para salvar a consulta após a confirmação
+                    this.consultaService.salvarConsulta(consultaData).pipe(
+                        tap(response => {
+                            if (response.success) {
+                                this.alertService.success('Sucesso!', 'Consulta salva com sucesso.');
+                                this.isEditing = true;
+                            } else {
+                                this.alertService.error('Erro!', 'Falha ao salvar a consulta.');
+                            }
+                        }),
+                        catchError(error => {
+                            this.alertService.error('Erro!', 'Erro ao salvar a consulta.');
+                            return of(null);
+                        })
+                    ).subscribe();
+                }
+                // Se o usuário clicar em "Não", nada acontece
+            });
+    }
+
+    manterConsulta(): void {
+        if (!this.selectedPaciente || !this.tipoConsulta) {
+            this.alertService.error('Erro!', 'Selecione um paciente e um tipo de consulta.');
+            return;
+        }
+
+        // Chama o método de confirmação do AlertService
+
+
         const consultaData: ConsultaCadastroDTO = {
-            tipo: this.tipoConsulta, 
-            idPaciente: this.selectedPaciente.id, 
+            tipo: this.tipoConsulta ?? '',
+            idPaciente: this.selectedPaciente?.id ?? 0,
+            anamnese: this.anamnese
         };
 
-        // Chama o serviço para salvar a consulta
-        this.consultaService.salvarConsulta(consultaData).pipe(
+        // Chama o serviço para salvar a consulta após a confirmação
+        this.consultaService.updateConsulta(this.idConsulta, consultaData).pipe(
             tap(response => {
                 if (response.success) {
-                    this.alertService.success('Sucesso!', 'Consulta salva com sucesso.');
-                    this.router.navigate(['/prontuario/pacientes']); // Navega para outra página após salvar
+                    this.alertService.success('Sucesso!', 'Operação realizada com sucesso.');
                 } else {
                     this.alertService.error('Erro!', 'Falha ao salvar a consulta.');
                 }
@@ -135,6 +214,7 @@ export class CadastrarConsultasComponent implements OnInit {
                 return of(null);
             })
         ).subscribe();
+
     }
 
     cancel(): void {
@@ -142,7 +222,5 @@ export class CadastrarConsultasComponent implements OnInit {
             this.alertService.error('Erro!', 'Nenhum paciente foi selecionado.');
             return;
         }
-
-        this.router.navigate(['/prontuario/pacientes']);
     }
 }

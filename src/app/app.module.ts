@@ -24,18 +24,18 @@ import { PhoneMaskPipe } from './pipes/phone.pipe';
 import { CadastraPacientesComponent } from './dashboard/pacientes/cadastrar-pacientes/cadastrar-pacientes.component';
 import { DataGridComponent } from './dashboard/base/grid/data-grid.component';
 import { AlertService } from './dashboard/base/alert/alert.service';
-import { CadastraMedicosComponent } from './dashboard/medicos/cadastrar-medicos/cadastrar-medicos.component';
 import { EditarMedicoComponent } from './dashboard/medicos/editar-medicos/editar-medicos.component';
 import { UsuarioComponent } from './dashboard/usuarios/usuario.component';
 import { CadastrarUsuariosComponent } from './dashboard/usuarios/cadastrar-usuarios/cadastrar-usuarios.component';
 import { EditarUsuariosComponent } from './dashboard/usuarios/editar-usuarios/editar-usuarios.component';
-import { CadastrarConsultasComponent } from './dashboard/consultas/cadastrar-consultas/cadastrar-consulta.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { PacienteResumoComponent } from './dashboard/pacientes/resumo-paciente/paciente-resumo.component';
+import { CadastraMedicosComponent } from './dashboard/medicos/cadastrar-medicos/cadastrar-medicos.component';
+import { ManterConsultasComponent } from './dashboard/consultas/cadastrar-consultas/manter-consulta.component';
 
 
 @NgModule({
@@ -54,7 +54,7 @@ import { PacienteResumoComponent } from './dashboard/pacientes/resumo-paciente/p
     MedicosComponent,
 
     ConsultasComponent,
-    CadastrarConsultasComponent,
+    ManterConsultasComponent,
 
     EditarPacienteComponent,
     CadastraPacientesComponent,
