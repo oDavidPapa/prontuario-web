@@ -1,5 +1,5 @@
 <div class="consulta-container">
-    <mat-tab-group>
+    <mat-tab-group (selectedTabChange)="onTabChange($event)">
         <!-- ABA 0: Vincular Paciente -->
         <mat-tab *ngIf="isEditing" label="Resumo">
             <div class="form-container">
@@ -73,6 +73,10 @@
                     <mat-label>Diagnóstico</mat-label>
                     <textarea matInput [(ngModel)]="diagnostico" placeholder="Descreva o diagnóstico"></textarea>
                 </mat-form-field>
+                <div class="button-container">
+                    <button class="btn btn-primary" (click)="salvarDiagnostico()">Salvar</button>
+                    <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
+                </div>
             </div>
         </mat-tab>
 
