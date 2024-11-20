@@ -17,6 +17,10 @@ export class EditarPacienteComponent implements OnInit {
   idPaciente!: number;
   idPessoa!: number;
 
+  isDadosPessoaisOpen = true;
+  isEnderecoOpen = false;
+  isContatoOpen = false;
+
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -31,6 +35,15 @@ export class EditarPacienteComponent implements OnInit {
     this.loadPaciente();
   }
 
+  toggleSection(section: string): void {
+    if (section === 'dadosPessoais') {
+      this.isDadosPessoaisOpen = !this.isDadosPessoaisOpen;
+    } else if (section === 'endereco') {
+      this.isEnderecoOpen = !this.isEnderecoOpen;
+    } else if (section === 'contato') {
+      this.isContatoOpen = !this.isContatoOpen;
+    }
+  }
 
 
   private initializeForm(): void {

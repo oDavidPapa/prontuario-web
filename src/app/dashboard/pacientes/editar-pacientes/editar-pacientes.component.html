@@ -1,85 +1,104 @@
 <div class="form-container">
-  <form [formGroup]="pacienteForm" (ngSubmit)="onSubmit()" class="form">
-      <!-- Dados do Paciente -->
-      <div class="form-group-row">
-          <div class="form-group cpf-group">
-              <label for="cpf">CPF</label>
-              <input id="cpf" formControlName="cpf" placeholder="Digite o CPF" class="form-control"
-                  mask="000.000.000-00"
-                  [ngClass]="{'is-invalid': pacienteForm.get('cpf')?.invalid && pacienteForm.get('cpf')?.touched}" />
-              <div *ngIf="pacienteForm.get('cpf')?.invalid && pacienteForm.get('cpf')?.touched"
-                  class="invalid-feedback">
-                  CPF é obrigatório e deve estar no formato correto.
-              </div>
-          </div>
-          <div class="form-group nome-group">
-              <label for="nome">Nome</label>
-              <input id="nome" formControlName="nome" placeholder="Digite o nome" class="form-control"
-                  [ngClass]="{'is-invalid': pacienteForm.get('nome')?.invalid && pacienteForm.get('nome')?.touched}" />
-              <div *ngIf="pacienteForm.get('nome')?.invalid && pacienteForm.get('nome')?.touched"
-                  class="invalid-feedback">
-                  Nome é obrigatório.
-              </div>
-          </div>
+    <form [formGroup]="pacienteForm" (ngSubmit)="onSubmit()" class="form">
+        <!-- Dados do Paciente -->
+        <h1 class="section-title" (click)="toggleSection('dadosPessoais')">
+            Dados Pessoais
+            <span class="toggle-icon">{{ isDadosPessoaisOpen ? '−' : '+' }}</span>
+        </h1>
+        <div class="separator"></div>
+        <div *ngIf="isDadosPessoaisOpen" class="section-content">
+            <div class="form-group-row">
+                <div class="form-group cpf-group">
+                    <label for="cpf">CPF</label>
+                    <input id="cpf" formControlName="cpf" placeholder="Digite o CPF" class="form-control"
+                        mask="000.000.000-00"
+                        [ngClass]="{'is-invalid': pacienteForm.get('cpf')?.invalid && pacienteForm.get('cpf')?.touched}" />
+                    <div *ngIf="pacienteForm.get('cpf')?.invalid && pacienteForm.get('cpf')?.touched"
+                        class="invalid-feedback">
+                        CPF é obrigatório e deve estar no formato correto.
+                    </div>
+                </div>
+                <div class="form-group nome-group">
+                    <label for="nome">Nome</label>
+                    <input id="nome" formControlName="nome" placeholder="Digite o nome" class="form-control"
+                        [ngClass]="{'is-invalid': pacienteForm.get('nome')?.invalid && pacienteForm.get('nome')?.touched}" />
+                    <div *ngIf="pacienteForm.get('nome')?.invalid && pacienteForm.get('nome')?.touched"
+                        class="invalid-feedback">
+                        Nome é obrigatório.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group-row">
+                <div class="form-group">
+                    <label for="dataNascimento">Data de Nascimento</label>
+                    <input id="dataNascimento" formControlName="dataNascimento"
+                        placeholder="Digite a data de nascimento" type="date" class="form-control"
+                        [ngClass]="{'is-invalid': pacienteForm.get('dataNascimento')?.invalid && pacienteForm.get('dataNascimento')?.touched}" />
+                    <div *ngIf="pacienteForm.get('dataNascimento')?.invalid && pacienteForm.get('dataNascimento')?.touched"
+                        class="invalid-feedback">
+                        Data de nascimento é obrigatória.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="sexo">Sexo</label>
+                    <select id="sexo" formControlName="sexo" class="form-control"
+                        [ngClass]="{'is-invalid': pacienteForm.get('sexo')?.invalid && pacienteForm.get('sexo')?.touched}">
+                        <option value="">Selecione o sexo</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                    </select>
+                    <div *ngIf="pacienteForm.get('sexo')?.invalid && pacienteForm.get('sexo')?.touched"
+                        class="invalid-feedback">
+                        Sexo é obrigatório.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="altura">Altura</label>
+                    <input id="altura" formControlName="altura" placeholder="Digite a altura" type="text"
+                        class="form-control" mask="0,00"
+                        [ngClass]="{'is-invalid': pacienteForm.get('altura')?.invalid && pacienteForm.get('altura')?.touched}" />
+                    <div *ngIf="pacienteForm.get('altura')?.invalid && pacienteForm.get('altura')?.touched"
+                        class="invalid-feedback">
+                        Altura é obrigatória e deve estar no formato correto.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="peso">Peso</label>
+                    <input id="peso" formControlName="peso" placeholder="Digite o peso" type="text" class="form-control"
+                        [ngClass]="{'is-invalid': pacienteForm.get('peso')?.invalid && pacienteForm.get('peso')?.touched}" />
+                    <div *ngIf="pacienteForm.get('peso')?.invalid && pacienteForm.get('peso')?.touched"
+                        class="invalid-feedback">
+                        Peso é obrigatório e deve estar no formato correto.
+                    </div>
+                </div>
+            </div>
+            <!-- Botão Salvar -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
+            </div>
+        </div>
+
+
+        <!-- Endereço -->
+        <h1 class="section-title" (click)="toggleSection('endereco')">
+            Endereço
+            <span class="toggle-icon">{{ isEnderecoOpen ? '−' : '+' }}</span>
+        </h1>
+        <div class="separator"></div>
+        <div *ngIf="isEnderecoOpen" class="section-content">
+            <app-endereco [idPessoa]="idPessoa"></app-endereco>
+        </div>
+
+    <!-- Contatos -->
+    <h1 class="section-title" (click)="toggleSection('contato')">
+        Contato
+        <span class="toggle-icon">{{ isContatoOpen ? '−' : '+' }}</span>
+      </h1>
+      <div class="separator"></div>
+      <div *ngIf="isContatoOpen" class="section-content">
+        <app-contatos [idPessoa]="idPessoa" (contatosAtualizados)="onContatosAtualizados($event)"></app-contatos>
       </div>
-
-      <div class="form-group-row">
-          <div class="form-group">
-              <label for="dataNascimento">Data de Nascimento</label>
-              <input id="dataNascimento" formControlName="dataNascimento" placeholder="Digite a data de nascimento"
-                  type="date" class="form-control"
-                  [ngClass]="{'is-invalid': pacienteForm.get('dataNascimento')?.invalid && pacienteForm.get('dataNascimento')?.touched}" />
-              <div *ngIf="pacienteForm.get('dataNascimento')?.invalid && pacienteForm.get('dataNascimento')?.touched"
-                  class="invalid-feedback">
-                  Data de nascimento é obrigatória.
-              </div>
-          </div>
-          <div class="form-group">
-              <label for="sexo">Sexo</label>
-              <select id="sexo" formControlName="sexo" class="form-control"
-                  [ngClass]="{'is-invalid': pacienteForm.get('sexo')?.invalid && pacienteForm.get('sexo')?.touched}">
-                  <option value="">Selecione o sexo</option>
-                  <option value="M">Masculino</option>
-                  <option value="F">Feminino</option>
-              </select>
-              <div *ngIf="pacienteForm.get('sexo')?.invalid && pacienteForm.get('sexo')?.touched"
-                  class="invalid-feedback">
-                  Sexo é obrigatório.
-              </div>
-          </div>
-          <div class="form-group">
-              <label for="altura">Altura</label>
-              <input id="altura" formControlName="altura" placeholder="Digite a altura" type="text"
-                  class="form-control" mask="0,00"
-                  [ngClass]="{'is-invalid': pacienteForm.get('altura')?.invalid && pacienteForm.get('altura')?.touched}" />
-              <div *ngIf="pacienteForm.get('altura')?.invalid && pacienteForm.get('altura')?.touched"
-                  class="invalid-feedback">
-                  Altura é obrigatória e deve estar no formato correto.
-              </div>
-          </div>
-          <div class="form-group">
-              <label for="peso">Peso</label>
-              <input id="peso" formControlName="peso" placeholder="Digite o peso" type="text" class="form-control"
-                  [ngClass]="{'is-invalid': pacienteForm.get('peso')?.invalid && pacienteForm.get('peso')?.touched}" />
-              <div *ngIf="pacienteForm.get('peso')?.invalid && pacienteForm.get('peso')?.touched"
-                  class="invalid-feedback">
-                  Peso é obrigatório e deve estar no formato correto.
-              </div>
-          </div>
-      </div>
-
-    <!-- Botão Salvar -->
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Salvar</button>
-      <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
-    </div>
-
-    <!-- Linha Separadora -->
-    <div class="separator"></div>
-
-    <!-- Dados de Contatos -->
-    <div class="contatos-section">
-      <app-contatos [idPessoa]="idPessoa" (contatosAtualizados)="onContatosAtualizados($event)"></app-contatos>
-    </div>
-  </form>
+    </form>
 </div>

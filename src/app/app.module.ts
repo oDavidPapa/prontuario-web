@@ -36,6 +36,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { PacienteResumoComponent } from './dashboard/pacientes/resumo-paciente/paciente-resumo.component';
 import { CadastraMedicosComponent } from './dashboard/medicos/cadastrar-medicos/cadastrar-medicos.component';
 import { ManterConsultasComponent } from './dashboard/consultas/cadastrar-consultas/manter-consulta.component';
+import { EnderecoComponent } from './endereco/endereco.component';
 
 
 @NgModule({
@@ -65,6 +66,8 @@ import { ManterConsultasComponent } from './dashboard/consultas/cadastrar-consul
     UsuarioComponent,
     CadastrarUsuariosComponent,
     EditarUsuariosComponent,
+
+    EnderecoComponent,
 
     CpfPipe,
     DatePipe,

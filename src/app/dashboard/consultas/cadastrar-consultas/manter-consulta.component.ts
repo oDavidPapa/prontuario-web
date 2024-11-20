@@ -28,6 +28,7 @@ export class ManterConsultasComponent implements OnInit {
     pacientes: Paciente[] = [];
     isEditing: boolean = false;
     idConsulta: any;
+    idDiagnostico: any;
 
     selectedPaciente?: Paciente;
     optionSelect?: PacienteOption;
@@ -102,13 +103,15 @@ export class ManterConsultasComponent implements OnInit {
             tap(response => {
                 if (response.success) {
                     const consulta = response.data;
-                    this.anamnese = consulta.anamnese || '';
+                    if (consulta) {
+                        this.anamnese = consulta.anamnese || '';
+                    }
                 } else {
-                    this.alertService.error('Erro!', 'Falha ao carregar a consulta.');
+                    this.alertService.error('Erro!', 'Falha ao carregar a anamnése.');
                 }
             }),
             catchError(() => {
-                this.alertService.error('Erro!', 'Erro ao carregar a consulta.');
+                this.alertService.error('Erro!', 'Erro ao carregar a anamnése.');
                 return of(null);
             })
         ).subscribe();
@@ -119,14 +122,17 @@ export class ManterConsultasComponent implements OnInit {
             tap(response => {
                 if (response.success) {
                     const diagnostico = response.data;
-                    this.diagnostico = diagnostico.diagnostico || '';
-                    this.idConsulta = diagnostico.idConsulta;
+                    if (diagnostico) {
+                        this.diagnostico = diagnostico.diagnostico || '';
+                        this.idConsulta = diagnostico.idConsulta;
+                        this.idDiagnostico = diagnostico.id;
+                    }
                 } else {
-                    this.alertService.error('Erro!', 'Falha ao carregar a consulta.');
+                    this.alertService.error('Erro!', 'Falha ao carregar a diagnóstico.');
                 }
             }),
-            catchError(() => {
-                this.alertService.error('Erro!', 'Erro ao carregar a consulta.');
+            catchError((error) => {
+                this.alertService.error('Erro!', 'Erro ao carregar a diagnóstico.');
                 return of(null);
             })
         ).subscribe();
@@ -143,6 +149,7 @@ export class ManterConsultasComponent implements OnInit {
 
         // ABA DIAGNOSTICO:
         this.diagnosticoForm = this.fb.group({
+            id: [],
             idConsulta: ['', Validators.required],
             diagnostico: ['']
         });
@@ -153,16 +160,7 @@ export class ManterConsultasComponent implements OnInit {
         this.pacienteService.getOptionsPaciente().pipe(
             tap(response => {
                 this.pacientes = response.data.list.map((paciente: any) => ({
-                    ...paciente,
-                    endereco: {
-                        rua: 'Rua Exemplo',
-                        numero: '456',
-                        complemento: 'Apto 12',
-                        cidade: 'Cidade Exemplo',
-                        cep: '12345-678',
-                        estado: 'EX',
-                        pais: 'Brasil'
-                    }
+                    ...paciente
                 }));
 
                 this.pacientesOptions = response.data.list.map((paciente: any) => {
@@ -175,7 +173,7 @@ export class ManterConsultasComponent implements OnInit {
                 // Inicializa a lista filtrada com todos os pacientes
                 this.filteredPacientes = this.pacientesOptions;
             }),
-            catchError(() => {
+            catchError((error) => {
                 this.alertService.error('Erro!', 'Erro ao carregar a listagem de pacientes.');
                 return of(null);
             })
@@ -190,7 +188,7 @@ export class ManterConsultasComponent implements OnInit {
         );
     }
 
-    salvarPaciente(): void {
+    criarConsulta(): void {
         if (!this.selectedPaciente || !this.tipoConsulta) {
             this.alertService.error('Erro!', 'Selecione um paciente e um tipo de consulta.');
             return;
@@ -261,21 +259,41 @@ export class ManterConsultasComponent implements OnInit {
                 diagnostico: this.diagnostico
             };
 
-            this.diagnosticoService.salvarDiagnostico(diagnosticoData).pipe(
-                tap(response => {
-                    if (response.success) {
-                        this.alertService.success('Sucesso!', 'Diagnóstico salvo com sucesso.');
-                        this.isEditing = true;
-                        this.idConsulta = response.data.id;
-                    } else {
-                        this.alertService.error('Erro!', 'Falha ao salvar o diagnostico.');
-                    }
-                }),
-                catchError(() => {
-                    this.alertService.error('Erro!', 'Erro ao salvar o diagnóstico.');
-                    return of(null);
-                })
-            ).subscribe();
+            if (this.idDiagnostico) {
+                this.diagnosticoService.updateDiagnostico(this.idDiagnostico, diagnosticoData).pipe(
+                    tap(response => {
+                        if (response.success) {
+                            this.alertService.success('Sucesso!', 'Diagnóstico salvo com sucesso.');
+                            this.isEditing = true;
+                            this.idConsulta = response.data.idConsulta;
+                            this.idDiagnostico = response.data.id;
+                        } else {
+                            this.alertService.error('Erro!', 'Falha ao salvar o diagnostico.');
+                        }
+                    }),
+                    catchError(() => {
+                        this.alertService.error('Erro!', 'Erro ao salvar o diagnóstico.');
+                        return of(null);
+                    })
+                ).subscribe();
+            } else {
+                this.diagnosticoService.salvarDiagnostico(diagnosticoData).pipe(
+                    tap(response => {
+                        if (response.success) {
+                            this.alertService.success('Sucesso!', 'Diagnóstico salvo com sucesso.');
+                            this.isEditing = true;
+                            this.idConsulta = response.data.idConsulta;
+                            this.idDiagnostico = response.data.id;
+                        } else {
+                            this.alertService.error('Erro!', 'Falha ao salvar o diagnostico.');
+                        }
+                    }),
+                    catchError(() => {
+                        this.alertService.error('Erro!', 'Erro ao salvar o diagnóstico.');
+                        return of(null);
+                    })
+                ).subscribe();
+            }
         }
     }
 
@@ -336,30 +354,36 @@ export class ManterConsultasComponent implements OnInit {
 
     loadAnamnese(): void {
         console.log("ANAMNESE");
+        this.carregarPaciente(this.idConsulta);
         this.carregarAnamnese(this.idConsulta);
-
     }
+
     loadDiagnostico(): void {
         console.log("DIAGNOSTICO");
         this.carregarDiagnostico(this.idConsulta);
 
     }
+
     loadExame(): void {
         console.log("EXAME");
 
     }
+
     loadPrescricao(): void {
         console.log("PRESCRICAO");
 
     }
+
     loadTratamento(): void {
         console.log("TRATAMENTO");
 
     }
+
     loadAlergia(): void {
         console.log("ALERGIA");
 
     }
+
     loadArquivo(): void {
         console.log("ARQUIVO");
 

@@ -45,7 +45,7 @@
                 <div *ngIf="selectedPaciente" class="resumo-paciente">
                     <app-paciente-resumo [selectedPaciente]="selectedPaciente"></app-paciente-resumo>
                     <div *ngIf="!isEditing" class="button-container">
-                        <button class="btn btn-primary" (click)="salvarPaciente()">Salvar</button>
+                        <button class="btn btn-primary" (click)="criarConsulta()">Salvar</button>
                         <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
                     </div>
                 </div>
@@ -79,7 +79,14 @@
                 </div>
             </div>
         </mat-tab>
-
+        <mat-tab label="Alergias">
+            <div class="form-container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Alergia</mat-label>
+                    <textarea matInput [(ngModel)]="alergia" placeholder="Informar alergia"></textarea>
+                </mat-form-field>
+            </div>
+        </mat-tab>
         <!-- ABA 4: Solicitação de Exames -->
         <mat-tab label="Solicitação de Exames">
             <div class="form-container">
@@ -108,14 +115,6 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Tratamento</mat-label>
                     <textarea matInput [(ngModel)]="tratamento" placeholder="Descreva o tratamento"></textarea>
-                </mat-form-field>
-            </div>
-        </mat-tab>
-        <mat-tab label="Alergias">
-            <div class="form-container">
-                <mat-form-field appearance="fill">
-                    <mat-label>Alergia</mat-label>
-                    <textarea matInput [(ngModel)]="alergia" placeholder="Informar alergia"></textarea>
                 </mat-form-field>
             </div>
         </mat-tab>

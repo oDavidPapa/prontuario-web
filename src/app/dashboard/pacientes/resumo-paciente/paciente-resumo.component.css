@@ -58,7 +58,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Mantém duas colunas */
     row-gap: 30px; /* Aumenta o espaçamento entre as linhas para 30px */
-    column-gap: 0px; /* Espaçamento entre colunas */
+    column-gap: 45px; /* Espaçamento entre colunas */
 }
 
 .linha-paciente div {

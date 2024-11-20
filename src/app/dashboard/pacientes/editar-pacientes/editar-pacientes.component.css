@@ -15,10 +15,10 @@ html, body {
 
 .form-container {
   width: 100%;
-  max-width: 96%; /* Ajusta o tamanho máximo para 90% da largura da tela */
+  max-width: 97%; /* Ajusta o tamanho máximo para 90% da largura da tela */
   padding: 20px;
   background-color: white;
-  border-radius: 8px;
+  border-radius: 1px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin-top: 10px
 }
@@ -146,4 +146,44 @@ html, body {
   color: #dc3545;
   font-size: 0.875em;
   margin-top: 0.25rem;
+}
+
+/* Estilo discreto para <h1> */
+h1 {
+  font-size: 20px; /* Tamanho moderado */
+  font-weight: 600; /* Sem ser muito pesado */
+  color: #555; /* Tom de cinza */
+  margin-bottom: 15px; /* Espaçamento inferior */
+  border-left: 4px solid #007bff; /* Barra vertical ao lado do título */
+  padding-left: 10px; /* Espaçamento entre o texto e a barra */
+}
+
+.section-title {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  color: #333;
+  margin: 20px 0; /* Adicionado espaçamento vertical maior */
+
+
+  &:hover {
+    color: #007bff;
+  }
+}
+
+.separator {
+  border-bottom: 1px solid #ccc; /* Linha fina e uniforme */
+  margin: 20px 0; /* Espaçamento ajustado */
+}
+
+.section-content {
+  margin: 10px 0;
+  transition: all 0.3s ease;
+}
+
+.toggle-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
 }

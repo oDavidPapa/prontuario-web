@@ -19,8 +19,8 @@ export class DiagnosticoService {
         return this.http.post(`${this.apiUrl}`, diagnostico);
     }
 
-    updateConsulta(idConsulta: number, consultaData: ConsultaCadastroDTO): Observable<any> {
-        return this.http.put<void>(`${this.apiUrl}/${idConsulta}`, consultaData);
+    updateDiagnostico(idDiagnostico: number, diagnostico: DiagnosticoCadastroDTO): Observable<any> {
+        return this.http.put<void>(`${this.apiUrl}/${idDiagnostico}`, diagnostico);
     }
 
     getConsultas(page: number = 0, size: number = 10): Observable<PaginatedResponse<Consulta>> {

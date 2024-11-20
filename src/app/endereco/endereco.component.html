@@ -1,0 +1,75 @@
+<form [formGroup]="enderecoForm" (ngSubmit)="onSubmit()" class="form">
+    <!-- Dados do Paciente -->
+    <div class="form-group-row">
+        <div class="form-group nome-group">
+            <label for="logradouro">Logradouro</label>
+            <input id="logradouro" formControlName="logradouro" placeholder="Digite o logradouro" class="form-control"
+                [ngClass]="{'is-invalid': enderecoForm.get('logradouro')?.invalid && enderecoForm.get('logradouro')?.touched}" />
+            <div *ngIf="enderecoForm.get('logradouro')?.invalid && enderecoForm.get('logradouro')?.touched"
+                class="invalid-feedback">
+                Logradouro é Obrigatório.
+            </div>
+        </div>
+        <div class="form-group nome-group">
+            <label for="numero">Número</label>
+            <input id="numero" formControlName="numero" placeholder="Digite o número" class="form-control" />
+
+        </div>
+        <div class="form-group nome-group">
+            <label for="complemento">Complemento</label>
+            <input id="complemento" formControlName="complemento" placeholder="Digite o complemento"
+                class="form-control" />
+        </div>
+        <div class="form-group nome-group">
+            <label for="bairro">Bairro</label>
+            <input id="bairro" formControlName="bairro" placeholder="Digite o bairro" class="form-control"
+                [ngClass]="{'is-invalid': enderecoForm.get('bairro')?.invalid && enderecoForm.get('bairro')?.touched}" />
+            <div *ngIf="enderecoForm.get('bairro')?.invalid && enderecoForm.get('bairro')?.touched"
+                class="invalid-feedback">
+                Bairro é Obrigatório.
+            </div>
+        </div>
+    </div>
+    <div class="form-group-row">
+        <div class="form-group nome-group">
+            <label for="nome">CEP</label>
+            <input id="cep" formControlName="cep" placeholder="Digite o complemento" class="form-control"
+                [ngClass]="{'is-invalid': enderecoForm.get('cep')?.invalid && enderecoForm.get('cep')?.touched}" />
+            <div *ngIf="enderecoForm.get('cep')?.invalid && enderecoForm.get('cep')?.touched" class="invalid-feedback">
+                CEP é Obrigatório.
+            </div>
+        </div>
+        <div class="form-group nome-group">
+            <label for="nome">Cidade</label>
+            <input id="cidade" formControlName="cidade" placeholder="Digite o cidade" class="form-control"
+                [ngClass]="{'is-invalid': enderecoForm.get('cidade')?.invalid && enderecoForm.get('cidade')?.touched}" />
+            <div *ngIf="enderecoForm.get('cidade')?.invalid && enderecoForm.get('cidade')?.touched"
+                class="invalid-feedback">
+                Cidade é Obrigatória.
+            </div>
+        </div>
+        <div class="form-group nome-group">
+            <label for="nome">UF</label>
+            <input id="uf" formControlName="uf" placeholder="Digite a UF" class="form-control"
+                [ngClass]="{'is-invalid': enderecoForm.get('uf')?.invalid && enderecoForm.get('uf')?.touched}" />
+            <div *ngIf="enderecoForm.get('uf')?.invalid && enderecoForm.get('uf')?.touched" class="invalid-feedback">
+                UF é Obrigatória.
+            </div>
+        </div>
+        <div class="form-group nome-group">
+            <label for="nome">País</label>
+            <input id="pais" formControlName="pais" placeholder="Digite o país" class="form-control"
+                [ngClass]="{'is-invalid': enderecoForm.get('pais')?.invalid && enderecoForm.get('pais')?.touched}" />
+            <div *ngIf="enderecoForm.get('pais')?.invalid && enderecoForm.get('pais')?.touched"
+                class="invalid-feedback">
+                País é Obrigatório.
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão Salvar -->
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
+    </div>
+</form>
