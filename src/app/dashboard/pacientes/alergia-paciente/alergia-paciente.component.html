@@ -1,0 +1,24 @@
+<div class="alergia-container">
+  <form [formGroup]="alergiaPacienteForm" (ngSubmit)="onAddAlergia()" class="form">
+    <div class="form-group-row">
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <input id="descricao" formControlName="descricao" placeholder="Digite a descricao" type="text"
+          class="form-control" />
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="separator"></div>
+
+  <!-- Grid de alergias -->
+  <div class="data-grid">
+    <app-data-grid [columns]="columns" [data]="alergias" [showEdit]="false" (remove)="onRemoveAlergia($event)">
+    </app-data-grid>
+  </div>
+</div>

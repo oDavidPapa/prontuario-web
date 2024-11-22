@@ -37,6 +37,7 @@ import { PacienteResumoComponent } from './dashboard/pacientes/resumo-paciente/p
 import { CadastraMedicosComponent } from './dashboard/medicos/cadastrar-medicos/cadastrar-medicos.component';
 import { ManterConsultasComponent } from './dashboard/consultas/cadastrar-consultas/manter-consulta.component';
 import { EnderecoComponent } from './endereco/endereco.component';
+import { AlergiaPacienteComponent } from './dashboard/pacientes/alergia-paciente/alergia-paciente.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { EnderecoComponent } from './endereco/endereco.component';
     DataGridComponent,
     PacientesComponent,
     PacienteResumoComponent,
+    AlergiaPacienteComponent,
     
     MedicosComponent,
 

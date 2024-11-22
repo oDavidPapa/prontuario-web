@@ -91,14 +91,25 @@
             <app-endereco [idPessoa]="idPessoa"></app-endereco>
         </div>
 
-    <!-- Contatos -->
-    <h1 class="section-title" (click)="toggleSection('contato')">
-        Contato
-        <span class="toggle-icon">{{ isContatoOpen ? '−' : '+' }}</span>
-      </h1>
-      <div class="separator"></div>
-      <div *ngIf="isContatoOpen" class="section-content">
-        <app-contatos [idPessoa]="idPessoa" (contatosAtualizados)="onContatosAtualizados($event)"></app-contatos>
-      </div>
+        <!-- Contatos -->
+        <h1 class="section-title" (click)="toggleSection('contato')">
+            Contato
+            <span class="toggle-icon">{{ isContatoOpen ? '−' : '+' }}</span>
+        </h1>
+        <div class="separator"></div>
+        <div *ngIf="isContatoOpen" class="section-content">
+            <app-contatos [idPessoa]="idPessoa" (contatosAtualizados)="onContatosAtualizados($event)"></app-contatos>
+        </div>
+
+        <!-- Alergias -->
+        <h1 class="section-title" (click)="toggleSection('alergia')">
+            Alergias
+            <span class="toggle-icon">{{ isAlergiaOpen ? '−' : '+' }}</span>
+        </h1>
+        <div class="separator"></div>
+        <div *ngIf="isAlergiaOpen" class="section-content">
+            <app-alergia-paciente [idPaciente]="idPaciente"
+                (alergiasAtualizadas)="onAlergiasAtualizadas($event)"></app-alergia-paciente>
+        </div>
     </form>
 </div>
