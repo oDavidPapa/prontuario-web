@@ -110,4 +110,11 @@
     outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
   }
+
+  .no-data-message {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin-top: 20px;
+  }
   
