@@ -80,11 +80,10 @@
             </div>
         </mat-tab>
         <mat-tab label="Alergias">
+            <!-- Campo para adicionar nova alergia -->
             <div class="form-container">
-                <mat-form-field appearance="fill">
-                    <mat-label>Alergia</mat-label>
-                    <textarea matInput [(ngModel)]="alergia" placeholder="Informar alergia"></textarea>
-                </mat-form-field>
+                <!-- Componente de gerenciamento de alergias -->
+                <app-alergia-paciente [idPaciente]="idPaciente"></app-alergia-paciente>
             </div>
         </mat-tab>
         <!-- ABA 4: Solicitação de Exames -->

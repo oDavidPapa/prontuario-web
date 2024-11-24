@@ -38,6 +38,8 @@ import { CadastraMedicosComponent } from './dashboard/medicos/cadastrar-medicos/
 import { ManterConsultasComponent } from './dashboard/consultas/cadastrar-consultas/manter-consulta.component';
 import { EnderecoComponent } from './endereco/endereco.component';
 import { AlergiaPacienteComponent } from './dashboard/pacientes/alergia-paciente/alergia-paciente.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -88,8 +90,10 @@ import { AlergiaPacienteComponent } from './dashboard/pacientes/alergia-paciente
     NgxMaskModule.forRoot(),
     NgSelectModule,
     MatTabsModule,
+    MatTableModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
     MatSelectModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, AlertService],

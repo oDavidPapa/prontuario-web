@@ -3,6 +3,6 @@ export interface ConsultaCadastroDTO {
     tipo: string;
     idMedico?: number;
     idConsulta?: number;
-    idPaciente: number; 
+    idPaciente: number | undefined; 
     idAgendaConsulta?: number;
 }

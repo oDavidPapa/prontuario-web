@@ -3,10 +3,10 @@ export enum ConsultaTabs {
     PACIENTE = 1,
     ANAMNESE = 2,
     DIAGNOSTICO = 3,
-    EXAME = 4,
-    PRESCRICAO = 5,
-    TRATAMENTO = 6,
-    ALERGIA = 7,
+    ALERGIA = 4,
+    EXAME = 5,
+    PRESCRICAO = 6,
+    TRATAMENTO = 7,
     ARQUIVO = 8
   }
   

@@ -18,14 +18,12 @@ export class AlergiaPacienteComponent implements OnInit, OnChanges {
   alergias: AlergiaPaciente[] = [];
 
   @Input() idPaciente!: number;
-
-  @Output() contatosAtualizados = new EventEmitter<any[]>();
   @Output() alergiasAtualizadas = new EventEmitter<any[]>();
 
 
+
   columns: Column[] = [
-    { header: 'Id', field: 'id' },
-    { header: 'Descrição', field: 'descricao' }
+    { header: 'Descrição', field: 'descricao', align: 'left' }
   ];
 
   constructor(

@@ -1,7 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, input, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { UsuarioService } from "../../../services/usuario.service";
 import { AlertService } from "../../base/alert/alert.service";
 import { PacienteService } from "../../../services/paciente.service";
 import { PacienteOption } from "../../../options/paciente.option";
@@ -22,6 +21,7 @@ export class ManterConsultasComponent implements OnInit {
 
     consultaForm!: FormGroup;
     diagnosticoForm!: FormGroup;
+    idPaciente!: any;
 
     pacientesOptions: PacienteOption[] = [];
     filteredPacientes: PacienteOption[] = []; // Nova lista para pacientes filtrados
@@ -29,6 +29,7 @@ export class ManterConsultasComponent implements OnInit {
     isEditing: boolean = false;
     idConsulta: any;
     idDiagnostico: any;
+
 
     selectedPaciente?: Paciente;
     optionSelect?: PacienteOption;
@@ -67,9 +68,8 @@ export class ManterConsultasComponent implements OnInit {
 
     onPacienteChange(event: any): void {
         this.selectedPaciente = this.pacientes.find(p => p.id == event.value.id);
-        console.log(this.selectedPaciente);
-
         this.searchTerm = ''; // Limpa o campo de pesquisa ao selecionar um paciente
+        this.idPaciente = this.selectedPaciente?.id;
     }
 
     private carregarPaciente(id: string): void {
@@ -164,6 +164,7 @@ export class ManterConsultasComponent implements OnInit {
                 }));
 
                 this.pacientesOptions = response.data.list.map((paciente: any) => {
+                    this.idPaciente = paciente.id;
                     return {
                         id: paciente.id,
                         nome: `${paciente.pessoa.cpf} - ${paciente.pessoa.nome}`
@@ -200,7 +201,7 @@ export class ManterConsultasComponent implements OnInit {
                 if (confirmacao) {
                     const consultaData: ConsultaCadastroDTO = {
                         tipo: this.tipoConsulta ?? '',
-                        idPaciente: this.selectedPaciente?.id ?? 0
+                        idPaciente: this.selectedPaciente?.id,
                     };
 
                     // Chama o serviço para salvar a consulta após a confirmação
@@ -231,7 +232,7 @@ export class ManterConsultasComponent implements OnInit {
 
         const consultaData: ConsultaCadastroDTO = {
             tipo: this.tipoConsulta ?? '',
-            idPaciente: this.selectedPaciente?.id ?? 0,
+            idPaciente: this.selectedPaciente?.id,
             anamnese: this.anamnese
         };
 
@@ -380,6 +381,7 @@ export class ManterConsultasComponent implements OnInit {
     }
 
     loadAlergia(): void {
+        this.idPaciente = this.selectedPaciente?.id;
         console.log("ALERGIA");
 
     }
