@@ -1,0 +1,39 @@
+<div class="cid-container" *ngIf="idDiagnostico">
+    <div class="separator"></div>
+    <h1 class="section-title">Cadastrar CID</h1>
+    <form [formGroup]="cidPacienteForm" (ngSubmit)="onAddCid()" class="form">
+        <div class="form-group-row">
+            <div class="form-group">
+                <label for="codigo">Código</label>
+                <input id="codigo" formControlName="codigo" placeholder="Adicionar código do CID" type="text"
+                    class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <input id="descricao" formControlName="descricao" placeholder="Adicionar descrição do CID" type="text"
+                    class="form-control" />
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-plus"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div class="separator"></div>
+
+    <!-- Grid de cids -->
+    <!-- Condicional para exibir a grade de cids -->
+    <div class="data-grid">
+        <ng-container *ngIf="cids && cids.length > 0; else noDataTemplate">
+            <app-data-grid [columns]="columns" [data]="cids" [showEdit]="false" (remove)="onRemoveCid($event)">
+            </app-data-grid>
+        </ng-container>
+
+        <!-- Mensagem para caso não haja dados -->
+        <ng-template #noDataTemplate>
+            <p class="no-data-message">Nenhum cid cadastrado.</p>
+        </ng-template>
+    </div>
+</div>

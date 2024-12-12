@@ -40,6 +40,7 @@ import { EnderecoComponent } from './endereco/endereco.component';
 import { AlergiaPacienteComponent } from './dashboard/pacientes/alergia-paciente/alergia-paciente.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { CidCadastroComponent } from './dashboard/pacientes/cid-cadastro-paciente/cadastro-cid.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { MatIconModule } from '@angular/material/icon';
     CpfPipe,
     DatePipe,
     PhoneMaskPipe,
-    ContatosComponent
+    ContatosComponent,
+    CidCadastroComponent
   ],
 
   imports: [

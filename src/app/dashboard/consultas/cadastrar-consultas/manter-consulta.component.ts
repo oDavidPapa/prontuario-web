@@ -11,6 +11,7 @@ import { ConsultaCadastroDTO } from "../../../models/consulta-cadastro.model";
 import { DiagnosticoService } from "../../../services/diagnostico.service";
 import { ConsultaTabs } from "../../../models/enum/consulta-tabs.enum";
 import { MatTabChangeEvent } from "@angular/material/tabs";
+import { Cid } from "../../../models/cid.model";
 
 @Component({
     selector: 'app-manter-consulta',
@@ -45,6 +46,12 @@ export class ManterConsultasComponent implements OnInit {
     arquivo: string = '';
     tipoConsulta: string = '';
 
+    selectedCid: any = null;
+    diagnosticoCids: any[] = [];
+
+    cidsAdicionados: Cid[] = [];
+    @Input() cids: Cid[] = [];
+
 
     constructor(
         private route: ActivatedRoute,
@@ -65,6 +72,19 @@ export class ManterConsultasComponent implements OnInit {
             this.isEditing = true;
         }
     }
+
+    adicionarCid() {
+        if (this.selectedCid && !this.diagnosticoCids.includes(this.selectedCid)) {
+            this.diagnosticoCids.push(this.selectedCid);
+            this.selectedCid = null; // Reseta a seleção
+        }
+    }
+
+    // Remove um CID da lista de CIDs associados
+    removerCid(cid: any) {
+        this.diagnosticoCids = this.diagnosticoCids.filter(item => item !== cid);
+    }
+
 
     onPacienteChange(event: any): void {
         this.selectedPaciente = this.pacientes.find(p => p.id == event.value.id);
@@ -389,5 +409,15 @@ export class ManterConsultasComponent implements OnInit {
     loadArquivo(): void {
         console.log("ARQUIVO");
 
+    }
+
+    onCidAdicionado(event: any): void {
+        console.log('CID Adicionado:', event);
+        //this.cidsAdicionados.push(cid);  // Adiciona o CID ao array de CIDs
+    }
+
+    onCidRemovido(event: any): void {
+        console.log('CID Removido:', event);
+        //this.cidsAdicionados = this.cidsAdicionados.filter(c => c.codigo !== cid.codigo);
     }
 }

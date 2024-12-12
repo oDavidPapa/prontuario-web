@@ -20,8 +20,6 @@ export class AlergiaPacienteComponent implements OnInit, OnChanges {
   @Input() idPaciente!: number;
   @Output() alergiasAtualizadas = new EventEmitter<any[]>();
 
-
-
   columns: Column[] = [
     { header: 'Descrição', field: 'descricao', align: 'left' }
   ];

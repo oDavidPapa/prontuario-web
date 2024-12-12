@@ -66,18 +66,27 @@
             </div>
         </mat-tab>
 
-        <!-- ABA 3: Tratamento da Consulta -->
+        <!-- ABA 3: Diagnostico -->
         <mat-tab label="Diagnósticos">
             <div class="form-container">
+                <!-- Campo de Diagnóstico -->
                 <mat-form-field appearance="fill">
                     <mat-label>Diagnóstico</mat-label>
                     <textarea matInput [(ngModel)]="diagnostico" placeholder="Descreva o diagnóstico"></textarea>
                 </mat-form-field>
+
                 <div class="button-container">
                     <button class="btn btn-primary" (click)="salvarDiagnostico()">Salvar</button>
                     <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
                 </div>
+
+                <!-- Componente de Cadastro de CIDs -->
+                <div class="separator"></div>
+                <div class="form-container">
+                    <app-cid-cadastro [idDiagnostico]="idDiagnostico"></app-cid-cadastro>
+                </div>
             </div>
+
         </mat-tab>
         <mat-tab label="Alergias">
             <!-- Campo para adicionar nova alergia -->
