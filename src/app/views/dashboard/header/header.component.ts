@@ -10,7 +10,7 @@ import { filter } from 'rxjs/operators';
 export class HeaderComponent implements OnInit {
   title: string = '';
   showRegisterButton: boolean = false;
-  showHeader = false; 
+  showHeader = false;
 
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
       this.title = 'Pacientes';
       this.showRegisterButton = this.shouldShowRegisterButton();
       this.showHeader = true;
-      
+
     } else if (currentUrl.startsWith('/prontuario/consultas')) {
       this.title = 'Consultas';
       this.showRegisterButton = this.shouldShowRegisterButton();
@@ -56,6 +56,11 @@ export class HeaderComponent implements OnInit {
 
     } else if (currentUrl.startsWith('/prontuario/configuracoes')) {
       this.title = 'Configurações';
+      this.showRegisterButton = this.shouldShowRegisterButton();
+      this.showHeader = true;
+
+    } else if (currentUrl.startsWith('/prontuario/agendamentos')) {
+      this.title = 'Agendamentos';
       this.showRegisterButton = this.shouldShowRegisterButton();
       this.showHeader = true;
 

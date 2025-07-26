@@ -10,7 +10,6 @@ import { AuthInterceptor } from './views/interceptors/auth.interceptors';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { HeaderComponent } from './views/dashboard/header/header.component';
 import { HomeComponent } from './views/dashboard/home/home.component';
-import { SettingsComponent } from './views/dashboard/configuracao/settings.component';
 import { PacientesComponent } from './views/dashboard/pacientes/pacientes.component';
 import { MedicosComponent } from './views/dashboard/medicos/medicos.component';
 import { ConsultasComponent } from './views/dashboard/consultas/consultas.component';
@@ -41,6 +40,10 @@ import { AlergiaPacienteComponent } from './views/dashboard/pacientes/alergia-pa
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { CidCadastroComponent } from './views/dashboard/pacientes/cid-cadastro-paciente/cadastro-cid.component';
+import { CadastrarAgendamentosComponent } from './views/dashboard/agendamentos/cadastrar-agendamentos/cadastrar-agendamentos.component';
+import { AgendamentosComponent } from './views/dashboard/agendamentos/agendamentos.component';
+import { EditarAgendamentosComponent } from './views/dashboard/agendamentos/editar-agendamentos/editar-agendamentos.component';
+import { DatetimePipe } from './pipes/date-time.pipe';
 
 
 @NgModule({
@@ -51,7 +54,6 @@ import { CidCadastroComponent } from './views/dashboard/pacientes/cid-cadastro-p
     HeaderComponent,
     HomeComponent,
     UsuarioComponent,
-    SettingsComponent,
     DataGridComponent,
     PacientesComponent,
     PacienteResumoComponent,
@@ -76,10 +78,16 @@ import { CidCadastroComponent } from './views/dashboard/pacientes/cid-cadastro-p
 
     CpfPipe,
     DatePipe,
+    DatetimePipe,
     PhoneMaskPipe,
     ContatosComponent,
-    CidCadastroComponent
-  ],
+    CidCadastroComponent,
+
+    AgendamentosComponent,
+    CadastrarAgendamentosComponent,
+    EditarAgendamentosComponent,
+
+   ],
 
   imports: [
     BrowserModule,

@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Column } from './column';
-import { faEdit, faTrash, faTimesCircle, faCheckCircle, faToggleOn, faToggleOff  } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faTimesCircle, faCheckCircle, faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { CustomButtonGrid } from './custom-button-grid.model';
 
 @Component({
   selector: 'app-data-grid',
@@ -14,10 +15,12 @@ export class DataGridComponent {
   @Input() showEdit: boolean = true; // Adiciona esta propriedade para controle de exibição do botão de editar
   @Input() showDelete: boolean = true; // Adiciona esta propriedade para controle de exibição do botão de deletar
   @Input() showToggle: boolean = false; // Controle de exibição do botão de toggle (ativar/desativar)
+  @Input() iconButtons: CustomButtonGrid[] = [];
 
   @Output() edit = new EventEmitter<any>();
   @Output() remove = new EventEmitter<any>(); // Emissor para remoção
   @Output() toggleStatus = new EventEmitter<any>(); // Emissor para alterar status
+  @Output() iconButtonClick = new EventEmitter<{ actionName: string, item: any }>();
 
 
   faEdit = faEdit; // Adiciona o ícone de lápis
@@ -27,6 +30,7 @@ export class DataGridComponent {
 
   faToggleOn = faToggleOn; // Ícone de toggle ligado
   faToggleOff = faToggleOff; // Ícone de toggle desligado
+
 
 
 
@@ -46,8 +50,12 @@ export class DataGridComponent {
   onRemove(item: any): void {
     this.remove.emit(item); // Emite o item para remoção
   }
-  
+
   onToggleStatus(item: any): void {
     this.toggleStatus.emit(item);
+  }
+
+  onIconButtonClick(actionName: string, item: any) {
+    this.iconButtonClick.emit({ actionName, item });
   }
 }
