@@ -44,6 +44,7 @@ import { CadastrarAgendamentosComponent } from './views/dashboard/agendamentos/c
 import { AgendamentosComponent } from './views/dashboard/agendamentos/agendamentos.component';
 import { EditarAgendamentosComponent } from './views/dashboard/agendamentos/editar-agendamentos/editar-agendamentos.component';
 import { DatetimePipe } from './pipes/date-time.pipe';
+import { MedicamentoCadastroComponent } from './views/dashboard/consultas/prescricao-medicamento/cadastro-medicamento.component';
 
 
 @NgModule({
@@ -82,6 +83,7 @@ import { DatetimePipe } from './pipes/date-time.pipe';
     PhoneMaskPipe,
     ContatosComponent,
     CidCadastroComponent,
+    MedicamentoCadastroComponent,
 
     AgendamentosComponent,
     CadastrarAgendamentosComponent,

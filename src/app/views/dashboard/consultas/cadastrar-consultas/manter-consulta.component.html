@@ -110,21 +110,37 @@
         <mat-tab label="Prescrições Médicas">
             <div class="form-container">
                 <mat-form-field appearance="fill">
-                    <mat-label>Prescrições Médicas</mat-label>
-                    <textarea matInput [(ngModel)]="prescricoesMedicas"
+                    <mat-label>Orientações Médicas</mat-label>
+                    <textarea matInput [(ngModel)]="prescricao"
                         placeholder="Descreva as prescrições médicas"></textarea>
                 </mat-form-field>
+                <div class="button-container">
+                    <button class="btn btn-primary" (click)="salvarPrescricao()">Salvar</button>
+                    <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
+                </div>
+            </div>
+
+
+            <!-- Componente de Cadastro de CIDs -->
+            <div class="separator"></div>
+            <div class="form-container">
+                <app-medicamento-cadastro [idPrescricaoConsulta]="idPrescricaoConsulta"></app-medicamento-cadastro>
             </div>
         </mat-tab>
 
-        <!-- ABA 7: Diagnóstico -->
+        <!-- ABA 7: Tratanebto -->
         <mat-tab label="Tratamentos">
             <div class="form-container">
                 <mat-form-field appearance="fill">
                     <mat-label>Tratamento</mat-label>
                     <textarea matInput [(ngModel)]="tratamento" placeholder="Descreva o tratamento"></textarea>
                 </mat-form-field>
+                <div class="button-container">
+                    <button class="btn btn-primary" (click)="salvarTratamento()">Salvar</button>
+                    <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
+                </div>
             </div>
+
         </mat-tab>
         <mat-tab label="Arquivos">
             <div class="form-container">
@@ -134,5 +150,7 @@
                 </mat-form-field>
             </div>
         </mat-tab>
+
+
     </mat-tab-group>
 </div>

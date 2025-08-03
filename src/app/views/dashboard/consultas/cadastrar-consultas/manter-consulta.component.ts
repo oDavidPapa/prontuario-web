@@ -12,6 +12,8 @@ import { DiagnosticoService } from "../../../../services/diagnostico.service";
 import { ConsultaTabs } from "../../../../models/enum/consulta-tabs.enum";
 import { MatTabChangeEvent } from "@angular/material/tabs";
 import { Cid } from "../../../../models/cid.model";
+import { TratamentoService } from "../../../../services/tratamento.service";
+import { PrescricaoConsultaService } from "../../../../services/prescricao-consulta.service";
 
 @Component({
     selector: 'app-manter-consulta',
@@ -28,8 +30,11 @@ export class ManterConsultasComponent implements OnInit {
     filteredPacientes: PacienteOption[] = []; // Nova lista para pacientes filtrados
     pacientes: Paciente[] = [];
     isEditing: boolean = false;
+    
     idConsulta: any;
     idDiagnostico: any;
+    idTratamento: any;
+    idPrescricaoConsulta: any;
 
 
     selectedPaciente?: Paciente;
@@ -40,7 +45,7 @@ export class ManterConsultasComponent implements OnInit {
     anamnese: string = '';
     tratamento: string = '';
     examesSolicitados: string = '';
-    prescricoesMedicas: string = '';
+    prescricao: string = '';
     diagnostico: string = '';
     alergia: string = '';
     arquivo: string = '';
@@ -60,7 +65,9 @@ export class ManterConsultasComponent implements OnInit {
         private pacienteService: PacienteService,
         private alertService: AlertService,
         private consultaService: ConsultaService,
-        private diagnosticoService: DiagnosticoService
+        private diagnosticoService: DiagnosticoService,
+        private tratamentoService: TratamentoService,
+        private prescricaoConsultaService: PrescricaoConsultaService
     ) { }
 
     ngOnInit(): void {
@@ -92,8 +99,9 @@ export class ManterConsultasComponent implements OnInit {
         this.idPaciente = this.selectedPaciente?.id;
     }
 
-    private carregarPaciente(id: string): void {
-        this.consultaService.getConsultaById(+id).pipe(
+    private carregarPaciente(): void {
+        this.reloadConsultaId();
+        this.consultaService.getConsultaById(this.idConsulta).pipe(
             tap(response => {
                 if (response.success) {
                     const consulta = response.data;
@@ -118,8 +126,9 @@ export class ManterConsultasComponent implements OnInit {
     }
 
 
-    private carregarAnamnese(id: string): void {
-        this.consultaService.getConsultaById(+id).pipe(
+    private carregarAnamnese(): void {
+        this.reloadConsultaId();
+        this.consultaService.getConsultaById(this.idConsulta).pipe(
             tap(response => {
                 if (response.success) {
                     const consulta = response.data;
@@ -137,8 +146,10 @@ export class ManterConsultasComponent implements OnInit {
         ).subscribe();
     }
 
-    private carregarDiagnostico(id: string): void {
-        this.diagnosticoService.getDiagnostico(+id).pipe(
+    // DIAGNOSTICO
+    private carregarDiagnostico(): void {
+        this.reloadConsultaId();
+        this.diagnosticoService.getDiagnostico(this.idConsulta).pipe(
             tap(response => {
                 if (response.success) {
                     const diagnostico = response.data;
@@ -153,6 +164,52 @@ export class ManterConsultasComponent implements OnInit {
             }),
             catchError((error) => {
                 this.alertService.error('Erro!', 'Erro ao carregar a diagnóstico.');
+                return of(null);
+            })
+        ).subscribe();
+    }
+
+    // TRATAMENTO: 
+    private carregarTratamento(): void {
+        this.reloadConsultaId();
+        this.tratamentoService.getTratamento(this.idConsulta).pipe(
+            tap(response => {
+                if (response.success) {
+                    const tratamento = response.data;
+                    if (tratamento) {
+                        this.tratamento = tratamento.tratamento || '';
+                        this.idConsulta = tratamento.idConsulta;
+                        this.idTratamento = tratamento.id;
+                    }
+                } else {
+                    this.alertService.error('Erro!', 'Falha ao carregar a tratamento.');
+                }
+            }),
+            catchError((error) => {
+                this.alertService.error('Erro!', 'Erro ao carregar a tratamento.');
+                return of(null);
+            })
+        ).subscribe();
+    }
+
+    // PRESCRIÇÃO:
+        private carregarPrescricao(): void {
+        this.reloadConsultaId();
+        this.prescricaoConsultaService.getPrescricaoConsulta(this.idConsulta).pipe(
+            tap(response => {
+                if (response.success) {
+                    const prescricao = response.data;
+                    if (prescricao) {
+                        this.prescricao = prescricao.descricao || '';
+                        this.idConsulta = prescricao.idConsulta;
+                        this.idPrescricaoConsulta = prescricao.id;
+                    }
+                } else {
+                    this.alertService.error('Erro!', 'Falha ao carregar a prescrição.');
+                }
+            }),
+            catchError((error) => {
+                this.alertService.error('Erro!', 'Erro ao carregar a prescrição.');
                 return of(null);
             })
         ).subscribe();
@@ -176,6 +233,7 @@ export class ManterConsultasComponent implements OnInit {
 
     }
 
+    // PACIENTES:
     private carregarPacientes(): void {
         this.pacienteService.getOptionsPaciente().pipe(
             tap(response => {
@@ -245,6 +303,8 @@ export class ManterConsultasComponent implements OnInit {
     }
 
     manterConsulta(): void {
+        this.reloadConsultaId();
+
         if (!this.selectedPaciente || !this.tipoConsulta) {
             this.alertService.error('Erro!', 'Selecione um paciente e um tipo de consulta.');
             return;
@@ -274,6 +334,7 @@ export class ManterConsultasComponent implements OnInit {
     }
 
     salvarDiagnostico(): void {
+        this.reloadConsultaId();
         if (this.idConsulta && this.diagnostico) {
             const diagnosticoData = {
                 idConsulta: this.idConsulta,
@@ -318,6 +379,98 @@ export class ManterConsultasComponent implements OnInit {
         }
     }
 
+    salvarTratamento(): void {
+        this.reloadConsultaId();
+        if (this.idConsulta && this.tratamento) {
+            const tratamentoData = {
+                idConsulta: this.idConsulta,
+                tratamento: this.tratamento
+            };
+
+            if (this.idTratamento) {
+                this.tratamentoService.updateTratamento(this.idTratamento, tratamentoData).pipe(
+                    tap(response => {
+                        if (response.success) {
+                            this.alertService.success('Sucesso!', 'Tratamento salvo com sucesso.');
+                            this.isEditing = true;
+                            this.idConsulta = response.data.idConsulta;
+                            this.idTratamento = response.data.id;
+                        } else {
+                            this.alertService.error('Erro!', 'Falha ao salvar o tratamento.');
+                        }
+                    }),
+                    catchError(() => {
+                        this.alertService.error('Erro!', 'Erro ao salvar o tratamento.');
+                        return of(null);
+                    })
+                ).subscribe();
+            } else {
+                this.tratamentoService.salvarTratamento(tratamentoData).pipe(
+                    tap(response => {
+                        if (response.success) {
+                            this.alertService.success('Sucesso!', 'Tratamento salvo com sucesso.');
+                            this.isEditing = true;
+                            this.idConsulta = response.data.idConsulta;
+                            this.idTratamento = response.data.id;
+                        } else {
+                            this.alertService.error('Erro!', 'Falha ao salvar o Tratamento.');
+                        }
+                    }),
+                    catchError(() => {
+                        this.alertService.error('Erro!', 'Erro ao salvar o Tratamento.');
+                        return of(null);
+                    })
+                ).subscribe();
+            }
+        }
+    }
+
+    salvarPrescricao(): void {
+        this.reloadConsultaId();
+        if (this.idConsulta && this.prescricao) {
+            const prescricaoData = {
+                idConsulta: this.idConsulta,
+                descricao: this.prescricao
+            };
+
+            if (this.idPrescricaoConsulta) {
+                this.prescricaoConsultaService.updatePrescricaoConsulta(this.idPrescricaoConsulta, prescricaoData).pipe(
+                    tap(response => {
+                        if (response.success) {
+                            this.alertService.success('Sucesso!', 'Prescrição salvo com sucesso.');
+                            this.isEditing = true;
+                            this.idConsulta = response.data.idConsulta;
+                            this.idPrescricaoConsulta = response.data.id;
+                        } else {
+                            this.alertService.error('Erro!', 'Falha ao salvar o Prescrição.');
+                        }
+                    }),
+                    catchError(() => {
+                        this.alertService.error('Erro!', 'Erro ao salvar o Prescrição.');
+                        return of(null);
+                    })
+                ).subscribe();
+            } else {
+                this.prescricaoConsultaService.salvarPrescricaoConsulta(prescricaoData).pipe(
+                    tap(response => {
+                        if (response.success) {
+                            this.alertService.success('Sucesso!', 'Prescrição salvo com sucesso.');
+                            this.isEditing = true;
+                            this.idConsulta = response.data.idConsulta;
+                            this.idPrescricaoConsulta = response.data.id;
+                        } else {
+                            this.alertService.error('Erro!', 'Falha ao salvar o Prescrição.');
+                        }
+                    }),
+                    catchError(() => {
+                        this.alertService.error('Erro!', 'Erro ao salvar o Prescrição.');
+                        return of(null);
+                    })
+                ).subscribe();
+            }
+        }
+    }
+
 
     cancel(): void {
         this.router.navigate(['/prontuario/consultas']);
@@ -329,6 +482,7 @@ export class ManterConsultasComponent implements OnInit {
             return;
         }
 
+        this.reloadConsultaId();
         const selectedTabIndex = event.index;
 
         switch (selectedTabIndex) {
@@ -370,18 +524,18 @@ export class ManterConsultasComponent implements OnInit {
 
     loadPaciente(): void {
         console.log("PACIENTE");
-        this.carregarPaciente(this.idConsulta);
+        this.carregarPaciente();
     }
 
     loadAnamnese(): void {
         console.log("ANAMNESE");
-        this.carregarPaciente(this.idConsulta);
-        this.carregarAnamnese(this.idConsulta);
+        this.carregarPaciente();
+        this.carregarAnamnese();
     }
 
     loadDiagnostico(): void {
         console.log("DIAGNOSTICO");
-        this.carregarDiagnostico(this.idConsulta);
+        this.carregarDiagnostico();
 
     }
 
@@ -392,12 +546,13 @@ export class ManterConsultasComponent implements OnInit {
 
     loadPrescricao(): void {
         console.log("PRESCRICAO");
+        this.carregarPrescricao();
 
     }
 
     loadTratamento(): void {
         console.log("TRATAMENTO");
-
+        this.carregarTratamento();
     }
 
     loadAlergia(): void {
@@ -419,5 +574,9 @@ export class ManterConsultasComponent implements OnInit {
     onCidRemovido(event: any): void {
         console.log('CID Removido:', event);
         //this.cidsAdicionados = this.cidsAdicionados.filter(c => c.codigo !== cid.codigo);
+    }
+
+    private reloadConsultaId() {
+        this.idConsulta = this.route.snapshot.paramMap.get('id');
     }
 }
