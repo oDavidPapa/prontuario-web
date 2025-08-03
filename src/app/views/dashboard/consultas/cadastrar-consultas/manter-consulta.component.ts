@@ -30,7 +30,7 @@ export class ManterConsultasComponent implements OnInit {
     filteredPacientes: PacienteOption[] = []; // Nova lista para pacientes filtrados
     pacientes: Paciente[] = [];
     isEditing: boolean = false;
-    
+
     idConsulta: any;
     idDiagnostico: any;
     idTratamento: any;
@@ -193,7 +193,7 @@ export class ManterConsultasComponent implements OnInit {
     }
 
     // PRESCRIÇÃO:
-        private carregarPrescricao(): void {
+    private carregarPrescricao(): void {
         this.reloadConsultaId();
         this.prescricaoConsultaService.getPrescricaoConsulta(this.idConsulta).pipe(
             tap(response => {
@@ -289,6 +289,8 @@ export class ManterConsultasComponent implements OnInit {
                                 this.alertService.success('Sucesso!', 'Consulta salva com sucesso.');
                                 this.isEditing = true;
                                 this.idConsulta = response.data.id;
+                                this.router.navigate([`/prontuario/consultas/editar/${this.idConsulta}`]);
+
                             } else {
                                 this.alertService.error('Erro!', 'Falha ao salvar a consulta.');
                             }
