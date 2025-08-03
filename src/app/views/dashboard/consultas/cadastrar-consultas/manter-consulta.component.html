@@ -95,16 +95,6 @@
                 <app-alergia-paciente [idPaciente]="idPaciente"></app-alergia-paciente>
             </div>
         </mat-tab>
-        <!-- ABA 4: Solicitação de Exames -->
-        <mat-tab label="Solicitação de Exames">
-            <div class="form-container">
-                <mat-form-field appearance="fill">
-                    <mat-label>Exames Solicitados</mat-label>
-                    <textarea matInput [(ngModel)]="examesSolicitados"
-                        placeholder="Descreva os exames solicitados"></textarea>
-                </mat-form-field>
-            </div>
-        </mat-tab>
 
         <!-- ABA 5: Prescrições Médicas -->
         <mat-tab label="Prescrições Médicas">
@@ -140,7 +130,16 @@
                     <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
                 </div>
             </div>
-
+        </mat-tab>
+        <!-- ABA 4: Solicitação de Exames -->
+        <mat-tab label="Solicitação de Exames">
+            <div class="form-container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Exames Solicitados</mat-label>
+                    <textarea matInput [(ngModel)]="examesSolicitados"
+                        placeholder="Descreva os exames solicitados"></textarea>
+                </mat-form-field>
+            </div>
         </mat-tab>
         <mat-tab label="Arquivos">
             <div class="form-container">
