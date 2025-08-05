@@ -2,12 +2,11 @@
   <form [formGroup]="exameConsultaForm" (ngSubmit)="onAddExame()" class="form">
     <div class="form-group-row">
       <div class="form-group">
-        <label for="descricao">Solicitação de exames</label>
         <input id="descricao" formControlName="descricao" placeholder="Adicionar solicitação de exame" type="text"
           class="form-control" />
       </div>
       <div class="form-actions">
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn-add" title="Adicionar exame">
           <i class="fa fa-plus"></i>
         </button>
       </div>
@@ -16,16 +15,18 @@
 
   <div class="separator"></div>
 
-  <!-- Grid de alergias -->
   <div class="data-grid">
     <ng-container *ngIf="exames && exames.length > 0; else noDataTemplate">
-      <app-data-grid [columns]="columns" [data]="exames" [showEdit]="false" (remove)="onRemoveExame($event)">
+      <app-data-grid
+        [columns]="columns"
+        [data]="exames"
+        [showEdit]="false"
+        (remove)="onRemoveExame($event)">
       </app-data-grid>
     </ng-container>
 
-    <!-- Mensagem para caso não haja dados -->
     <ng-template #noDataTemplate>
-      <p class="no-data-message">Nenhuma exame solicitado.</p>
+      <p class="no-data-message">Nenhum exame solicitado.</p>
     </ng-template>
   </div>
 </div>

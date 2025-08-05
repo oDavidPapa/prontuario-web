@@ -1,131 +1,96 @@
 .cid-container {
-    margin: -20px;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column; /* Manter os itens em uma coluna */
-  }
-  
-  .form-group-row {
-    display: flex;
-    align-items: center; /* Alinha os itens verticalmente */
-    gap: 10px; /* Espaço entre os campos */
-    margin-bottom: 20px; /* Espaço abaixo da linha dos campos */
-  }
-  
-  .form-group {
-    flex: 1;
-    min-width: 150px; /* Ajuste para garantir que os campos não fiquem muito pequenos */
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    color: #333;
-    box-sizing: border-box;
-  }
-  
-  .form-group input:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
-  }
-  
-  .form-actions {
-    display: flex;
-    align-items: center;
-  }
-  
-  .btn-primary {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: -2px;
-    padding: 10px;
-    font-size: 20px; /* Tamanho do ícone */
-    height: 38px;
-    width: 38px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    line-height: 1; /* Centraliza verticalmente o ícone */
-    cursor: pointer;
-    margin-left: 10px; /* Espaço entre o último campo e o botão */
-    margin-top: 22px;
-  }
-  
-  .separator {
-    border-top: 1px solid #ddd;
-    margin: 20px 0; /* Espaço acima e abaixo da linha separadora */
-  }
-  
-  .alergias-list {
-    margin-top: 20px;
-  }
-  
-  .alergias-list ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .alergias-list li {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .btn-danger {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  .btn-danger:hover {
-    background-color: #c82333;
-  }
+  background-color: #fafafa; /* cinza claríssimo, quase branco */
+  padding: 20px; /* igual padding do pai */
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03); /* sombra quase imperceptível */
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+  border: none;
+}
 
-  .form-group select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    color: #333;
-    box-sizing: border-box;
-  }
-  
-  .form-group select:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
-  }
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+  border-left: 4px solid #007bff;
+  padding-left: 1rem;
+}
 
-  .no-data-message {
-    text-align: center;
-    color: #666;
-    font-style: italic;
-    margin-top: 20px;
-  }
+.form-group-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+}
 
-  .section-title {
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.2rem;
-    color: #333;
-    margin: 20px 0;
-    font-weight: bold;
-  }
-  
+.form-group {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: #555;
+}
+
+.form-control {
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  padding: 12px 30px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.separator {
+  margin: 2rem 0;
+  height: 1px;
+  background-color: #e0e0e0;
+}
+
+.no-data-message {
+  font-style: italic;
+  color: #888;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.data-grid {
+  margin-top: 1rem;
+}

@@ -18,7 +18,6 @@ export class MedicamentoCadastroComponent implements OnInit {
 
     medicamentos: MedicamentoConsultaDTO[] = [];
 
-    @Input() idPaciente!: number;
     @Input() idPrescricaoConsulta!: number;
 
     columns: Column[] = [
@@ -86,6 +85,7 @@ export class MedicamentoCadastroComponent implements OnInit {
                     this.alertService.success('Sucesso!', 'Medicamento cadastrado com sucesso!');
                     this.medicamentos.push(response.data);
                     this.medicamentoConsultaForm.reset();
+                    this.idPrescricaoConsulta = response.data.prescricao.id;
                     this.initializeForm();
                 }),
                 catchError(error => {

@@ -1,22 +1,13 @@
-.medicamento-container {
-  background-color: #fafafa; /* fundo suave, cinza claríssimo */
+.upload-container {
+  background-color: #fafafa;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
   width: 100%;
   box-sizing: border-box;
   font-family: 'Segoe UI', sans-serif;
-}
-
-.section-title {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 1rem;
-  border-left: 4px solid #007bff;
-  padding-left: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .form {
@@ -27,9 +18,8 @@
 
 .form-group-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
   align-items: flex-end;
+  gap: 1rem;
 }
 
 .form-group {
@@ -65,11 +55,11 @@
   align-items: center;
 }
 
-.btn-primary {
+.btn-add {
   background-color: #007bff;
   color: white;
   border-radius: 4px;
-  padding: 12px 30px;
+  padding: 12px 18px;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -79,23 +69,6 @@
   justify-content: center;
 }
 
-.btn-primary:hover {
+.btn-add:hover {
   background-color: #0056b3;
-}
-
-.separator {
-  margin: 2rem 0;
-  height: 1px;
-  background-color: #e0e0e0;
-}
-
-.no-data-message {
-  font-style: italic;
-  color: #888;
-  text-align: center;
-  margin-top: 1rem;
-}
-
-.data-grid {
-  margin-top: 1rem;
 }

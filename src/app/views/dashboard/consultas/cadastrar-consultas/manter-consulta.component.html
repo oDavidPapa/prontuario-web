@@ -141,10 +141,7 @@
         </mat-tab>
         <mat-tab label="Arquivos">
             <div class="form-container">
-                <mat-form-field appearance="fill">
-                    <mat-label>Arquivos</mat-label>
-                    <textarea matInput [(ngModel)]="arquivo" placeholder="Informar alergia"></textarea>
-                </mat-form-field>
+                <app-upload-arquivo [idConsulta]="idConsulta"></app-upload-arquivo>
             </div>
         </mat-tab>
 
