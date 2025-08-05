@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { PrescricaoConsultaCadastroDTO } from '../models/prescricao-consulta-cadastro.model';
 import { MedicamentoConsultaDTO } from '../models/medicamento-consulta.model';
@@ -30,6 +30,10 @@ export class PrescricaoConsultaService {
     // ---- //
 
     getMedicamentosByPrescricao(idPrescricao: number, page: number = 0, size: number = 10): Observable<PaginatedResponse<MedicamentoConsultaDTO>> {
+        if (!idPrescricao) {
+            return EMPTY;
+        }
+
         const params = new HttpParams()
             .set('idPrescricao', idPrescricao.toString())
             .set('page', page.toString())

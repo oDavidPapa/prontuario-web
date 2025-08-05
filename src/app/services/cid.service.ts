@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { PaginatedResponse } from '../models/pagination.model';
 import { Cid } from '../models/cid.model';
@@ -19,6 +19,9 @@ export class CidService {
     }
 
     getCidByDiagnostico(idDiagnostico: number, page: number = 0, size: number = 10): Observable<PaginatedResponse<Cid>> {
+        if (!idDiagnostico) {
+            return EMPTY;
+        }
         const params = new HttpParams()
             .set('idDiagnostico', idDiagnostico.toString())
             .set('page', page.toString())

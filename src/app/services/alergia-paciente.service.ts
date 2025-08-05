@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { PaginatedResponse } from '../models/pagination.model';
 import { AlergiaPaciente } from '../models/alergia-paciente.model';
@@ -18,6 +18,10 @@ export class AlergiaPacienteService {
     }
 
     getAlergiasByPaciente(idPaciente: number, page: number = 0, size: number = 10): Observable<PaginatedResponse<AlergiaPaciente>> {
+        if (!idPaciente) {
+            return EMPTY;
+        }
+
         const params = new HttpParams()
             .set('idPaciente', idPaciente.toString())
             .set('page', page.toString())

@@ -79,6 +79,7 @@ export class AlergiaPacienteComponent implements OnInit, OnChanges {
           this.alertService.success('Sucesso!', 'Alergia cadastrada com sucesso!');
           this.alergias.push(response.data);
           this.alergiaPacienteForm.reset();
+          this.idPaciente = response.data.paciente.id;
           this.initializeForm();
         }),
         catchError(error => {

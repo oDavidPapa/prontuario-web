@@ -45,6 +45,7 @@ import { AgendamentosComponent } from './views/dashboard/agendamentos/agendament
 import { EditarAgendamentosComponent } from './views/dashboard/agendamentos/editar-agendamentos/editar-agendamentos.component';
 import { DatetimePipe } from './pipes/date-time.pipe';
 import { MedicamentoCadastroComponent } from './views/dashboard/consultas/prescricao-medicamento/cadastro-medicamento.component';
+import { ExameConsultaComponent } from './views/dashboard/consultas/exame/exame-consulta.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { MedicamentoCadastroComponent } from './views/dashboard/consultas/prescr
     PacientesComponent,
     PacienteResumoComponent,
     AlergiaPacienteComponent,
+    ExameConsultaComponent,
     
     MedicosComponent,
 
