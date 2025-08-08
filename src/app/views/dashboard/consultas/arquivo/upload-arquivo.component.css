@@ -2,7 +2,7 @@
   background-color: #fafafa;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
   width: 100%;
   box-sizing: border-box;
   font-family: 'Segoe UI', sans-serif;
@@ -18,15 +18,28 @@
 
 .form-group-row {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  /* ajustado para centralizar verticalmente */
   gap: 1rem;
 }
 
+/* Ajuste para form-group: para inputs de texto continua flex:1, 
+   mas para a seleção de arquivo vamos usar uma classe extra para não esticar */
 .form-group {
   flex: 1;
   min-width: 200px;
   display: flex;
   flex-direction: column;
+}
+
+/* Nova classe para form-group do seletor de arquivo */
+.form-group.file-select-group {
+  flex: initial;
+  /* remove o flex-grow para não esticar */
+  min-width: auto;
+  /* remove o mínimo de largura */
+  width: max-content;
+  /* só ocupa o necessário */
 }
 
 .form-group label {
@@ -42,6 +55,7 @@
   border-radius: 4px;
   transition: border-color 0.3s ease;
   box-sizing: border-box;
+  margin-bottom: 5px;
 }
 
 .form-control:focus {
@@ -55,11 +69,15 @@
   align-items: center;
 }
 
+/* Botão de envio alinhado em altura com o seletor de arquivo */
 .btn-add {
   background-color: #007bff;
   color: white;
   border-radius: 4px;
-  padding: 12px 18px;
+  height: 38px;
+  /* altura fixa igual ao label do arquivo */
+  padding: 4px 18px;
+  /* só padding horizontal */
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -67,8 +85,97 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 5px;
 }
 
 .btn-add:hover {
   background-color: #0056b3;
+}
+
+.separator {
+  margin: 2rem 0;
+  height: 1px;
+  background-color: #e0e0e0;
+}
+
+.no-data-message {
+  font-style: italic;
+  color: #888;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.data-grid {
+  margin-top: 1rem;
+}
+
+/* Esconde o input file padrão */
+.custom-file-input {
+  display: none;
+}
+
+/* Base semelhante ao btn-add */
+.custom-file-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  padding: 0 40px 0px 40px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  user-select: none;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Centraliza o ícone dentro do label */
+.custom-file-label i {
+  display: block;
+  line-height: 36px;
+  font-size: 18px;
+}
+
+.custom-file-label,
+.custom-file-label i {
+  vertical-align: middle;
+}
+
+.custom-file-label:hover {
+  background-color: #0056b3;
+  /* hover igual ao btn-add */
+}
+
+.custom-file-label:active {
+  background-color: #004494;
+  /* active um pouco mais escuro */
+}
+
+/* Agrupa ícone e nome do arquivo lado a lado */
+.file-select-group.with-filename {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Evita que o label encolha demais */
+.file-select-group.with-filename .custom-file-label {
+  flex-shrink: 0;
+}
+
+/* Nome do arquivo com aparência elegante e protegida contra overflow */
+.file-name {
+  font-size: 0.9rem;
+  color: #444;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 }

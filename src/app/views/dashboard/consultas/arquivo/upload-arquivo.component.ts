@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ArquivoService } from '../../../../services/arquivo.service';
+import { Arquivo } from '../../../../models/arquivo.model';
+import { Column } from '../../base/grid/column';
 
 @Component({
   selector: 'app-upload-arquivo',
@@ -11,7 +13,14 @@ export class UploadArquivoComponent {
   uploadForm: FormGroup;
   selectedFile: File | null = null;
 
-    @Input() idConsulta!: number; 
+  @Input() idConsulta!: number;
+
+  arquivos: Arquivo[] = [];
+
+  columns: Column[] = [
+    { header: 'Descrição', field: 'descricao', align: 'left' },
+    { header: 'Nome', field: 'nome', align: 'left' },
+  ];
 
 
   constructor(
@@ -21,6 +30,31 @@ export class UploadArquivoComponent {
     this.uploadForm = this.fb.group({
       arquivo: [null, Validators.required],
       descricao: ['', Validators.required]
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['idConsulta'] && this.idConsulta) {
+      this.carregarArquivos();
+    }
+  }
+
+  carregarArquivos(): void {
+    this.arquivoService.getArquivosByConsulta(this.idConsulta).subscribe({
+      next: (res) => this.arquivos = res,
+      error: () => alert('Erro ao carregar arquivos.')
+    });
+  }
+
+  onRemoveArquivo(arquivo: Arquivo): void {
+    this.arquivoService.deleteArquivo(arquivo.id).subscribe({
+      next: () => {
+        this.carregarArquivos();
+        alert('Arquivo excluído com sucesso!');
+      },
+      error: () => {
+        alert('Erro ao excluir o arquivo.');
+      }
     });
   }
 

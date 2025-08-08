@@ -22,8 +22,8 @@ export class ArquivoService {
         return this.http.post<Arquivo>(`${this.apiUrl}/upload`, formData);
     }
 
-    getArquivosByExame(exameId: number): Observable<Arquivo[]> {
-        return this.http.get<Arquivo[]>(`${this.apiUrl}/exame/${exameId}`);
+    getArquivosByConsulta(consultaId: number): Observable<Arquivo[]> {
+        return this.http.get<Arquivo[]>(`${this.apiUrl}/consulta/${consultaId}`);
     }
 
     deleteArquivo(id: number): Observable<void> {
