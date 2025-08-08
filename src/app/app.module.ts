@@ -47,6 +47,7 @@ import { DatetimePipe } from './pipes/date-time.pipe';
 import { MedicamentoCadastroComponent } from './views/dashboard/consultas/prescricao-medicamento/cadastro-medicamento.component';
 import { ExameConsultaComponent } from './views/dashboard/consultas/exame/exame-consulta.component';
 import { UploadArquivoComponent } from './views/dashboard/consultas/arquivo/upload-arquivo.component';
+import { ResumoComponent } from './views/dashboard/consultas/resumo/resumo.component';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { UploadArquivoComponent } from './views/dashboard/consultas/arquivo/uplo
     AlergiaPacienteComponent,
     ExameConsultaComponent,
     UploadArquivoComponent,
+    ResumoComponent,
     
     MedicosComponent,
 

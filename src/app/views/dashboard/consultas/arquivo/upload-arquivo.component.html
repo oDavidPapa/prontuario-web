@@ -12,7 +12,7 @@
                 <input type="file" id="arquivo" (change)="onFileSelected($event)" class="custom-file-input" />
             </div>
             <div class="form-actions">
-                <button type="submit" class="btn-add" title="Enviar arquivo">
+                <button type="submit" class="btn-add" title="Enviar arquivo" [ngClass]="{'btn-green': selectedFile}">
                     <i class="fa fa-upload"></i>
                 </button>
             </div>

@@ -5,6 +5,7 @@ import { Arquivo } from '../../../../models/arquivo.model';
 import { Column } from '../../base/grid/column';
 import { AlertService } from '../../base/alert/alert.service';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-upload-arquivo',
@@ -19,7 +20,7 @@ export class UploadArquivoComponent {
     { icon: faDownload, actionName: 'donwloadArquivo', tooltip: 'Download Arquivo' },
   ];
 
-  @Input() idConsulta!: number;
+  @Input() idConsulta!: any;
 
   arquivos: Arquivo[] = [];
 
@@ -31,7 +32,9 @@ export class UploadArquivoComponent {
   constructor(
     private fb: FormBuilder,
     private arquivoService: ArquivoService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private route: ActivatedRoute,
+
   ) {
     this.uploadForm = this.fb.group({
       arquivo: [null, Validators.required],
@@ -52,9 +55,10 @@ export class UploadArquivoComponent {
   }
 
   carregarArquivos(): void {
+    this.reloadConsultaId();
     this.arquivoService.getArquivosByConsulta(this.idConsulta).subscribe({
       next: (res) => this.arquivos = res.data.list,
-      error: () => this.alertService.error('Erro!', 'Erro ao excluir o arquivo.')
+      error: () => this.alertService.error('Erro!', 'Erro ao carregar os arquivos.')
     });
   }
 
@@ -124,5 +128,9 @@ export class UploadArquivoComponent {
         this.alertService.error('Erro!', 'Erro ao baixar o arquivo.');
       }
     });
+  }
+
+  private reloadConsultaId() {
+    this.idConsulta = this.route.snapshot.paramMap.get('id');
   }
 }
