@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Arquivo } from '../models/arquivo.model';
+import { PaginatedResponse } from '../models/pagination.model';
 
 @Injectable({
     providedIn: 'root'
@@ -22,11 +23,15 @@ export class ArquivoService {
         return this.http.post<Arquivo>(`${this.apiUrl}/upload`, formData);
     }
 
-    getArquivosByConsulta(consultaId: number): Observable<Arquivo[]> {
-        return this.http.get<Arquivo[]>(`${this.apiUrl}/consulta/${consultaId}`);
+    getArquivosByConsulta(idConsulta: number): Observable<PaginatedResponse<Arquivo>> {
+        return this.http.get<PaginatedResponse<Arquivo>>(`${this.apiUrl}/consulta/${idConsulta}`);
     }
 
     deleteArquivo(id: number): Observable<void> {
         return this.http.delete<void>(`${this.apiUrl}/${id}`);
     }
+
+    downloadArquivo(id: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/${id}/download`, { responseType: 'blob' });
+}
 }

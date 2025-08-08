@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ArquivoService } from '../../../../services/arquivo.service';
 import { Arquivo } from '../../../../models/arquivo.model';
 import { Column } from '../../base/grid/column';
+import { AlertService } from '../../base/alert/alert.service';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-upload-arquivo',
@@ -13,36 +15,46 @@ export class UploadArquivoComponent {
   uploadForm: FormGroup;
   selectedFile: File | null = null;
 
+  iconButtons = [
+    { icon: faDownload, actionName: 'donwloadArquivo', tooltip: 'Download Arquivo' },
+  ];
+
   @Input() idConsulta!: number;
 
   arquivos: Arquivo[] = [];
 
   columns: Column[] = [
     { header: 'Descrição', field: 'descricao', align: 'left' },
-    { header: 'Nome', field: 'nome', align: 'left' },
+    { header: 'Nome Arquivo', field: 'nome', align: 'left' },
   ];
-
 
   constructor(
     private fb: FormBuilder,
-    private arquivoService: ArquivoService
+    private arquivoService: ArquivoService,
+    private alertService: AlertService
   ) {
     this.uploadForm = this.fb.group({
       arquivo: [null, Validators.required],
-      descricao: ['', Validators.required]
+      descricao: ['', Validators.required],
     });
+  }
+
+
+  ngOnInit(): void {
+    this.carregarArquivos()
+    console.log(this.arquivos)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['idConsulta'] && this.idConsulta) {
-      this.carregarArquivos();
+      this.carregarArquivos()
     }
   }
 
   carregarArquivos(): void {
     this.arquivoService.getArquivosByConsulta(this.idConsulta).subscribe({
-      next: (res) => this.arquivos = res,
-      error: () => alert('Erro ao carregar arquivos.')
+      next: (res) => this.arquivos = res.data.list,
+      error: () => this.alertService.error('Erro!', 'Erro ao excluir o arquivo.')
     });
   }
 
@@ -50,10 +62,10 @@ export class UploadArquivoComponent {
     this.arquivoService.deleteArquivo(arquivo.id).subscribe({
       next: () => {
         this.carregarArquivos();
-        alert('Arquivo excluído com sucesso!');
+        this.alertService.success('Sucesso!', 'Arquivo exluído com sucesso.');
       },
       error: () => {
-        alert('Erro ao excluir o arquivo.');
+        this.alertService.error('Erro!', 'Erro ao excluir o arquivo.');
       }
     });
   }
@@ -68,12 +80,11 @@ export class UploadArquivoComponent {
 
   onSubmit() {
     if (!this.selectedFile) {
-      alert('Selecione um arquivo antes de enviar.');
+      this.alertService.warn('Ops!', 'Selecione um arquivo antes de salvar.');
       return;
     }
 
     if (this.uploadForm.invalid) {
-      alert('Preencha a descrição do arquivo.');
       return;
     }
 
@@ -82,12 +93,35 @@ export class UploadArquivoComponent {
 
     this.arquivoService.uploadArquivo(this.selectedFile, descricao, nome, this.idConsulta).subscribe({
       next: () => {
-        alert('Arquivo enviado com sucesso!');
+        this.alertService.success('Sucesso!', 'Arquivo salvo com sucesso.');
         this.uploadForm.reset();
         this.selectedFile = null;
+        this.carregarArquivos()
       },
       error: () => {
-        alert('Erro ao enviar arquivo.');
+        this.alertService.error('Erro!', 'Erro ao salvar o arquivo.');
+      }
+    });
+  }
+
+  onIconButtonClicked(event: { actionName: string, item: any }) {
+    if (event.actionName === 'donwloadArquivo') {
+      this.download(event.item.id, event.item.nome);
+    }
+  }
+
+  private download(id: number, nomeArquivo: string): void {
+    this.arquivoService.downloadArquivo(id).subscribe({
+      next: (blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = nomeArquivo;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        this.alertService.error('Erro!', 'Erro ao baixar o arquivo.');
       }
     });
   }

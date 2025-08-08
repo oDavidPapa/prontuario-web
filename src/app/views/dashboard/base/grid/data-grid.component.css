@@ -1,109 +1,144 @@
 /* Estilização geral da tabela */
 table {
-    width: 100%;
-    border-collapse: collapse; /* Remove espaços entre bordas */
-    font-family: 'Inter', sans-serif; /* Fonte consistente */
-    color: #333; /* Cor de texto padrão */
-    background-color: #f9faff; /* Azul muito claro e quase transparente */
-    border-radius: 8px; /* Bordas arredondadas */
-    overflow: hidden; /* Garante que as bordas arredondadas funcionem */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    margin-top: 10px
+  width: 100%;
+  border-collapse: collapse;
+  /* Remove espaços entre bordas */
+  font-family: 'Inter', sans-serif;
+  /* Fonte consistente */
+  color: #333;
+  /* Cor de texto padrão */
+  background-color: #f9faff;
+  /* Azul muito claro e quase transparente */
+  border-radius: 8px;
+  /* Bordas arredondadas */
+  overflow: hidden;
+  /* Garante que as bordas arredondadas funcionem */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Sombra suave */
+  margin-top: 10px
 }
 
 /* Estilo das células da tabela */
-th, td {
-    padding: 12px; /* Espaçamento interno das células */
-    text-align: center; /* Alinhamento do texto à esquerda */
-    border-bottom: 1px solid #eee; /* Linha separadora entre linhas, cor clara */
+th,
+td {
+  padding: 12px;
+  /* Espaçamento interno das células */
+  text-align: center;
+  /* Alinhamento do texto à esquerda */
+  border-bottom: 1px solid #eee;
+  /* Linha separadora entre linhas, cor clara */
 }
 
 /* Estilo dos cabeçalhos das colunas */
 th {
-    background: #eaf4ff; /* Azul muito suave para o fundo do cabeçalho */
-    color: #023047; /* Texto do cabeçalho em azul escuro para contraste */
-    font-weight: 600; /* Fonte em negrito mais acentuado */
-    font-size: 16px; /* Aumenta o tamanho da fonte para destaque */
-    border-bottom: 2px solid #ddd; /* Linha de separação mais suave */
+  background: #eaf4ff;
+  /* Azul muito suave para o fundo do cabeçalho */
+  color: #023047;
+  /* Texto do cabeçalho em azul escuro para contraste */
+  font-weight: 600;
+  /* Fonte em negrito mais acentuado */
+  font-size: 16px;
+  /* Aumenta o tamanho da fonte para destaque */
+  border-bottom: 2px solid #ddd;
+  /* Linha de separação mais suave */
 }
 
 /* Estilo das linhas alternadas */
 tr:nth-child(even) {
-    background-color: #f2faff; /* Azul muito leve para linhas alternadas */
+  background-color: #f2faff;
+  /* Azul muito leve para linhas alternadas */
 }
 
 /* Estilo das linhas ao passar o mouse */
 tr:hover {
-    background-color: #e3f2fd; /* Azul muito claro ao passar o mouse */
+  background-color: #e3f2fd;
+  /* Azul muito claro ao passar o mouse */
 }
 
 /* Estilo do cabeçalho da tabela */
 thead {
-    background-color: #eaf4ff; /* Azul muito suave para o cabeçalho */
-    border-bottom: 2px solid #ddd; /* Linha de separação mais visível para o cabeçalho */
+  background-color: #eaf4ff;
+  /* Azul muito suave para o cabeçalho */
+  border-bottom: 2px solid #ddd;
+  /* Linha de separação mais visível para o cabeçalho */
 }
 
 tfoot {
-    background-color: #f9faff; /* Azul muito claro para o rodapé */
+  background-color: #f9faff;
+  /* Azul muito claro para o rodapé */
 }
 
 .edit-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #007bff; /* Azul, por exemplo */
-  }
-  
-  .edit-button:hover {
-    color: #0056b3; /* Azul mais escuro ao passar o mouse */
-  }
-  
-  .edit-button fa-icon {
-    font-size: 1.2rem; /* Tamanho do ícone */
-  }
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #007bff;
+  /* Azul, por exemplo */
+  padding: 3px 20px;
+}
 
-  .remove-button {
-    background: transparent; /* Remove o fundo do botão */
-    border: none;            /* Remove as bordas do botão */
-    color: #dc3545;          /* Define a cor do ícone como vermelho */
-    cursor: pointer;         /* Define o cursor como ponteiro para indicar que o botão é clicável */
-    padding: 0;             /* Remove o padding para o ícone ocupar o mínimo espaço possível */
-    font-size: 1.2em;        /* Ajusta o tamanho do ícone conforme necessário */
-  }
-  
-  .remove-button:hover {
-    opacity: 0.7;           /* Adiciona um efeito de hover para melhorar a usabilidade */
-  }
-  
-  
-  .status-icon {
-    display: flex;
-    justify-content: center; /* Centraliza o ícone horizontalmente */
-    align-items: left;     /* Centraliza o ícone verticalmente */
-    font-size: 1.5em;        /* Aumenta o tamanho do ícone */
-  }
-  
-  .text-success {
-    color: green; /* Cor verde para o ícone ativo */
-  }
-  
-  .text-muted {
-    color: gray;  /* Cor cinza para o ícone inativo */
-  }
+.edit-button:hover {
+  color: #0056b3;
+  /* Azul mais escuro ao passar o mouse */
+}
 
-  .toggle-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .toggle-button fa-icon {
-    font-size: 1.25em;
-  }
+.edit-button fa-icon {
+  font-size: 1.2rem;
+  /* Tamanho do ícone */
+}
 
-  .toggle-icon-large {
-    font-size: 1.45rem !important; /* Aumenta o ícone de acordo com a necessidade */
-  }
-  
-  
-  
+.remove-button {
+  background: transparent;
+  /* Remove o fundo do botão */
+  border: none;
+  /* Remove as bordas do botão */
+  color: #dc3545;
+  /* Define a cor do ícone como vermelho */
+  cursor: pointer;
+  /* Define o cursor como ponteiro para indicar que o botão é clicável */
+  padding: 0;
+  /* Remove o padding para o ícone ocupar o mínimo espaço possível */
+  font-size: 1.2em;
+  /* Ajusta o tamanho do ícone conforme necessário */
+}
+
+.remove-button:hover {
+  opacity: 0.7;
+  /* Adiciona um efeito de hover para melhorar a usabilidade */
+}
+
+
+.status-icon {
+  display: flex;
+  justify-content: center;
+  /* Centraliza o ícone horizontalmente */
+  align-items: left;
+  /* Centraliza o ícone verticalmente */
+  font-size: 1.5em;
+  /* Aumenta o tamanho do ícone */
+}
+
+.text-success {
+  color: green;
+  /* Cor verde para o ícone ativo */
+}
+
+.text-muted {
+  color: gray;
+  /* Cor cinza para o ícone inativo */
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle-button fa-icon {
+  font-size: 1.25em;
+}
+
+.toggle-icon-large {
+  font-size: 1.45rem !important;
+  /* Aumenta o ícone de acordo com a necessidade */
+}

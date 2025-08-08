@@ -1,4 +1,4 @@
-import { Component, Input, input, OnInit } from "@angular/core";
+import { Component, Input, input, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AlertService } from "../../base/alert/alert.service";
@@ -14,6 +14,7 @@ import { MatTabChangeEvent } from "@angular/material/tabs";
 import { Cid } from "../../../../models/cid.model";
 import { TratamentoService } from "../../../../services/tratamento.service";
 import { PrescricaoConsultaService } from "../../../../services/prescricao-consulta.service";
+import { UploadArquivoComponent } from "../arquivo/upload-arquivo.component";
 
 @Component({
     selector: 'app-manter-consulta',
@@ -21,6 +22,8 @@ import { PrescricaoConsultaService } from "../../../../services/prescricao-consu
     styleUrls: ['./manter-consulta.component.css']
 })
 export class ManterConsultasComponent implements OnInit {
+
+    @ViewChild(UploadArquivoComponent) uploadArquivoComponent!: UploadArquivoComponent;
 
     consultaForm!: FormGroup;
     diagnosticoForm!: FormGroup;
@@ -564,8 +567,9 @@ export class ManterConsultasComponent implements OnInit {
     }
 
     loadArquivo(): void {
-        console.log("ARQUIVO");
-
+        if (this.uploadArquivoComponent) {
+            this.uploadArquivoComponent.ngOnInit();
+        }
     }
 
     onCidAdicionado(event: any): void {

@@ -33,7 +33,11 @@
         <button *ngIf="showEdit" (click)="onEdit(item)" class="edit-button">
           <fa-icon [icon]="['fas', 'edit']"></fa-icon>
         </button>
-        <button *ngIf="showDelete" (click)="onRemove(item)" class="remove-button">
+        <button *ngFor="let btn of iconButtons" (click)="onIconButtonClick(btn.actionName, item)" [title]="btn.tooltip"
+          [ngClass]="btn.buttonClass || 'edit-button'">
+          <fa-icon [icon]="btn.icon"></fa-icon>
+        </button>
+        <button *ngIf="showDelete" (click)="onRemove(item)" title="Deletar" class="remove-button">
           <fa-icon [icon]="['fas', 'trash']"></fa-icon>
         </button>
         <button *ngIf="showToggle" (click)="onToggleStatus(item)" class="toggle-button">
@@ -43,10 +47,6 @@
           <ng-template #inactive>
             <fa-icon [icon]="['fas', 'toggle-off']" class="text-muted toggle-icon-large"></fa-icon>
           </ng-template>
-        </button>
-        <button *ngFor="let btn of iconButtons" (click)="onIconButtonClick(btn.actionName, item)" [title]="btn.tooltip"
-          [ngClass]="btn.buttonClass || 'edit-button'">
-          <fa-icon [icon]="btn.icon"></fa-icon>
         </button>
       </td>
     </tr>

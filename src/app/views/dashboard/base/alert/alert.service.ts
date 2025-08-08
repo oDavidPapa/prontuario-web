@@ -24,6 +24,16 @@ export class AlertService {
     });
   }
 
+  warn(title: string, message: string): void {
+    Swal.fire({
+      title: title,
+      text: message,
+      icon: 'warning',
+      confirmButtonText: 'OK'
+    });
+  }
+
+
   confirm(title: string, message: string): Promise<boolean> {
     return Swal.fire({
       title: title,

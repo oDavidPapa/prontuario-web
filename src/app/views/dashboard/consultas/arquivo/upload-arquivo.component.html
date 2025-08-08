@@ -23,7 +23,8 @@
 
     <div class="data-grid" *ngIf="idConsulta">
         <ng-container *ngIf="arquivos && arquivos.length > 0; else noDataTemplate">
-            <app-data-grid [columns]="columns" [data]="arquivos" [showEdit]="false" (remove)="onRemoveArquivo($event)">
+            <app-data-grid [columns]="columns" [data]="arquivos" [showEdit]="false" [iconButtons]="iconButtons"
+                (iconButtonClick)="onIconButtonClicked($event)" (remove)="onRemoveArquivo($event)">
             </app-data-grid>
         </ng-container>
 

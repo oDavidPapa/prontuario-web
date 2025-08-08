@@ -81,19 +81,19 @@ export class AgendamentosComponent {
     this.router.navigate([`/prontuario/agendamentos/editar/${agendamento.id}`]);
   }
 
-onIconButtonClicked(event: { actionName: string, item: any }) {
-  if (event.actionName === 'createConsulta') {
-    this.agendamentoService.createConsulta(event.item.id)
-      .pipe(
-        tap((response) => {
-              this.router.navigate([`/prontuario/consultas/editar/${response?.data}`]);
-        }),
-        catchError((err) => {
-          console.error('Erro ao criar consulta', err);
-          return of(null);
-        })
-      )
-      .subscribe();
+  onIconButtonClicked(event: { actionName: string, item: any }) {
+    if (event.actionName === 'createConsulta') {
+      this.agendamentoService.createConsulta(event.item.id)
+        .pipe(
+          tap((response) => {
+            this.router.navigate([`/prontuario/consultas/editar/${response?.data}`]);
+          }),
+          catchError((err) => {
+            console.error('Erro ao criar consulta', err);
+            return of(null);
+          })
+        )
+        .subscribe();
+    }
   }
-}
 }
