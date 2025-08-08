@@ -1,90 +1,97 @@
-    .resumo-paciente {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); /* mínimo maior */
-        gap: 24px 32px;
-        max-width: 100%;
-        margin: 20px 0;
-    }
+/* Container geral */
+.resumo-consulta-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 20px 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-    .paciente-card {
-        background: #fff;
-        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
-        border-radius: 10px;
-        padding: 30px 25px; /* mais espaço interno */
-        transition: box-shadow 0.3s ease;
-        min-width: 360px; /* evita ficar muito pequeno */
-    }
+/* Grupo de seção */
+.grupo-secao {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
-    .paciente-card:hover {
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-    }
+.grupo-secao > h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #555; /* muda para azul */
+  margin: 0 0 0.5rem 0;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 4px;
+}
 
-    .paciente-card h4 {
-        font-size: 1.1rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        color: #007bff;
-        margin-bottom: 18px;
-        border-bottom: 2px solid #e0e0e0;
-        padding-bottom: 6px;
-        white-space: nowrap; /* evita quebra no título */
-    }
+/* Cards container com grid padrão */
+.cards-container {
+  display: grid;
+  gap: 1rem 2rem;
+}
 
-    .paciente-info {
-        padding: 0;
-    }
+/* Cards container com 2 cards (dados pessoais + contato) */
+.cards-container.dois-cards {
+  grid-template-columns: repeat(2, 1fr);
+  /* define duas colunas iguais */
+}
 
-    .linha-paciente {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(160px, 1fr)); /* colunas com min largura maior */
-        gap: 20px 40px;
-    }
+/* Cards container do endereço */
+.cards-container.endereco-card-container {
+  grid-template-columns: 1fr;
+}
 
-    .linha-paciente div {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 12px;
-        word-break: break-word; /* quebra só se necessário */
-    }
+/* Card padrão */
+.card {
+  background: #fff;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  transition: box-shadow 0.3s ease;
+}
 
-    .linha-paciente strong {
-        font-weight: 700;
-        color: #333;
-        margin-bottom: 6px;
-    }
+/* Card endereço maior */
+.endereco-card {
+  min-width: 400px; /* deixa maior para evitar quebras */
+  max-width: 785px; /* largura máxima para não ficar enorme */
+  padding: 1.5rem 2rem; /* mais espaçamento interno */
+}
 
-    .linha-paciente div:nth-child(odd) {
-        color: #222;
-    }
+.card:hover {
+  box-shadow: 0 4px 20px rgb(0 0 0 / 0.15);
+}
 
-    .linha-paciente div:nth-child(even) {
-        color: #555;
-    }
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  color: #007bff;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
 
-    .linha-paciente div div {
-        background: #f5f7fa;
-        padding: 8px 10px;
-        border-radius: 5px;
-        font-size: 1rem;
-        color: #333;
-        white-space: normal; /* permite quebra */
-        word-break: break-word;
-    }
+.card p {
+  margin: 0.3rem 0 0 0;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.5;
+}
 
-    /* Responsividade */
-    @media (max-width: 768px) {
-        .resumo-paciente {
-            display: flex;
-            flex-direction: column;
-        }
+/* Separador */
+.separador {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+  margin: 2rem 0;
+}
 
-        .paciente-card {
-            min-width: auto;
-            padding: 20px 15px;
-        }
-
-        .linha-paciente {
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-    }
+/* Responsividade */
+@media (max-width: 768px) {
+  .cards-container.dois-cards {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .endereco-card {
+    min-width: auto;
+    max-width: 100%;
+    padding: 1rem 1.25rem;
+  }
+}

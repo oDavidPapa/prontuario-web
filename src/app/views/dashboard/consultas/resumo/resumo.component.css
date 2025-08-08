@@ -1,44 +1,71 @@
 .resumo-consulta-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin: 20px 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 20px 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.grupo-secao {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.grupo-secao > h2 {
+  font-size: 1.25rem;          /* menor */
+  font-weight: 600;            /* menos pesado */
+  color: #555;                 /* cinza suave */
+  margin: 0 0 0.5rem 0;        /* espaçamento inferior */
+  border-bottom: 1px solid #ddd; /* linha mais clara e fina */
+  padding-bottom: 4px;
+}
+
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem 2rem;
 }
 
 .card {
-    background: #fff;
-    padding: 1.25rem 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
-    transition: box-shadow 0.3s ease;
+  background: #fff;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  transition: box-shadow 0.3s ease;
 }
 
 .card:hover {
-    box-shadow: 0 4px 20px rgb(0 0 0 / 0.15);
+  box-shadow: 0 4px 20px rgb(0 0 0 / 0.15);
 }
 
 .card h3 {
-    margin-top: 0;
-    margin-bottom: 0.8rem;
-    color: #007bff;
-    font-weight: 700;
-    font-size: 1.3rem;
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  color: #007bff;
+  font-weight: 700;
+  font-size: 1.25rem;
 }
 
-.card p,
-.card ul {
-    margin: 0.3rem 0 0 0;
-    color: #333;
-    font-size: 1rem;
-    line-height: 1.5;
+.card p, .card ul {
+  margin: 0.3rem 0 0 0;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .card ul {
-    padding-left: 1.25rem;
+  padding-left: 1.25rem;
 }
 
 .card ul li {
-    margin-bottom: 0.3rem;
+  margin-bottom: 0.3rem;
 }
 
+.separador {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+  margin: 2rem 0;
+}

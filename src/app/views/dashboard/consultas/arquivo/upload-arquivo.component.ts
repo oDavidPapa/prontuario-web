@@ -56,6 +56,9 @@ export class UploadArquivoComponent {
 
   carregarArquivos(): void {
     this.reloadConsultaId();
+    if (!this.idConsulta) {
+      return;
+    }
     this.arquivoService.getArquivosByConsulta(this.idConsulta).subscribe({
       next: (res) => this.arquivos = res.data.list,
       error: () => this.alertService.error('Erro!', 'Erro ao carregar os arquivos.')

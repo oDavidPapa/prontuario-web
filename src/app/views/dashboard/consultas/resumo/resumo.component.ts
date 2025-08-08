@@ -41,7 +41,8 @@ export class ResumoComponent implements OnInit {
     dadosConsulta = {
         data: new Date('2024-08-08T14:30:00'),
         medico: 'Dr. João Silva',
-        especialidade: 'Cardiologia'
+        especialidade: 'Cardiologia',
+        tipo: 'Rotina'
     };
 
     dadosPaciente = {
@@ -64,7 +65,7 @@ export class ResumoComponent implements OnInit {
 
     tratamento = 'Orientação nutricional e prática de atividade física regular.';
 
-    alergias = ['Penicilina', 'Amendoim'];
+    alergias = [];
 
     examesSolicitados = ['Eletrocardiograma', 'Exame de sangue - perfil lipídico', 'Ecocardiograma'];
 

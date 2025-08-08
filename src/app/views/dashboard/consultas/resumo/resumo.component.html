@@ -1,55 +1,71 @@
 <div class="resumo-consulta-container">
-    <section class="card">
-        <h3>Dados da Consulta</h3>
-        <p><strong>Data:</strong> {{ dadosConsulta.data | date:'dd/MM/yyyy HH:mm' }}</p>
-        <p><strong>Médico:</strong> {{ dadosConsulta.medico }}</p>
-        <p><strong>Especialidade:</strong> {{ dadosConsulta.especialidade }}</p>
+
+    <!-- Seção Dados do Paciente e Alergias -->
+    <section class="grupo-secao">
+        <h2>Dados do Paciente e Alergias</h2>
+        <div class="cards-container">
+            <div class="card">
+                <h3>Dados do Paciente</h3>
+                <p><strong>Nome:</strong> {{ dadosPaciente.nome }}</p>
+                <p><strong>Idade:</strong> {{ dadosPaciente.idade }} anos</p>
+                <p><strong>Sexo:</strong> {{ dadosPaciente.sexo }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Alergias</h3>
+                <ul *ngIf="alergias && alergias.length > 0; else alergiasVazio">
+                    <li *ngFor="let a of alergias">{{ a }}</li>
+                </ul>
+                <ng-template #alergiasVazio>
+                    <p>Não informado.</p>
+                </ng-template>
+            </div>
+        </div>
     </section>
 
-    <section class="card">
-        <h3>Dados do Paciente</h3>
-        <p><strong>Nome:</strong> {{ dadosPaciente.nome }}</p>
-        <p><strong>Idade:</strong> {{ dadosPaciente.idade }} anos</p>
-        <p><strong>Sexo:</strong> {{ dadosPaciente.sexo }}</p>
+    <hr class="separador" />
+
+    <!-- Seção Dados da Consulta e Tratamentos -->
+    <section class="grupo-secao">
+        <h2>Dados da Consulta e Tratamentos</h2>
+        <div class="cards-container">
+            <div class="card">
+                <h3>Dados da Consulta</h3>
+                <p><strong>Data:</strong> {{ dadosConsulta.data | date:'dd/MM/yyyy HH:mm' }}</p>
+                <p><strong>Médico:</strong> {{ dadosConsulta.medico }}</p>
+                <p><strong>Especialidade:</strong> {{ dadosConsulta.especialidade }}</p>
+                <p><strong>Tipo:</strong> {{ dadosConsulta.tipo }}</p>
+
+            </div>
+
+            <div class="card" *ngIf="cids.length > 0">
+                <h3>CIDs da Consulta</h3>
+                <ul>
+                    <li *ngFor="let cid of cids">{{ cid.codigo }} - {{ cid.descricao }}</li>
+                </ul>
+            </div>
+
+            <div class="card" *ngIf="prescricoes.length > 0">
+                <h3>Prescrições Médicas</h3>
+                <ul>
+                    <li *ngFor="let p of prescricoes">
+                        <strong>{{ p.remedio }}:</strong> {{ p.instrucoes }}
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card" *ngIf="tratamento">
+                <h3>Tratamento</h3>
+                <p>{{ tratamento }}</p>
+            </div>
+
+            <div class="card" *ngIf="examesSolicitados.length > 0">
+                <h3>Solicitação de Exames</h3>
+                <ul>
+                    <li *ngFor="let exame of examesSolicitados">{{ exame }}</li>
+                </ul>
+            </div>
+        </div>
     </section>
 
-    <section class="card">
-        <h3>Diagnóstico</h3>
-        <p>{{ diagnostico }}</p>
-    </section>
-
-    <section class="card" *ngIf="cids.length > 0">
-        <h3>CIDs da Consulta</h3>
-        <ul>
-            <li *ngFor="let cid of cids">{{ cid.codigo }} - {{ cid.descricao }}</li>
-        </ul>
-    </section>
-
-    <section class="card" *ngIf="prescricoes.length > 0">
-        <h3>Prescrições Médicas</h3>
-        <ul>
-            <li *ngFor="let p of prescricoes">
-                <strong>{{ p.remedio }}:</strong> {{ p.instrucoes }}
-            </li>
-        </ul>
-    </section>
-
-    <section class="card" *ngIf="tratamento">
-        <h3>Tratamento</h3>
-        <p>{{ tratamento }}</p>
-    </section>
-
-    <section class="card" *ngIf="alergias.length > 0">
-        <h3>Alergias</h3>
-        <ul>
-            <li *ngFor="let a of alergias">{{ a }}</li>
-        </ul>
-    </section>
-
-    <section class="card" *ngIf="examesSolicitados.length > 0">
-        <h3>Solicitação de Exames</h3>
-        <ul>
-            <li *ngFor="let exame of examesSolicitados">{{ exame }}</li>
-        </ul>
-    </section>
 </div>
