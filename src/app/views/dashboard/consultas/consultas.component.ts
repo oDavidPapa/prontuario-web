@@ -22,28 +22,29 @@ export class ConsultasComponent {
     { header: 'Tipo', field: 'tipo' }
   ];
 
-  totalItems: number = 0; // Para paginação
-  page: number = 0; // Página atual
+  totalItems: number = 0; // Total de registros (para paginação)
+  page: number = 1; // Página atual (começa em 1 para o usuário)
   pageSize: number = 10; // Tamanho da página
   totalPages: number = 1; // Total de páginas
 
   constructor(private consultaService: ConsultaService, private router: Router) { }
 
-
   ngOnInit(): void {
-    this.carregarConsultas();
+    this.carregarConsultas(this.page);
   }
 
-  carregarConsultas(page: number = 0): void {
-    this.consultaService.getConsultas(page, this.pageSize).pipe(
+  carregarConsultas(page: number = 1): void {
+    const apiPage = page - 1; // Ajusta para 0-based para API
+
+    this.consultaService.getConsultas(apiPage, this.pageSize).pipe(
       catchError(error => {
         console.error(error);
-        // Ajuste a resposta para o formato esperado em caso de erro
+        // Resposta de fallback em caso de erro
         return of({
           data: {
             list: [],
             total: 0,
-            page: page,
+            page: apiPage,
             pageSize: this.pageSize
           },
           success: false
@@ -54,21 +55,20 @@ export class ConsultasComponent {
         this.consultas = response.data.list;
         this.totalItems = response.data.total;
         this.totalPages = Math.ceil(this.totalItems / this.pageSize);
+        this.page = page; // Atualiza página para UI (1-based)
       }
     });
   }
 
   previousPage(): void {
     if (this.page > 1) {
-      this.page--;
-      this.carregarConsultas(this.page);
+      this.carregarConsultas(this.page - 1);
     }
   }
 
   nextPage(): void {
     if (this.page < this.totalPages) {
-      this.page++;
-      this.carregarConsultas(this.page);
+      this.carregarConsultas(this.page + 1);
     }
   }
 
