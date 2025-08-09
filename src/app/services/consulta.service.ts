@@ -22,10 +22,18 @@ export class ConsultaService {
     return this.http.put<void>(`${this.apiUrl}/${idConsulta}`, consultaData);
   }
 
-  getConsultas(page: number = 0, size: number = 10): Observable<PaginatedResponse<Consulta>> {
-    const params = new HttpParams()
+  getConsultas(page: number = 0, size: number = 10, filters?: any): Observable<PaginatedResponse<Consulta>> {
+    let params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
+
+    if (filters) {
+      Object.keys(filters).forEach(key => {
+        if (filters[key]) {
+          params = params.set(key, filters[key]);
+        }
+      });
+    }
 
     return this.http.get<PaginatedResponse<Consulta>>(this.apiUrl, { params });
   }

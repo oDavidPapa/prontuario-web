@@ -1,0 +1,86 @@
+.filter-container {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 30px;           
+  border-radius: 0;        
+  margin-bottom: 20px;
+  font-family: 'Inter', sans-serif;
+  color: #333333;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;              
+  align-items: flex-end;
+  box-sizing: border-box;
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 180px;
+  min-width: 160px;
+}
+
+.filter-field label {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;      
+  color: #333333;
+}
+
+.filter-field input,
+.filter-field select {
+  padding: 10px 14px;      
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 0;        
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  color: #333333;
+}
+
+.filter-field input:focus,
+.filter-field select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+}
+
+.filter-actions {
+  display: flex;
+  gap: 16px;               
+  margin-left: auto;
+}
+
+.btn-filter {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;      
+  border-radius: 0;        
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-filter:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.btn-clear {
+  background-color: #b0b0b0;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 0;     
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-clear:hover {
+  background-color: #888888;
+  transform: scale(1.05);
+}

@@ -1,0 +1,21 @@
+<form class="filter-container" (ngSubmit)="applyFilter()">
+    <div *ngFor="let field of fields" class="filter-field">
+        <label [for]="field.name">{{field.label}}</label>
+
+        <input *ngIf="field.type === 'text'" type="text" [id]="field.name" [(ngModel)]="filterValues[field.name]"
+            name="{{field.name}}" />
+
+        <input *ngIf="field.type === 'date'" type="date" [id]="field.name" [(ngModel)]="filterValues[field.name]"
+            name="{{field.name}}" />
+
+        <select *ngIf="field.type === 'select'" [id]="field.name" [(ngModel)]="filterValues[field.name]"
+            name="{{field.name}}">
+            <option *ngFor="let option of field.options" [value]="option.value">{{option.label}}</option>
+        </select>
+    </div>
+
+    <div class="filter-actions">
+        <button type="submit" class="btn-filter">Filtrar</button>
+        <button type="button" class="btn-clear" (click)="clearFilter()">Limpar</button>
+    </div>
+</form>

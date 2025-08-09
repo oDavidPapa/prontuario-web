@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
-import { AppRoutingModule } from './app-routing.module';  
+import { AppRoutingModule } from './app-routing.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './views/interceptors/auth.interceptors';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
@@ -49,7 +49,9 @@ import { ExameConsultaComponent } from './views/dashboard/consultas/exame/exame-
 import { UploadArquivoComponent } from './views/dashboard/consultas/arquivo/upload-arquivo.component';
 import { ResumoComponent } from './views/dashboard/consultas/resumo/resumo.component';
 import { PaginationControlComponent } from './views/dashboard/base/pagination/pagination-control.component';
-
+import { FilterComponent } from './views/dashboard/base/filter/filter.component';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,7 @@ import { PaginationControlComponent } from './views/dashboard/base/pagination/pa
     UploadArquivoComponent,
     ResumoComponent,
     PaginationControlComponent,
-    
+
     MedicosComponent,
 
     ConsultasComponent,
@@ -84,6 +86,7 @@ import { PaginationControlComponent } from './views/dashboard/base/pagination/pa
     EditarUsuariosComponent,
 
     EnderecoComponent,
+    FilterComponent,
 
     CpfPipe,
     DatePipe,
@@ -97,7 +100,7 @@ import { PaginationControlComponent } from './views/dashboard/base/pagination/pa
     CadastrarAgendamentosComponent,
     EditarAgendamentosComponent,
 
-   ],
+  ],
 
   imports: [
     BrowserModule,
@@ -115,8 +118,14 @@ import { PaginationControlComponent } from './views/dashboard/base/pagination/pa
     MatInputModule,
     MatIconModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, AlertService],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
+    , AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
