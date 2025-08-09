@@ -20,27 +20,27 @@ export class PacientesComponent implements OnInit {
     { header: 'Data Nascimento', field: 'pessoa.dataNascimento', format: 'date' }
   ];
 
-  totalItems: number = 0; // Para paginação
-  page: number = 0; // Página atual
-  pageSize: number = 10; // Tamanho da página
-  totalPages: number = 1; // Total de páginas
+  totalItems: number = 0;
+  page: number = 1;
+  pageSize: number = 10;
+  totalPages: number = 1;
 
   constructor(private pacienteService: PacienteService, private router: Router) { }
 
   ngOnInit(): void {
-    this.loadPacientes();
+    this.loadPacientes(this.page);
   }
 
-  loadPacientes(page: number = 0): void {
-    this.pacienteService.getPacientes(page, this.pageSize).pipe(
+  loadPacientes(page: number = 1): void {
+    const apiPage = page - 1; 
+    this.pacienteService.getPacientes(apiPage, this.pageSize).pipe(
       catchError(error => {
         console.error(error);
-        // Ajuste a resposta para o formato esperado em caso de erro
         return of({
           data: {
             list: [],
             total: 0,
-            page: page,
+            page: apiPage,
             pageSize: this.pageSize
           },
           success: false
@@ -49,25 +49,17 @@ export class PacientesComponent implements OnInit {
     ).subscribe(response => {
       if (response && response.success) {
         this.pacientes = response.data.list;
-        this.totalItems = response.data.total; // Atualize o totalItems conforme necessário
-        this.totalPages = Math.ceil(this.totalItems / this.pageSize); // Calcule o total de páginas
+        this.totalItems = response.data.total;
+        this.totalPages = Math.ceil(this.totalItems / this.pageSize);
+        this.page = page;
       }
     });
   }
 
-  previousPage(): void {
-    if (this.page > 1) {
-      this.page--;
-      this.loadPacientes(this.page);
-    }
+  onPageChange(newPage: number) {
+    this.loadPacientes(newPage);
   }
 
-  nextPage(): void {
-    if (this.page < this.totalPages) {
-      this.page++;
-      this.loadPacientes(this.page);
-    }
-  }
 
   editPaciente(paciente: Paciente): void {
     this.router.navigate([`/prontuario/pacientes/editar/${paciente.id}`]);

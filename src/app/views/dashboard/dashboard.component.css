@@ -3,34 +3,34 @@ body {
     margin: 0;
     padding: 0;
     color: #023047;
-    height: 100%; /* Certifique-se de que o body ocupe 100% da altura */
+    height: 100%;
 }
 
 html {
-    height: 100%; /* Garanta que o html ocupe 100% da altura */
+    height: 100%;
 }
 
 .dashboard-container {
     display: flex;
-    height: 100vh; /* A altura da janela é 100% */
-    background: #f5f5f5; /* Fundo branco */
+    height: 100vh;
+    background: #f5f5f5;
 }
 
 .sidebar {
-    height: 100%; /* A sidebar deve ocupar 100% da altura do contêiner pai */
-    width: 60px; /* Largura inicial menor */
-    background-color: #007bb5; /* Azul pastel */
-    padding: 10px 0; /* Padding superior e inferior */
+    height: 100%;
+    width: 60px;
+    background-color: #007bb5;
+    padding: 10px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     position: relative;
-    transition: width 0.3s ease; /* Transição suave para a largura */
+    transition: width 0.3s ease;
 }
 
 .sidebar:hover {
-    width: 200px; /* Largura expandida ao passar o mouse */
+    width: 200px;
 }
 
 .menu-item {
@@ -38,7 +38,7 @@ html {
     text-decoration: none;
     display: flex;
     align-items: center;
-    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    justify-content: center;
     margin-bottom: 15px;
     transition: background-color 0.3s ease, color 0.3s ease, padding-left 0.3s ease, box-shadow 0.3s ease;
     font-size: 14px;
@@ -47,13 +47,13 @@ html {
     padding: 10px;
     box-sizing: border-box;
     overflow: hidden;
-    text-align: center; /* Centraliza o texto */
-    border-radius: 4px; /* Bordas arredondadas para os itens do menu */
+    text-align: center;
+    border-radius: 4px;
 }
 
 .menu-item i {
     font-size: 20px;
-    margin-right: 10px; /* Espaço entre o ícone e o texto */
+    margin-right: 10px;
     transition: font-size 0.3s ease;
 }
 
@@ -67,36 +67,34 @@ html {
 }
 
 .sidebar:hover .menu-item .menu-text {
-    display: inline; /* Exibe o texto quando a barra lateral é expandida */
-    margin-left: 10px; /* Espaço do texto em relação ao ícone quando o menu está expandido */
+    display: inline;
+    margin-left: 10px;
 }
 
 .sidebar:hover .menu-item {
-    padding-left: 20px; /* Espaço adicional para o texto quando o menu está expandido */
+    padding-left: 20px;
 }
 
 .menu-item:hover {
-    background-color: #025f9b; /* Azul intermediário */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adiciona sombra ao passar o mouse */
+    background-color: #025f9b;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .sidebar:hover .menu-item {
-    /* Ajuste o alinhamento do ícone quando o menu está aberto */
     align-items: flex-start;
     justify-content: flex-start;
     text-align: left;
 }
 
 .sidebar:hover .menu-item i {
-    /* Ajuste o tamanho do ícone quando o menu está aberto */
     font-size: 24px;
 }
 
 .content {
-    flex: 1; /* O conteúdo se expande para ocupar o espaço restante */
+    flex: 1;
     padding: 20px;
-    height: 100%; /* Garantindo que o conteúdo também ocupe 100% da altura */
-    overflow-y: auto; /* Adiciona rolagem se o conteúdo exceder a altura */
+    height: 100%;
+    overflow-y: auto;
 }
 
 .header img {

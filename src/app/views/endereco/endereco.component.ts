@@ -66,9 +66,9 @@ export class EnderecoComponent implements OnInit {
             }),
             catchError(error => {
                 console.error('Erro ao carregar dados do paciente', error);
-                return of(null); // Retorna um Observable vazio em caso de erro
+                return of(null);
             })
-        ).subscribe(); // Apenas para garantir que a pipe seja executada
+        ).subscribe();
     }
 
     onSubmit(): void {

@@ -25,14 +25,12 @@
 
     <div class="separator"></div>
 
-    <!-- Grid de medicamentos -->
     <div class="data-grid">
         <ng-container *ngIf="medicamentos && medicamentos.length > 0; else noDataTemplate">
             <app-data-grid [columns]="columns" [data]="medicamentos" [showEdit]="false" (remove)="onRemoveMedicamento($event)">
             </app-data-grid>
         </ng-container>
 
-        <!-- Mensagem para caso não haja dados -->
         <ng-template #noDataTemplate>
             <p class="no-data-message">Nenhum medicamento cadastrado.</p>
         </ng-template>

@@ -45,8 +45,7 @@ export class ManterConsultasComponent implements OnInit {
 
     selectedPaciente?: Paciente;
     optionSelect?: PacienteOption;
-    searchTerm: string = ''; // Para armazenar o termo de pesquisa
-
+    searchTerm: string = '';
     detalhes: string = '';
     anamnese: string = '';
     tratamento: string = '';
@@ -89,11 +88,10 @@ export class ManterConsultasComponent implements OnInit {
     adicionarCid() {
         if (this.selectedCid && !this.diagnosticoCids.includes(this.selectedCid)) {
             this.diagnosticoCids.push(this.selectedCid);
-            this.selectedCid = null; // Reseta a seleção
+            this.selectedCid = null; 
         }
     }
 
-    // Remove um CID da lista de CIDs associados
     removerCid(cid: any) {
         this.diagnosticoCids = this.diagnosticoCids.filter(item => item !== cid);
     }
@@ -101,7 +99,7 @@ export class ManterConsultasComponent implements OnInit {
 
     onPacienteChange(event: any): void {
         this.selectedPaciente = this.pacientes.find(p => p.id == event.value.id);
-        this.searchTerm = ''; // Limpa o campo de pesquisa ao selecionar um paciente
+        this.searchTerm = ''; 
         this.idPaciente = this.selectedPaciente?.id;
     }
 
@@ -152,7 +150,6 @@ export class ManterConsultasComponent implements OnInit {
         ).subscribe();
     }
 
-    // DIAGNOSTICO
     private carregarDiagnostico(): void {
         this.reloadConsultaId();
         this.diagnosticoService.getDiagnostico(this.idConsulta).pipe(
@@ -175,7 +172,6 @@ export class ManterConsultasComponent implements OnInit {
         ).subscribe();
     }
 
-    // TRATAMENTO: 
     private carregarTratamento(): void {
         this.reloadConsultaId();
         this.tratamentoService.getTratamento(this.idConsulta).pipe(
@@ -198,7 +194,6 @@ export class ManterConsultasComponent implements OnInit {
         ).subscribe();
     }
 
-    // PRESCRIÇÃO:
     private carregarPrescricao(): void {
         this.reloadConsultaId();
         this.prescricaoConsultaService.getPrescricaoConsulta(this.idConsulta).pipe(
@@ -223,14 +218,12 @@ export class ManterConsultasComponent implements OnInit {
 
     private initializeForm(): void {
 
-        // ABA PACIENTE e ANAMNESE:
         this.consultaForm = this.fb.group({
             idPaciente: ['', Validators.required],
             tipoConsulta: [''],
             anamnese: ['']
         });
 
-        // ABA DIAGNOSTICO:
         this.diagnosticoForm = this.fb.group({
             id: [],
             idConsulta: ['', Validators.required],
@@ -239,7 +232,6 @@ export class ManterConsultasComponent implements OnInit {
 
     }
 
-    // PACIENTES:
     private carregarPacientes(): void {
         this.pacienteService.getOptionsPaciente().pipe(
             tap(response => {
@@ -255,7 +247,6 @@ export class ManterConsultasComponent implements OnInit {
                     };
                 });
 
-                // Inicializa a lista filtrada com todos os pacientes
                 this.filteredPacientes = this.pacientesOptions;
             }),
             catchError((error) => {
@@ -265,7 +256,6 @@ export class ManterConsultasComponent implements OnInit {
         ).subscribe();
     }
 
-    // Método para filtrar os pacientes com base no termo de pesquisa
     filterPacientes(): void {
         const term = this.searchTerm.toLowerCase();
         this.filteredPacientes = this.pacientesOptions.filter(paciente =>
@@ -279,7 +269,6 @@ export class ManterConsultasComponent implements OnInit {
             return;
         }
 
-        // Chama o método de confirmação do AlertService
         this.alertService.confirm('Confirmação', 'Após a confirmação o paciente não poderá ser alterado. Deseja prosseguir?')
             .then((confirmacao) => {
                 if (confirmacao) {
@@ -288,7 +277,6 @@ export class ManterConsultasComponent implements OnInit {
                         idPaciente: this.selectedPaciente?.id,
                     };
 
-                    // Chama o serviço para salvar a consulta após a confirmação
                     this.consultaService.salvarConsulta(consultaData).pipe(
                         tap(response => {
                             if (response.success) {
@@ -324,7 +312,6 @@ export class ManterConsultasComponent implements OnInit {
             anamnese: this.anamnese
         };
 
-        // Chama o serviço para salvar a consulta após a confirmação
         this.consultaService.updateConsulta(this.idConsulta, consultaData).pipe(
             tap(response => {
                 if (response.success) {
@@ -479,7 +466,6 @@ export class ManterConsultasComponent implements OnInit {
         }
     }
 
-
     cancel(): void {
         this.router.navigate(['/prontuario/consultas']);
     }
@@ -529,46 +515,36 @@ export class ManterConsultasComponent implements OnInit {
     loadResumo(): void {
         if (this.isEditing) {
             this.resumoComponent.carregarResumo();
-            console.log("RESUMO");
         }
     }
 
     loadPaciente(): void {
-        console.log("PACIENTE");
         this.carregarPaciente();
     }
 
     loadAnamnese(): void {
-        console.log("ANAMNESE");
         this.carregarPaciente();
         this.carregarAnamnese();
     }
 
     loadDiagnostico(): void {
-        console.log("DIAGNOSTICO");
         this.carregarDiagnostico();
 
     }
 
-    loadExame(): void {
-        console.log("EXAME");
-
-    }
+    loadExame(): void {}
 
     loadPrescricao(): void {
-        console.log("PRESCRICAO");
         this.carregarPrescricao();
 
     }
 
     loadTratamento(): void {
-        console.log("TRATAMENTO");
         this.carregarTratamento();
     }
 
     loadAlergia(): void {
         this.idPaciente = this.selectedPaciente?.id;
-        console.log("ALERGIA");
 
     }
 
@@ -576,16 +552,6 @@ export class ManterConsultasComponent implements OnInit {
         if (this.uploadArquivoComponent) {
             this.uploadArquivoComponent.ngOnInit();
         }
-    }
-
-    onCidAdicionado(event: any): void {
-        console.log('CID Adicionado:', event);
-        //this.cidsAdicionados.push(cid);  // Adiciona o CID ao array de CIDs
-    }
-
-    onCidRemovido(event: any): void {
-        console.log('CID Removido:', event);
-        //this.cidsAdicionados = this.cidsAdicionados.filter(c => c.codigo !== cid.codigo);
     }
 
     private reloadConsultaId() {

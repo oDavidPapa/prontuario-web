@@ -28,27 +28,28 @@ export class AgendamentosComponent {
     { header: 'Tipo', field: 'tipoConsultaDescricao' }
   ];
 
-  totalItems: number = 0; // Para paginação
-  page: number = 0; // Página atual
-  pageSize: number = 10; // Tamanho da página
-  totalPages: number = 1; // Total de páginas
+  page: number = 1;
+  totalPages: number = 1;
+  pageSize: number = 10;
+  totalItems: number = 0;
 
   constructor(private agendamentoService: AgendamentoService, private router: Router) { }
 
 
   ngOnInit(): void {
-    this.carregarAgendamentos();
+    this.carregarAgendamentos(this.page);
   }
 
-  carregarAgendamentos(page: number = 0): void {
-    this.agendamentoService.getAgendamentos(page, this.pageSize).pipe(
+  carregarAgendamentos(page: number = 1): void {
+    const apiPage = page - 1;
+    this.agendamentoService.getAgendamentos(apiPage, this.pageSize).pipe(
       catchError(error => {
         console.error(error);
         return of({
           data: {
             list: [],
             total: 0,
-            page: page,
+            page: apiPage,
             pageSize: this.pageSize
           },
           success: false
@@ -59,22 +60,13 @@ export class AgendamentosComponent {
         this.agendamentos = response.data.list;
         this.totalItems = response.data.total;
         this.totalPages = Math.ceil(this.totalItems / this.pageSize);
+        this.page = page;
       }
     });
   }
 
-  previousPage(): void {
-    if (this.page > 1) {
-      this.page--;
-      this.carregarAgendamentos(this.page);
-    }
-  }
-
-  nextPage(): void {
-    if (this.page < this.totalPages) {
-      this.page++;
-      this.carregarAgendamentos(this.page);
-    }
+  onPageChange(newPage: number) {
+    this.carregarAgendamentos(newPage);
   }
 
   editarAgendamento(agendamento: Agendamento): void {

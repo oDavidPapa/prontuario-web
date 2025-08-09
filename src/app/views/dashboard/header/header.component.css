@@ -1,62 +1,57 @@
-/* header.component.css */
 .header {
-    background-color: #ffffff; /* Cor de fundo branca para um visual limpo */
-    border-bottom: 2px solid #e0e0e0; /* Linha sutil na parte inferior */
+    background-color: #ffffff; 
+    border-bottom: 2px solid #e0e0e0; 
     display: flex;
-    justify-content: space-between; /* Espaça o título e o botão para as extremidades */
+    justify-content: space-between; 
     align-items: center;
     padding: 10px 20px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra suave para profundidade */
-    height: 60px; /* Altura fixada para o header */
-    box-sizing: border-box; /* Inclui o padding e border na altura total */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); 
+    height: 60px;
+    box-sizing: border-box; 
 }
 
-/* Container para o título */
 .title-container {
-    flex: 1; /* Ocupa o espaço disponível */
+    flex: 1; 
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Alinha o título à esquerda */
+    justify-content: flex-start; 
 }
 
-/* Tamanho do texto do título */
 h1 {
-    font-size: 20px; /* Tamanho do texto do título */
-    color: #333; /* Cor do texto do título */
+    font-size: 20px; 
+    color: #333; 
     margin: 0;
 }
 
-/* Botão de registro */
 .register-button {
-    background-color: #007bff; /* Cor de fundo azul para o botão */
-    color: white; /* Cor do texto do botão */
-    border: none; /* Remove a borda padrão do botão */
-    border-radius: 5px; /* Bordas arredondadas */
+    background-color: #007bff;
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
     padding: 8px 16px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transições suaves */
+    transition: background-color 0.3s ease, transform 0.3s ease; 
 }
 
-/* Estado do botão ao passar o mouse */
 .register-button:hover {
-    background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
-    transform: scale(1.05); /* Efeito de aumento ao passar o mouse */
+    background-color: #0056b3; 
+    transform: scale(1.05); 
 }
 
 @media (max-width: 768px) {
     .header {
         flex-direction: column;
-        align-items: center; /* Centraliza o conteúdo em telas menores */
+        align-items: center; 
         text-align: center;
     }
 
     .title-container {
         margin-bottom: 10px;
-        justify-content: center; /* Alinha o título centralizado em telas menores */
+        justify-content: center; 
     }
 
     .register-button {
-        width: 100%; /* Botão ocupa a largura total em telas pequenas */
+        width: 100%;
     }
 }

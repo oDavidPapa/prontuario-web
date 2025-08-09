@@ -70,9 +70,9 @@ export class EditarUsuariosComponent implements OnInit {
             }),
             catchError(error => {
                 console.error('Erro ao carregar dados do usuário', error);
-                return of(null); // Retorna um Observable vazio em caso de erro
+                return of(null); 
             })
-        ).subscribe(); // Apenas para garantir que a pipe seja executada
+        ).subscribe(); 
     }
 
 

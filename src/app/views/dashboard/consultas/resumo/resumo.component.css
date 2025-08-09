@@ -13,11 +13,11 @@
 }
 
 .grupo-secao > h2 {
-  font-size: 1.25rem;          /* menor */
-  font-weight: 600;            /* menos pesado */
-  color: #555;                 /* cinza suave */
-  margin: 0 0 0.5rem 0;        /* espaçamento inferior */
-  border-bottom: 1px solid #ddd; /* linha mais clara e fina */
+  font-size: 1.25rem;          
+  font-weight: 600;            
+  color: #555;                 
+  margin: 0 0 0.5rem 0;        
+  border-bottom: 1px solid #ddd;
   padding-bottom: 4px;
 }
 

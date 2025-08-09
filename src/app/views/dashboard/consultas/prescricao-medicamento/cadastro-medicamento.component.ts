@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Column } from '../../base/grid/column';
 import { catchError, of, tap } from 'rxjs';
 import { PaginatedResponse } from '../../../../models/pagination.model';

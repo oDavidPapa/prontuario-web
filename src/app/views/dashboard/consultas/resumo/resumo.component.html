@@ -1,6 +1,4 @@
 <div class="resumo-consulta-container">
-
-    <!-- Seção Dados do Paciente -->
     <section class="grupo-secao">
         <h2>Dados do Paciente</h2>
         <div class="cards-container">
@@ -24,7 +22,6 @@
         </div>
     </section>
 
-    <!-- Seção Dados da Consulta -->
     <section class="grupo-secao">
         <h2>Dados da Consulta</h2>
         <div class="cards-container">
@@ -49,24 +46,20 @@
         </div>
     </section>
 
-    <!-- Seção Diagnóstico e Tratamento -->
     <section class="grupo-secao">
         <h2>Diagnóstico e Tratamento</h2>
         <div class="cards-container">
 
-            <!-- Diagnóstico -->
             <div class="card">
                 <h3>Diagnóstico</h3>
                 <p>{{ diagnostico || 'Não informado' }}</p>
             </div>
 
-            <!-- Tratamento -->
             <div class="card">
                 <h3>Tratamento</h3>
                 <p>{{ tratamento || 'Não informado' }}</p>
             </div>
 
-            <!-- CIDs -->
             <div class="card">
                 <h3>CIDs da Consulta</h3>
                 <ul *ngIf="cids && cids.length > 0; else cidsVazio">
@@ -77,7 +70,6 @@
                 </ng-template>
             </div>
 
-            <!-- Prescrições -->
             <div class="card">
                 <h3>Prescrições Médicas</h3>
                 <ul *ngIf="prescricoes && prescricoes.length > 0; else prescricoesVazio">
@@ -90,8 +82,6 @@
                     <p>Não informado</p>
                 </ng-template>
             </div>
-
         </div>
     </section>
-
 </div>

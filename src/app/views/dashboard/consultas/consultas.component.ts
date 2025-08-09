@@ -22,10 +22,10 @@ export class ConsultasComponent {
     { header: 'Tipo', field: 'tipo' }
   ];
 
-  totalItems: number = 0; // Total de registros (para paginação)
-  page: number = 1; // Página atual (começa em 1 para o usuário)
-  pageSize: number = 10; // Tamanho da página
-  totalPages: number = 1; // Total de páginas
+  totalItems: number = 0;
+  page: number = 1; 
+  pageSize: number = 10; 
+  totalPages: number = 1; 
 
   constructor(private consultaService: ConsultaService, private router: Router) { }
 
@@ -34,12 +34,9 @@ export class ConsultasComponent {
   }
 
   carregarConsultas(page: number = 1): void {
-    const apiPage = page - 1; // Ajusta para 0-based para API
-
+    const apiPage = page - 1; 
     this.consultaService.getConsultas(apiPage, this.pageSize).pipe(
       catchError(error => {
-        console.error(error);
-        // Resposta de fallback em caso de erro
         return of({
           data: {
             list: [],
@@ -55,22 +52,15 @@ export class ConsultasComponent {
         this.consultas = response.data.list;
         this.totalItems = response.data.total;
         this.totalPages = Math.ceil(this.totalItems / this.pageSize);
-        this.page = page; // Atualiza página para UI (1-based)
+        this.page = page;
       }
     });
   }
 
-  previousPage(): void {
-    if (this.page > 1) {
-      this.carregarConsultas(this.page - 1);
-    }
+  onPageChange(newPage: number) {
+    this.carregarConsultas(newPage);
   }
 
-  nextPage(): void {
-    if (this.page < this.totalPages) {
-      this.carregarConsultas(this.page + 1);
-    }
-  }
 
   editarConsulta(consulta: Consulta): void {
     this.router.navigate([`/prontuario/consultas/editar/${consulta.id}`]);

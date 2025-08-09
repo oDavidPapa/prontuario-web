@@ -1,12 +1,10 @@
 <div class="consulta-container">
     <mat-tab-group (selectedTabChange)="onTabChange($event)">
-        <!-- ABA 0: Vincular Paciente -->
         <mat-tab *ngIf="isEditing" label="Resumo">
             <div class="form-container">
                 <app-resumo [idConsulta]="idConsulta"></app-resumo>
             </div>
         </mat-tab>
-        <!-- ABA 1: Vincular Paciente -->
         <mat-tab label="Dados do Paciente">
             <div class="form-container">
 
@@ -29,13 +27,11 @@
                             {{ optionSelect?.nome || 'Selecione um paciente' }}
                         </mat-select-trigger>
 
-                        <!-- Campo de pesquisa -->
                         <mat-option>
                             <input matInput [(ngModel)]="searchTerm" placeholder="Pesquisar paciente"
                                 (input)="filterPacientes()" (click)="$event.stopPropagation()" />
                         </mat-option>
 
-                        <!-- Lista de opções filtradas -->
                         <mat-option *ngFor="let paciente of filteredPacientes" [value]="paciente">
                             {{ paciente.nome }}
                         </mat-option>
@@ -52,7 +48,6 @@
             </div>
         </mat-tab>
 
-        <!-- ABA 2: Anamnese -->
         <mat-tab label="Anamnèse">
             <div class="form-container">
                 <mat-form-field appearance="fill">
@@ -66,10 +61,8 @@
             </div>
         </mat-tab>
 
-        <!-- ABA 3: Diagnostico -->
         <mat-tab label="Diagnósticos">
             <div class="form-container">
-                <!-- Campo de Diagnóstico -->
                 <mat-form-field appearance="fill">
                     <mat-label>Diagnóstico</mat-label>
                     <textarea matInput [(ngModel)]="diagnostico" placeholder="Descreva o diagnóstico"></textarea>
@@ -80,7 +73,6 @@
                     <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
                 </div>
 
-                <!-- Componente de Cadastro de CIDs -->
                 <div class="separator"></div>
                 <div class="form-container">
                     <app-cid-cadastro [idDiagnostico]="idDiagnostico"></app-cid-cadastro>
@@ -89,14 +81,11 @@
 
         </mat-tab>
         <mat-tab label="Alergias">
-            <!-- Campo para adicionar nova alergia -->
             <div class="form-container">
-                <!-- Componente de gerenciamento de alergias -->
                 <app-alergia-paciente [idPaciente]="idPaciente"></app-alergia-paciente>
             </div>
         </mat-tab>
 
-        <!-- ABA 5: Prescrições Médicas -->
         <mat-tab label="Prescrições Médicas">
             <div class="form-container">
                 <mat-form-field appearance="fill">
@@ -110,15 +99,12 @@
                 </div>
             </div>
 
-
-            <!-- Componente de Cadastro de CIDs -->
             <div class="separator"></div>
             <div class="form-container">
                 <app-medicamento-cadastro [idPrescricaoConsulta]="idPrescricaoConsulta"></app-medicamento-cadastro>
             </div>
         </mat-tab>
 
-        <!-- ABA 7: Tratanebto -->
         <mat-tab label="Tratamentos">
             <div class="form-container">
                 <mat-form-field appearance="fill">
@@ -131,11 +117,8 @@
                 </div>
             </div>
         </mat-tab>
-        <!-- ABA 4: Solicitação de Exames -->
         <mat-tab label="Solicitação de Exames">
-            <!-- Campo para adicionar nova alergia -->
             <div class="form-container">
-                <!-- Componente de gerenciamento de alergias -->
                 <app-exame-consulta [idConsulta]="idConsulta"></app-exame-consulta>
             </div>
         </mat-tab>
@@ -144,7 +127,5 @@
                 <app-upload-arquivo [idConsulta]="idConsulta"></app-upload-arquivo>
             </div>
         </mat-tab>
-
-
     </mat-tab-group>
 </div>

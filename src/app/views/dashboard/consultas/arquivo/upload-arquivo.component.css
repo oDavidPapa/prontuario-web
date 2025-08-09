@@ -19,12 +19,9 @@
 .form-group-row {
   display: flex;
   align-items: center;
-  /* ajustado para centralizar verticalmente */
   gap: 1rem;
 }
 
-/* Ajuste para form-group: para inputs de texto continua flex:1, 
-   mas para a seleção de arquivo vamos usar uma classe extra para não esticar */
 .form-group {
   flex: 1;
   min-width: 200px;
@@ -32,14 +29,10 @@
   flex-direction: column;
 }
 
-/* Nova classe para form-group do seletor de arquivo */
 .form-group.file-select-group {
   flex: initial;
-  /* remove o flex-grow para não esticar */
   min-width: auto;
-  /* remove o mínimo de largura */
   width: max-content;
-  /* só ocupa o necessário */
 }
 
 .form-group label {
@@ -69,15 +62,12 @@
   align-items: center;
 }
 
-/* Botão de envio alinhado em altura com o seletor de arquivo */
 .btn-add {
   background-color: #007bff;
   color: white;
   border-radius: 4px;
   height: 38px;
-  /* altura fixa igual ao label do arquivo */
   padding: 4px 18px;
-  /* só padding horizontal */
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -109,12 +99,10 @@
   margin-top: 1rem;
 }
 
-/* Esconde o input file padrão */
 .custom-file-input {
   display: none;
 }
 
-/* Base semelhante ao btn-add */
 .custom-file-label {
   display: inline-flex;
   align-items: center;
@@ -136,7 +124,6 @@
   text-overflow: ellipsis;
 }
 
-/* Centraliza o ícone dentro do label */
 .custom-file-label i {
   display: block;
   line-height: 36px;
@@ -150,27 +137,22 @@
 
 .custom-file-label:hover {
   background-color: #0056b3;
-  /* hover igual ao btn-add */
 }
 
 .custom-file-label:active {
   background-color: #004494;
-  /* active um pouco mais escuro */
 }
 
-/* Agrupa ícone e nome do arquivo lado a lado */
 .file-select-group.with-filename {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-/* Evita que o label encolha demais */
 .file-select-group.with-filename .custom-file-label {
   flex-shrink: 0;
 }
 
-/* Nome do arquivo com aparência elegante e protegida contra overflow */
 .file-name {
   font-size: 0.9rem;
   color: #444;
@@ -181,14 +163,14 @@
 }
 
 .btn-green {
-  background-color: #28a745; /* Verde */
+  background-color: #28a745;
   box-shadow: 0 0 6px rgba(40, 167, 69, 0.5);
 }
 
 .btn-green:hover {
-  background-color: #218838; /* Verde mais escuro */
+  background-color: #218838; 
 }
 
 .btn-green:active {
-  background-color: #1e7e34; /* Verde ainda mais escuro */
+  background-color: #1e7e34;
 }

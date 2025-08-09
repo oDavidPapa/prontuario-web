@@ -16,7 +16,7 @@ export class LoginComponent {
   constructor(private router: Router,
     private authService: AuthService
   ) { 
-    localStorage.removeItem('token'); // Substitua 'token' pelo nome da chave usada
+    localStorage.removeItem('token');
   }
 
   onSubmit() {
@@ -27,7 +27,6 @@ export class LoginComponent {
 
     this.authService.login(authRequest).pipe(
       catchError(error => {
-        console.error(error)
         return of(null);
       })
     ).subscribe(response => {
@@ -44,6 +43,5 @@ export class LoginComponent {
 
   private storeToken(token: string): void {
     localStorage.setItem('token', token);
-    console.log('Token armazenado:', token);
   }
 }

@@ -12,30 +12,28 @@ import { CustomButtonGrid } from './custom-button-grid.model';
 export class DataGridComponent {
   @Input() columns: Column[] = [];
   @Input() data: any[] = [];
-  @Input() showEdit: boolean = true; // Adiciona esta propriedade para controle de exibição do botão de editar
-  @Input() showDelete: boolean = true; // Adiciona esta propriedade para controle de exibição do botão de deletar
-  @Input() showToggle: boolean = false; // Controle de exibição do botão de toggle (ativar/desativar)
+  @Input() showEdit: boolean = true; 
+  @Input() showDelete: boolean = true; 
+  @Input() showToggle: boolean = false; 
   @Input() iconButtons: CustomButtonGrid[] = [];
 
   @Output() edit = new EventEmitter<any>();
-  @Output() remove = new EventEmitter<any>(); // Emissor para remoção
-  @Output() toggleStatus = new EventEmitter<any>(); // Emissor para alterar status
+  @Output() remove = new EventEmitter<any>(); 
+  @Output() toggleStatus = new EventEmitter<any>(); 
   @Output() iconButtonClick = new EventEmitter<{ actionName: string, item: any }>();
 
 
-  faEdit = faEdit; // Adiciona o ícone de lápis
-  faTrash = faTrash; // Adiciona o ícone de lixeira
+  faEdit = faEdit; 
+  faTrash = faTrash; 
   faCheckCircle = faCheckCircle;
   faTimesCircle = faTimesCircle;
 
-  faToggleOn = faToggleOn; // Ícone de toggle ligado
-  faToggleOff = faToggleOff; // Ícone de toggle desligado
-
+  faToggleOn = faToggleOn; 
+  faToggleOff = faToggleOff; 
 
 
 
   constructor(private library: FaIconLibrary) {
-    // Adiciona os ícones à biblioteca
     this.library.addIcons(faEdit, faTrash, faTimesCircle, faCheckCircle, faToggleOn, faToggleOff);
   }
 
@@ -48,7 +46,7 @@ export class DataGridComponent {
   }
 
   onRemove(item: any): void {
-    this.remove.emit(item); // Emite o item para remoção
+    this.remove.emit(item); 
   }
 
   onToggleStatus(item: any): void {

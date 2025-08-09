@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';  // Necessário para ngModel
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
-import { AppRoutingModule } from './app-routing.module';  // Corrigir o nome e a exportação
+import { AppRoutingModule } from './app-routing.module';  
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './views/interceptors/auth.interceptors';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
@@ -48,6 +48,7 @@ import { MedicamentoCadastroComponent } from './views/dashboard/consultas/prescr
 import { ExameConsultaComponent } from './views/dashboard/consultas/exame/exame-consulta.component';
 import { UploadArquivoComponent } from './views/dashboard/consultas/arquivo/upload-arquivo.component';
 import { ResumoComponent } from './views/dashboard/consultas/resumo/resumo.component';
+import { PaginationControlComponent } from './views/dashboard/base/pagination/pagination-control.component';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { ResumoComponent } from './views/dashboard/consultas/resumo/resumo.compo
     ExameConsultaComponent,
     UploadArquivoComponent,
     ResumoComponent,
+    PaginationControlComponent,
     
     MedicosComponent,
 

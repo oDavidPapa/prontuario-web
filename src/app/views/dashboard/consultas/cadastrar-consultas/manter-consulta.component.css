@@ -26,13 +26,13 @@ textarea {
 
 .button-container {
   display: flex;
-  justify-content: flex-start; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente, caso seja necessário */
-  gap: 10px; /* Espaço entre os botões */
+  justify-content: flex-start; 
+  align-items: center; 
+  gap: 10px; 
 }
 
 .btn {
-  padding: 12px 30px; /* Aumenta o padding lateral (direita e esquerda) */
+  padding: 12px 30px; 
   border: none;
   border-radius: 4px;
   font-size: 16px;

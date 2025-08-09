@@ -22,10 +22,10 @@ export class UsuarioComponent {
     { header: 'Nome', field: 'pessoa.nome' },
     { header: 'Status', field: 'status', format: 'status' }];
 
-  totalItems: number = 0; // Para paginação
-  page: number = 0; // Página atual
-  pageSize: number = 10; // Tamanho da página
-  totalPages: number = 1; // Total de páginas
+  page: number = 1;
+  totalPages: number = 1;
+  pageSize: number = 10;
+  totalItems: number = 0;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -33,19 +33,18 @@ export class UsuarioComponent {
     private alertService: AlertService) { }
 
   ngOnInit(): void {
-    this.loadUsuarios();
+    this.loadUsuarios(this.page);
   }
 
   loadUsuarios(page: number = 0): void {
-    this.usuarioService.getUsuarios(page, this.pageSize).pipe(
+    const apiPage = page - 1;
+    this.usuarioService.getUsuarios(apiPage, this.pageSize).pipe(
       catchError(error => {
-        console.error(error);
-        // Ajuste a resposta para o formato esperado em caso de erro
         return of({
           data: {
             list: [],
             total: 0,
-            page: page,
+            page: apiPage,
             pageSize: this.pageSize
           },
           success: false
@@ -54,24 +53,15 @@ export class UsuarioComponent {
     ).subscribe(response => {
       if (response && response.success) {
         this.usuarios = response.data.list;
-        this.totalItems = response.data.total; // Atualize o totalItems conforme necessário
-        this.totalPages = Math.ceil(this.totalItems / this.pageSize); // Calcule o total de páginas
+        this.totalItems = response.data.total;
+        this.totalPages = Math.ceil(this.totalItems / this.pageSize);
+        this.page = page;
       }
     });
   }
 
-  previousPage(): void {
-    if (this.page > 1) {
-      this.page--;
-      this.loadUsuarios(this.page);
-    }
-  }
-
-  nextPage(): void {
-    if (this.page < this.totalPages) {
-      this.page++;
-      this.loadUsuarios(this.page);
-    }
+  onPageChange(newPage: number) {
+    this.loadUsuarios(newPage);
   }
 
   editUsuario(usuario: Usuario): void {
