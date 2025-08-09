@@ -19,6 +19,7 @@ export class ConsultasComponent {
     { header: '#', field: 'id' },
     { header: 'Data', field: 'data', format: 'date' },
     { header: 'Médico', field: 'medico.pessoa.nome' },
+    { header: 'CPF', field: 'paciente.pessoa.cpf', format: 'cpf' },
     { header: 'Paciente', field: 'paciente.pessoa.nome' },
     { header: 'Tipo', field: 'tipo' }
   ];
