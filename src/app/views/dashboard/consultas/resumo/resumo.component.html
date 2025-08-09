@@ -6,9 +6,10 @@
         <div class="cards-container">
             <div class="card">
                 <h3>Dados do Paciente</h3>
-                <p><strong>Nome:</strong> {{ dadosPaciente.nome }}</p>
-                <p><strong>Idade:</strong> {{ dadosPaciente.idade }} anos</p>
-                <p><strong>Sexo:</strong> {{ dadosPaciente.sexo }}</p>
+                <p><strong>Nome:</strong> {{ dadosPaciente.nome || 'Não informado' }}</p>
+                <p><strong>Idade:</strong> {{ dadosPaciente.idade !== undefined ? dadosPaciente.idade + ' anos' : 'Não
+                    informado' }}</p>
+                <p><strong>Sexo:</strong> {{ dadosPaciente.sexo || 'Não informado' }}</p>
             </div>
 
             <div class="card">
@@ -29,17 +30,21 @@
         <div class="cards-container">
             <div class="card">
                 <h3>Dados da Consulta</h3>
-                <p><strong>Data:</strong> {{ dadosConsulta.data | date:'dd/MM/yyyy HH:mm' }}</p>
-                <p><strong>Médico:</strong> {{ dadosConsulta.medico }}</p>
-                <p><strong>Especialidade:</strong> {{ dadosConsulta.especialidade }}</p>
-                <p><strong>Tipo:</strong> {{ dadosConsulta.tipo }}</p>
+                <p><strong>Data:</strong> {{ dadosConsulta.dataHora ? dadosConsulta.dataHora : 'Não
+                    informado' }}</p>
+                <p><strong>Médico:</strong> {{ dadosConsulta.medico || 'Não informado' }}</p>
+                <p><strong>Especialidade:</strong> {{ dadosConsulta.especialidade || 'Não informado' }}</p>
+                <p><strong>Tipo:</strong> {{ dadosConsulta.tipo || 'Não informado' }}</p>
             </div>
 
-            <div class="card" *ngIf="examesSolicitados.length > 0">
+            <div class="card">
                 <h3>Solicitação de Exames</h3>
-                <ul>
+                <ul *ngIf="examesSolicitados && examesSolicitados.length > 0; else naoInformado">
                     <li *ngFor="let exame of examesSolicitados">{{ exame }}</li>
                 </ul>
+                <ng-template #naoInformado>
+                    <p>Não informado</p>
+                </ng-template>
             </div>
         </div>
     </section>
@@ -48,33 +53,45 @@
     <section class="grupo-secao">
         <h2>Diagnóstico e Tratamento</h2>
         <div class="cards-container">
-            <div class="card" *ngIf="diagnostico">
+
+            <!-- Diagnóstico -->
+            <div class="card">
                 <h3>Diagnóstico</h3>
-                <p>{{ diagnostico }}</p>
+                <p>{{ diagnostico || 'Não informado' }}</p>
             </div>
 
-            <div class="card" *ngIf="tratamento">
+            <!-- Tratamento -->
+            <div class="card">
                 <h3>Tratamento</h3>
-                <p>{{ tratamento }}</p>
+                <p>{{ tratamento || 'Não informado' }}</p>
             </div>
 
-            <div class="card" *ngIf="cids.length > 0">
+            <!-- CIDs -->
+            <div class="card">
                 <h3>CIDs da Consulta</h3>
-                <ul>
+                <ul *ngIf="cids && cids.length > 0; else cidsVazio">
                     <li *ngFor="let cid of cids">{{ cid.codigo }} - {{ cid.descricao }}</li>
                 </ul>
+                <ng-template #cidsVazio>
+                    <p>Não informado</p>
+                </ng-template>
             </div>
 
-            <div class="card" *ngIf="prescricoes.length > 0">
+            <!-- Prescrições -->
+            <div class="card">
                 <h3>Prescrições Médicas</h3>
-                <ul>
+                <ul *ngIf="prescricoes && prescricoes.length > 0; else prescricoesVazio">
                     <li *ngFor="let p of prescricoes">
-                        <strong>{{ p.remedio }}:</strong> {{ p.instrucoes }}
+                        <strong>{{ p?.medicamento || 'Medicamento não informado' }}:</strong>
+                        {{ p?.instrucoes || 'Sem instruções' }}
                     </li>
                 </ul>
+                <ng-template #prescricoesVazio>
+                    <p>Não informado</p>
+                </ng-template>
             </div>
-        </div>
 
+        </div>
     </section>
 
 </div>

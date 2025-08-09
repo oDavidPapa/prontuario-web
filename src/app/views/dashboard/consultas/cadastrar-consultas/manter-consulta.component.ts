@@ -15,6 +15,7 @@ import { Cid } from "../../../../models/cid.model";
 import { TratamentoService } from "../../../../services/tratamento.service";
 import { PrescricaoConsultaService } from "../../../../services/prescricao-consulta.service";
 import { UploadArquivoComponent } from "../arquivo/upload-arquivo.component";
+import { ResumoComponent } from "../resumo/resumo.component";
 
 @Component({
     selector: 'app-manter-consulta',
@@ -24,6 +25,8 @@ import { UploadArquivoComponent } from "../arquivo/upload-arquivo.component";
 export class ManterConsultasComponent implements OnInit {
 
     @ViewChild(UploadArquivoComponent) uploadArquivoComponent!: UploadArquivoComponent;
+    @ViewChild(ResumoComponent) resumoComponent!: ResumoComponent;
+
 
     consultaForm!: FormGroup;
     diagnosticoForm!: FormGroup;
@@ -524,7 +527,10 @@ export class ManterConsultasComponent implements OnInit {
     }
 
     loadResumo(): void {
-        console.log("RESUMO");
+        if (this.isEditing) {
+            this.resumoComponent.carregarResumo();
+            console.log("RESUMO");
+        }
     }
 
     loadPaciente(): void {

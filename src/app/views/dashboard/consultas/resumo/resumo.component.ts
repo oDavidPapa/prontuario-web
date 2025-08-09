@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ConsultaService } from '../../../../services/consulta.service';
-import { AlertService } from '../../base/alert/alert.service';
+import { ResumoConsultaService } from '../../../../services/resumo-consulta.service';
+import { DadosCID, DadosConsulta, DadosPaciente, DadosPrescricao } from '../../../../models/resumo-consulta.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-resumo',
@@ -10,63 +11,54 @@ import { AlertService } from '../../base/alert/alert.service';
 export class ResumoComponent implements OnInit {
     @Input() idConsulta!: any;
 
-    consulta: any;
-    carregando = true;
+    dadosPaciente: DadosPaciente = {
+        nome: '',
+        idade: 0,
+        sexo: '',
+    };
+
+    dadosConsulta: DadosConsulta = {
+        dataHora: '',
+        medico: '',
+        especialidade: '',
+        tipo: '',
+    };
+
+    cids: DadosCID[] = [];
+
+    prescricoes: DadosPrescricao[] = [];
+    tratamento: string = '';
+    examesSolicitados: string[] = [];
+    alergias: string[] = [];
+    diagnostico: string = '';
+
 
     constructor(
-        private consultaService: ConsultaService,
-        private alertService: AlertService
+        private resumoConsulta: ResumoConsultaService,
+        private route: ActivatedRoute,
     ) { }
 
     ngOnInit(): void {
+        this.carregarResumo();
+    }
+
+    carregarResumo() {
+        this.reloadConsultaId();
         if (this.idConsulta) {
-            this.carregarResumo();
+            this.resumoConsulta.getResumoConsulta(this.idConsulta).subscribe(res => {
+                this.dadosPaciente = res.data.dadosPaciente;
+                this.dadosConsulta = res.data.dadosConsulta;
+                this.cids = res.data.cids;
+                this.prescricoes = res.data.prescricoes;
+                this.tratamento = res.data.tratamento;
+                this.examesSolicitados = res.data.examesSolicitados;
+                this.alergias = res.data.alergias;
+                this.diagnostico = res.data.diagnostico;
+            });
         }
     }
 
-    private carregarResumo(): void {
-        // this.consultaService.getResumoConsulta(this.idConsulta).subscribe({
-        //   next: (res) => {
-        //     this.consulta = res.data;
-        //     this.carregando = false;
-        //   },
-        //   error: () => {
-        //     this.alertService.error('Erro!', 'Não foi possível carregar o resumo da consulta.');
-        //     this.carregando = false;
-        //   }
-        // });
+    private reloadConsultaId() {
+        this.idConsulta = this.route.snapshot.paramMap.get('id');
     }
-
-    // Mock dos dados
-    dadosConsulta = {
-        data: new Date('2024-08-08T14:30:00'),
-        medico: 'Dr. João Silva',
-        especialidade: 'Cardiologia',
-        tipo: 'Rotina'
-    };
-
-    dadosPaciente = {
-        nome: 'Maria da Silva',
-        idade: 38,
-        sexo: 'Feminino'
-    };
-
-    diagnostico = 'Hipertensão arterial controlada, recomendação de dieta e exercícios.';
-
-    cids = [
-        { codigo: 'I10', descricao: 'Hipertensão essencial (primária)' },
-        { codigo: 'E78.5', descricao: 'Hipercolesterolemia isolada' }
-    ];
-
-    prescricoes = [
-        { remedio: 'Losartana 50mg', instrucoes: '1 comprimido ao dia após o café da manhã' },
-        { remedio: 'Sinvastatina 20mg', instrucoes: '1 comprimido à noite' }
-    ];
-
-    tratamento = 'Orientação nutricional e prática de atividade física regular.';
-
-    alergias = [];
-
-    examesSolicitados = ['Eletrocardiograma', 'Exame de sangue - perfil lipídico', 'Ecocardiograma'];
-
 }
