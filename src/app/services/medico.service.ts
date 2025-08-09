@@ -14,10 +14,18 @@ export class MedicoService {
 
   constructor(private http: HttpClient) { }
 
-  getMedicos(page: number = 0, size: number = 10): Observable<PaginatedResponse<Medico>> {
-    const params = new HttpParams()
+  getMedicos(page: number = 0, size: number = 10, filters?: any): Observable<PaginatedResponse<Medico>> {
+    let params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
+
+    if (filters) {
+      Object.keys(filters).forEach(key => {
+        if (filters[key]) {
+          params = params.set(key, filters[key]);
+        }
+      });
+    }
 
     return this.http.get<PaginatedResponse<Medico>>(this.apiUrl + "medicos", { params });
   }

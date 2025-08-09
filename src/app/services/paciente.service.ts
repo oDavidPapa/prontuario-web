@@ -14,10 +14,18 @@ export class PacienteService {
 
   constructor(private http: HttpClient) { }
 
-  getPacientes(page: number = 0, size: number = 10): Observable<PaginatedResponse<Paciente>> {
-    const params = new HttpParams()
+  getPacientes(page: number = 0, size: number = 10, filters?: any): Observable<PaginatedResponse<Paciente>> {
+    let params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
+
+    if (filters) {
+      Object.keys(filters).forEach(key => {
+        if (filters[key]) {
+          params = params.set(key, filters[key]);
+        }
+      });
+    }
 
     return this.http.get<PaginatedResponse<Paciente>>(this.apiUrl, { params });
   }

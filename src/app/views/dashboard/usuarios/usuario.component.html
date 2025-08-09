@@ -1,3 +1,5 @@
+<app-filter [fields]="filterFields" (filterChange)="onFilterChange($event)"></app-filter>
+
 <div class="data-grid">
     <app-data-grid [columns]="columns" [data]="usuarios" (edit)="editUsuario($event)"
         (toggleStatus)="toggleStatus($event)" [showDelete]="false" [showToggle]="true">

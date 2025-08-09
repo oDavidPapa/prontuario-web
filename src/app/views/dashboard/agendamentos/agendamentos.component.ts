@@ -6,6 +6,7 @@ import { catchError, of, tap } from "rxjs";
 import { PaginatedResponse } from "../../../models/pagination.model";
 import { Router } from "@angular/router";
 import { faNotesMedical } from "@fortawesome/free-solid-svg-icons";
+import { FilterField } from "../../../models/filter-field.model";
 
 @Component({
   selector: 'app-agendamentos',
@@ -28,6 +29,17 @@ export class AgendamentosComponent {
     { header: 'Tipo', field: 'tipoConsultaDescricao' }
   ];
 
+  filters: any = {};
+
+  filterFields: FilterField[] = [
+    { label: 'CPF Paciente', name: 'cpfPaciente', type: 'text' },
+    { label: 'Nome Paciente', name: 'nomePaciente', type: 'text' },
+    { label: 'Nome Médico', name: 'nomeMedico', type: 'text' },
+    { label: 'Data Início', name: 'dataInicio', type: 'date' },
+    { label: 'Data Fim', name: 'dataFim', type: 'date' },
+  ];
+
+
   page: number = 1;
   totalPages: number = 1;
   pageSize: number = 10;
@@ -42,7 +54,7 @@ export class AgendamentosComponent {
 
   carregarAgendamentos(page: number = 1): void {
     const apiPage = page - 1;
-    this.agendamentoService.getAgendamentos(apiPage, this.pageSize).pipe(
+    this.agendamentoService.getAgendamentos(apiPage, this.pageSize, this.filters).pipe(
       catchError(error => {
         console.error(error);
         return of({
@@ -63,6 +75,13 @@ export class AgendamentosComponent {
         this.page = page;
       }
     });
+  }
+
+
+  onFilterChange(newFilters: any) {
+    this.filters = newFilters;
+    this.page = 1;
+    this.carregarAgendamentos(this.page);
   }
 
   onPageChange(newPage: number) {

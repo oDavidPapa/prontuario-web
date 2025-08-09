@@ -5,6 +5,7 @@ import { PaginatedResponse } from '../../../models/pagination.model';
 import { Paciente } from '../../../models/paciente.model';
 import { Router } from '@angular/router';
 import { Column } from '../base/grid/column';
+import { FilterField } from '../../../models/filter-field.model';
 
 @Component({
   selector: 'app-pacientes',
@@ -20,6 +21,13 @@ export class PacientesComponent implements OnInit {
     { header: 'Data Nascimento', field: 'pessoa.dataNascimento', format: 'date' }
   ];
 
+  filters: any = {};
+
+  filterFields: FilterField[] = [
+    { label: 'CPF Paciente', name: 'cpf', type: 'text' },
+    { label: 'Nome Paciente', name: 'nome', type: 'text' }
+  ];
+
   totalItems: number = 0;
   page: number = 1;
   pageSize: number = 10;
@@ -32,8 +40,8 @@ export class PacientesComponent implements OnInit {
   }
 
   loadPacientes(page: number = 1): void {
-    const apiPage = page - 1; 
-    this.pacienteService.getPacientes(apiPage, this.pageSize).pipe(
+    const apiPage = page - 1;
+    this.pacienteService.getPacientes(apiPage, this.pageSize, this.filters).pipe(
       catchError(error => {
         console.error(error);
         return of({
@@ -56,10 +64,15 @@ export class PacientesComponent implements OnInit {
     });
   }
 
+  onFilterChange(newFilters: any) {
+    this.filters = newFilters;
+    this.page = 1;
+    this.loadPacientes(this.page);
+  }
+
   onPageChange(newPage: number) {
     this.loadPacientes(newPage);
   }
-
 
   editPaciente(paciente: Paciente): void {
     this.router.navigate([`/prontuario/pacientes/editar/${paciente.id}`]);

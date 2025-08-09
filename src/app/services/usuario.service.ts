@@ -14,10 +14,18 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) { }
 
-  getUsuarios(page: number = 0, size: number = 10): Observable<PaginatedResponse<Usuario>> {
-    const params = new HttpParams()
+  getUsuarios(page: number = 0, size: number = 10, filters?: any): Observable<PaginatedResponse<Usuario>> {
+    let params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
+
+    if (filters) {
+      Object.keys(filters).forEach(key => {
+        if (filters[key]) {
+          params = params.set(key, filters[key]);
+        }
+      });
+    }
 
     return this.http.get<PaginatedResponse<Usuario>>(this.apiUrl, { params });
   }

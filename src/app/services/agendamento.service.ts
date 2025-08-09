@@ -14,11 +14,18 @@ export class AgendamentoService {
 
   constructor(private http: HttpClient) { }
 
-  getAgendamentos(page: number = 0, size: number = 10): Observable<PaginatedResponse<Agendamento>> {
-    const params = new HttpParams()
+  getAgendamentos(page: number = 0, size: number = 10, filters?: any): Observable<PaginatedResponse<Agendamento>> {
+    let params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
 
+    if (filters) {
+      Object.keys(filters).forEach(key => {
+        if (filters[key]) {
+          params = params.set(key, filters[key]);
+        }
+      });
+    }
     return this.http.get<PaginatedResponse<Agendamento>>(this.apiUrl, { params });
   }
 

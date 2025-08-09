@@ -6,6 +6,7 @@ import { Usuario } from '../../../models/usuario.model';
 import { UsuarioService } from '../../../services/usuario.service';
 import { Router } from '@angular/router';
 import { AlertService } from '../base/alert/alert.service';
+import { FilterField } from '../../../models/filter-field.model';
 
 @Component({
   selector: 'app-usuario',
@@ -21,6 +22,13 @@ export class UsuarioComponent {
     { header: 'Perfil', field: 'role' },
     { header: 'Nome', field: 'pessoa.nome' },
     { header: 'Status', field: 'status', format: 'status' }];
+
+  filters: any = {};
+
+  filterFields: FilterField[] = [
+    { label: 'Login', name: 'login', type: 'text' },
+    { label: 'Nome', name: 'nome', type: 'text' }
+  ];
 
   page: number = 1;
   totalPages: number = 1;
@@ -38,7 +46,7 @@ export class UsuarioComponent {
 
   loadUsuarios(page: number = 0): void {
     const apiPage = page - 1;
-    this.usuarioService.getUsuarios(apiPage, this.pageSize).pipe(
+    this.usuarioService.getUsuarios(apiPage, this.pageSize, this.filters).pipe(
       catchError(error => {
         return of({
           data: {
@@ -58,6 +66,12 @@ export class UsuarioComponent {
         this.page = page;
       }
     });
+  }
+
+  onFilterChange(newFilters: any) {
+    this.filters = newFilters;
+    this.page = 1;
+    this.loadUsuarios(this.page);
   }
 
   onPageChange(newPage: number) {

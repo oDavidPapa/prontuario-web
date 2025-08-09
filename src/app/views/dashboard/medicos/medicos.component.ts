@@ -3,6 +3,7 @@ import { Medico } from '../../../models/medico.model';
 import { Column } from '../base/grid/column';
 import { MedicoService } from '../../../services/medico.service';
 import { Router } from '@angular/router';
+import { FilterField } from '../../../models/filter-field.model';
 
 @Component({
   selector: 'app-medicos',
@@ -14,10 +15,19 @@ export class MedicosComponent {
   medicos: Medico[] = [];
   columns: Column[] = [
     { header: '#', field: 'id' },
-    { header: 'CPF', field: 'pessoa.cpf', format: 'cpf' },
     { header: 'CRM', field: 'crm' },
     { header: 'Nome', field: 'pessoa.nome' },
-    { header: 'Data Nascimento', field: 'pessoa.dataNascimento', format: 'date' }
+    { header: 'CPF', field: 'pessoa.cpf', format: 'cpf' },
+    { header: 'Especialidade', field: 'especialidade' }
+  ];
+
+  filters: any = {};
+
+  filterFields: FilterField[] = [
+    { label: 'Nome Médico', name: 'nome', type: 'text' },
+    { label: 'CRM', name: 'crm', type: 'text' },
+    { label: 'CPF', name: 'cpf', type: 'text' },
+    { label: 'Especialidade', name: 'especialidade', type: 'text' }
   ];
 
   page: number = 1;
@@ -32,8 +42,8 @@ export class MedicosComponent {
   }
 
   loadMedicos(page: number = 0): void {
-    const apiPage = page - 1; 
-    this.medicoService.getMedicos(apiPage, this.pageSize).subscribe({
+    const apiPage = page - 1;
+    this.medicoService.getMedicos(apiPage, this.pageSize, this.filters).subscribe({
       next: response => {
         if (response.success) {
           this.medicos = response.data.list;
@@ -50,6 +60,13 @@ export class MedicosComponent {
       }
     });
   }
+
+  onFilterChange(newFilters: any) {
+    this.filters = newFilters;
+    this.page = 1;
+    this.loadMedicos(this.page);
+  }
+
 
   onPageChange(newPage: number) {
     this.loadMedicos(newPage);
