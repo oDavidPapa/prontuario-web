@@ -28,9 +28,9 @@ export class AuthService {
   }
 
   requestPasswordReset(email: string) {
-    return this.http.post<any>(`${this.apiUrl}api/auth/recuperar-senha`, { email });
+    return this.http.post<any>(`${this.apiUrl}api/auth/recuperar-senha`, { email: email });
   }
-
+  
   private handleError(error: HttpErrorResponse) {
     console.error('Erro no serviço de autenticação:', error);
     return throwError(() => new Error(error.message));
