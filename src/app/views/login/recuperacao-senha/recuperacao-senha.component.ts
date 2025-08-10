@@ -28,7 +28,7 @@ export class RecuperarSenhaRequestComponent {
             if (response?.success) {
                 this.message = 'Se o e-mail estiver cadastrado em nossa base, você receberá um link para redefinir sua senha.';
             } else {
-                this.error = 'Este e-mail não está registrado em nosso sistema. Por favor, verifique e tente novamente.';
+                this.error = 'Não foi possível processar sua solicitação. Por favor, tente novamente mais tarde.';
             }
         });
     }
