@@ -29,6 +29,7 @@ export class AgendamentosComponent {
   columns: Column[] = [
     { header: '#', field: 'id' },
     { header: 'Data - Hora', field: 'dataConsulta' },
+    { header: 'Descrição', field: 'descricao' },
     { header: 'Paciente', field: 'paciente.pessoa.nome' },
     { header: 'Médico', field: 'medico.pessoa.nome' },
     { header: 'Tipo', field: 'tipoConsultaDescricao' }
