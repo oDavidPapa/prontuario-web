@@ -53,6 +53,7 @@ import { FilterComponent } from './views/dashboard/base/filter/filter.component'
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RecuperarSenhaRequestComponent } from './views/login/recuperacao-senha/recuperacao-senha.component';
+import { AlteracaoSenhaComponent } from './views/login/altercao-senha/alteracao-senha.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { RecuperarSenhaRequestComponent } from './views/login/recuperacao-senha/
     CadastrarAgendamentosComponent,
     EditarAgendamentosComponent,
     RecuperarSenhaRequestComponent,
+    AlteracaoSenhaComponent,
 
   ],
 

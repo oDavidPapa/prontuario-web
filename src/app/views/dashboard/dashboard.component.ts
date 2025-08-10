@@ -37,6 +37,6 @@ export class DashboardComponent {
   }
 
   editarPerfil() {
-    this.router.navigate(['/prontuario/editar-perfil']);
+    this.router.navigate(['/prontuario/alterar-senha']);
   }
 }

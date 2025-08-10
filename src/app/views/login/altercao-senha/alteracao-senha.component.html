@@ -1,0 +1,50 @@
+<div class="page">
+    <div class="formLogin">
+        <div class="header">
+            <img src="assets/ufes70.png" alt="Logo da Aplicação">
+            <h1>
+                <span>Alteração de Senha</span>
+            </h1>
+        </div>
+
+        <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
+
+            <!-- Senha Atual -->
+            <div class="input-container">
+                <input type="password" placeholder="Senha Atual" formControlName="currentPassword" />
+                <div class="error-message"
+                    *ngIf="passwordForm.get('currentPassword')?.touched && passwordForm.get('currentPassword')?.invalid">
+                    A senha atual é obrigatória.
+                </div>
+            </div>
+
+            <!-- Nova Senha -->
+            <div class="input-container">
+                <input type="password" placeholder="Nova Senha" formControlName="newPassword" />
+                <div class="error-message"
+                    *ngIf="passwordForm.get('newPassword')?.touched && passwordForm.get('newPassword')?.errors?.['required']">
+                    A nova senha é obrigatória.
+                </div>
+                <div class="error-message"
+                    *ngIf="passwordForm.get('newPassword')?.touched && passwordForm.get('newPassword')?.errors?.['minlength']">
+                    A nova senha deve ter pelo menos 8 caracteres.
+                </div>
+            </div>
+
+            <!-- Confirmar Nova Senha -->
+            <div class="input-container">
+                <input type="password" placeholder="Confirmar Nova Senha" formControlName="confirmPassword" />
+                <div class="error-message"
+                    *ngIf="passwordForm.get('confirmPassword')?.touched && passwordForm.get('confirmPassword')?.errors?.['required']">
+                    A confirmação da senha é obrigatória.
+                </div>
+                <div class="error-message"
+                    *ngIf="passwordForm.errors?.['passwordMismatch'] && passwordForm.get('confirmPassword')?.touched">
+                    As senhas não coincidem.
+                </div>
+            </div>
+
+            <button type="submit" class="btn">Alterar Senha</button>
+        </form>
+    </div>
+</div>

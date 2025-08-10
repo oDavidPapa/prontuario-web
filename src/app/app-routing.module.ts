@@ -19,6 +19,7 @@ import { CadastrarAgendamentosComponent } from './views/dashboard/agendamentos/c
 import { EditarAgendamentosComponent } from './views/dashboard/agendamentos/editar-agendamentos/editar-agendamentos.component';
 import { roleGuard } from './views/interceptors/role-guard';
 import { RecuperarSenhaRequestComponent } from './views/login/recuperacao-senha/recuperacao-senha.component';
+import { AlteracaoSenhaComponent } from './views/login/altercao-senha/alteracao-senha.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -27,26 +28,28 @@ const routes: Routes = [
   {
     path: 'prontuario', component: DashboardComponent, children:
       [
-        { path: 'home', component: HomeComponent, canActivate: [roleGuard], data: { roles: ['MEDICO', 'ADMINISTRATIVO'] } },
-        { path: 'usuarios', component: UsuarioComponent, canActivate: [roleGuard], data: { roles: ['ADMINISTRATIVO'] } },
-        { path: 'usuarios/editar/:id', component: EditarUsuariosComponent, canActivate: [roleGuard], data: { roles: ['ADMINISTRATIVO'] } },
-        { path: 'usuarios/cadastrar', component: CadastrarUsuariosComponent, canActivate: [roleGuard], data: { roles: ['ADMINISTRATIVO'] } },
+        { path: 'home', component: HomeComponent, canActivate: [roleGuard], data: { roles: ['ROLE_MEDICO', 'ROLE_ADMINISTRATIVO'] } },
+        { path: 'usuarios', component: UsuarioComponent, canActivate: [roleGuard], data: { roles: ['ROLE_ADMINISTRATIVO'] } },
+        { path: 'usuarios/editar/:id', component: EditarUsuariosComponent, canActivate: [roleGuard], data: { roles: ['ROLE_ADMINISTRATIVO'] } },
+        { path: 'usuarios/cadastrar', component: CadastrarUsuariosComponent, canActivate: [roleGuard], data: { roles: ['ROLE_ADMINISTRATIVO'] } },
+        { path: 'alterar-senha', component: AlteracaoSenhaComponent, canActivate: [roleGuard], data: { roles: ['ROLE_MEDICO', 'ROLE_ADMINISTRATIVO'] } },
 
-        { path: 'pacientes', component: PacientesComponent, canActivate: [roleGuard], data: { roles: ['MEDICO', 'ADMINISTRATIVO'] } },
-        { path: 'pacientes/editar/:id', component: EditarPacienteComponent, canActivate: [roleGuard], data: { roles: ['MEDICO', 'ADMINISTRATIVO'] } },
-        { path: 'pacientes/cadastrar', component: CadastraPacientesComponent, canActivate: [roleGuard], data: { roles: ['MEDICO', 'ADMINISTRATIVO'] } },
 
-        { path: 'medicos', component: MedicosComponent, canActivate: [roleGuard], data: { roles: ['ADMINISTRATIVO'] } },
-        { path: 'medicos/editar/:id', component: EditarMedicoComponent, canActivate: [roleGuard], data: { roles: ['ADMINISTRATIVO'] } },
-        { path: 'medicos/cadastrar', component: CadastraMedicosComponent, canActivate: [roleGuard], data: { roles: ['ADMINISTRATIVO'] } },
+        { path: 'pacientes', component: PacientesComponent, canActivate: [roleGuard], data: { roles: ['ROLE_MEDICO', 'ROLE_ADMINISTRATIVO'] } },
+        { path: 'pacientes/editar/:id', component: EditarPacienteComponent, canActivate: [roleGuard], data: { roles: ['ROLE_MEDICO', 'ROLE_ADMINISTRATIVO'] } },
+        { path: 'pacientes/cadastrar', component: CadastraPacientesComponent, canActivate: [roleGuard], data: { roles: ['ROLE_MEDICO', 'ROLE_ADMINISTRATIVO'] } },
 
-        { path: 'agendamentos', component: AgendamentosComponent, canActivate: [roleGuard], data: { roles: ['MEDICO', 'ADMINISTRATIVO'] } },
-        { path: 'agendamentos/editar/:id', component: EditarAgendamentosComponent, canActivate: [roleGuard], data: { roles: ['MEDICO', 'ADMINISTRATIVO'] } },
-        { path: 'agendamentos/cadastrar', component: CadastrarAgendamentosComponent, canActivate: [roleGuard], data: { roles: ['MEDICO', 'ADMINISTRATIVO'] } },
+        { path: 'medicos', component: MedicosComponent, canActivate: [roleGuard], data: { roles: ['ROLE_ADMINISTRATIVO'] } },
+        { path: 'medicos/editar/:id', component: EditarMedicoComponent, canActivate: [roleGuard], data: { roles: ['ROLE_ADMINISTRATIVO'] } },
+        { path: 'medicos/cadastrar', component: CadastraMedicosComponent, canActivate: [roleGuard], data: { roles: ['ROLE_ADMINISTRATIVO'] } },
 
-        { path: 'consultas', component: ConsultasComponent, canActivate: [roleGuard], data: { roles: ['MEDICO',] } },
-        { path: 'consultas/cadastrar', component: ManterConsultasComponent, canActivate: [roleGuard], data: { roles: ['MEDICO',] } },
-        { path: 'consultas/editar/:id', component: ManterConsultasComponent, canActivate: [roleGuard], data: { roles: ['MEDICO',] } },
+        { path: 'agendamentos', component: AgendamentosComponent, canActivate: [roleGuard], data: { roles: ['ROLE_MEDICO', 'ROLE_ADMINISTRATIVO'] } },
+        { path: 'agendamentos/editar/:id', component: EditarAgendamentosComponent, canActivate: [roleGuard], data: { roles: ['ROLE_MEDICO', 'ROLE_ADMINISTRATIVO'] } },
+        { path: 'agendamentos/cadastrar', component: CadastrarAgendamentosComponent, canActivate: [roleGuard], data: { roles: ['ROLE_MEDICO', 'ROLE_ADMINISTRATIVO'] } },
+
+        { path: 'consultas', component: ConsultasComponent, canActivate: [roleGuard], data: { roles: ['ROLE_MEDICO',] } },
+        { path: 'consultas/cadastrar', component: ManterConsultasComponent, canActivate: [roleGuard], data: { roles: ['ROLE_MEDICO',] } },
+        { path: 'consultas/editar/:id', component: ManterConsultasComponent, canActivate: [roleGuard], data: { roles: ['ROLE_MEDICO',] } },
 
         { path: '', redirectTo: 'home', pathMatch: 'full' }
       ]

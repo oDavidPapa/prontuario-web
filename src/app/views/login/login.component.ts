@@ -42,7 +42,6 @@ export class LoginComponent {
         }
       }),
       catchError(error => {
-        // Em caso de erro (ex: 401)
         this.loginError = 'Usuário ou senha incorretos.';
         return of(null);
       })

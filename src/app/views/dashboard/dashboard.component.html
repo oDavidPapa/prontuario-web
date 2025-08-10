@@ -1,26 +1,26 @@
 <div class="dashboard-container">
   <nav class="sidebar">
-    <a routerLink="/prontuario/home" class="menu-item" *ngIf="hasRole('MEDICO', 'ADMINISTRATIVO')">
+    <a routerLink="/prontuario/home" class="menu-item" *ngIf="hasRole('ROLE_MEDICO', 'ROLE_ADMINISTRATIVO')">
       <i class="fa fa-home"></i>
       <span class="menu-text">Home</span>
     </a>
-    <a routerLink="/prontuario/consultas" class="menu-item" *ngIf="hasRole('MEDICO')">
+    <a routerLink="/prontuario/consultas" class="menu-item" *ngIf="hasRole('ROLE_MEDICO')">
       <i class="fa fa-medkit"></i>
       <span class="menu-text">Consultas</span>
     </a>
-    <a routerLink="/prontuario/agendamentos" class="menu-item" *ngIf="hasRole('ADMINISTRATIVO', 'MEDICO')">
+    <a routerLink="/prontuario/agendamentos" class="menu-item" *ngIf="hasRole('ROLE_ADMINISTRATIVO', 'ROLE_MEDICO')">
       <i class="fa fa-calendar"></i>
       <span class="menu-text">Agendamentos</span>
     </a>
-    <a routerLink="/prontuario/pacientes" class="menu-item" *ngIf="hasRole('ADMINISTRATIVO', 'MEDICO')">
+    <a routerLink="/prontuario/pacientes" class="menu-item" *ngIf="hasRole('ROLE_ADMINISTRATIVO', 'ROLE_MEDICO')">
       <i class="fa fa-user-md"></i>
       <span class="menu-text">Pacientes</span>
     </a>
-    <a routerLink="/prontuario/medicos" class="menu-item" *ngIf="hasRole('ADMINISTRATIVO')">
+    <a routerLink="/prontuario/medicos" class="menu-item" *ngIf="hasRole('ROLE_ADMINISTRATIVO')">
       <i class="fa fa-stethoscope"></i>
       <span class="menu-text">Médicos</span>
     </a>
-    <a routerLink="/prontuario/usuarios" class="menu-item" *ngIf="hasRole('ADMINISTRATIVO')">
+    <a routerLink="/prontuario/usuarios" class="menu-item" *ngIf="hasRole('ROLE_ADMINISTRATIVO')">
       <i class="fa fa-user"></i>
       <span class="menu-text">Usuários</span>
     </a>
@@ -33,7 +33,7 @@
 
       <button class="profile-btn" (click)="editarPerfil()" title="Editar Perfil">
         <i class="fa fa-pencil"></i>
-        <span class="btn-text">Editar Perfil</span>
+        <span class="btn-text">Alterar dados</span>
       </button>
 
       <button class="logout-btn" (click)="logout()" title="Sair">

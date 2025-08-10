@@ -114,6 +114,6 @@ export class AgendamentosComponent {
   }
 
   showCreateConsultaButton(): boolean {
-    return this.authService.hasRole('MEDICO');
+    return this.authService.hasRole('ROLE_MEDICO');
   }
 }

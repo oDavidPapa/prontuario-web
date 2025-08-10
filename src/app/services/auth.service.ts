@@ -20,6 +20,13 @@ export class AuthService {
     );
   }
 
+  changePassword(passwordData: { currentPassword: string, newPassword: string }): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<any>(`${this.apiUrl}api/auth/alterar-senha`, passwordData, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   requestPasswordReset(email: string) {
     return this.http.post<any>(`${this.apiUrl}api/auth/recuperar-senha`, { email });
   }
