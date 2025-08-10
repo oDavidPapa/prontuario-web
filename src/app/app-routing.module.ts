@@ -17,6 +17,7 @@ import { CadastraMedicosComponent } from './views/dashboard/medicos/cadastrar-me
 import { AgendamentosComponent } from './views/dashboard/agendamentos/agendamentos.component';
 import { CadastrarAgendamentosComponent } from './views/dashboard/agendamentos/cadastrar-agendamentos/cadastrar-agendamentos.component';
 import { EditarAgendamentosComponent } from './views/dashboard/agendamentos/editar-agendamentos/editar-agendamentos.component';
+import { roleGuard } from './views/interceptors/role-guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,26 +25,26 @@ const routes: Routes = [
   {
     path: 'prontuario', component: DashboardComponent, children:
       [
-        { path: 'home', component: HomeComponent },
-        { path: 'usuarios', component: UsuarioComponent },
-        { path: 'usuarios/editar/:id', component: EditarUsuariosComponent },
-        { path: 'usuarios/cadastrar', component: CadastrarUsuariosComponent },
+        { path: 'home', component: HomeComponent, canActivate: [roleGuard], data: { roles: ['MEDICO', 'ADMINISTRATIVO'] } },
+        { path: 'usuarios', component: UsuarioComponent, canActivate: [roleGuard], data: { roles: ['ADMINISTRATIVO'] } },
+        { path: 'usuarios/editar/:id', component: EditarUsuariosComponent, canActivate: [roleGuard], data: { roles: ['ADMINISTRATIVO'] } },
+        { path: 'usuarios/cadastrar', component: CadastrarUsuariosComponent, canActivate: [roleGuard], data: { roles: ['ADMINISTRATIVO'] } },
 
-        { path: 'pacientes', component: PacientesComponent },
-        { path: 'pacientes/editar/:id', component: EditarPacienteComponent },
-        { path: 'pacientes/cadastrar', component: CadastraPacientesComponent },
+        { path: 'pacientes', component: PacientesComponent, canActivate: [roleGuard], data: { roles: ['MEDICO', 'ADMINISTRATIVO'] } },
+        { path: 'pacientes/editar/:id', component: EditarPacienteComponent, canActivate: [roleGuard], data: { roles: ['MEDICO', 'ADMINISTRATIVO'] } },
+        { path: 'pacientes/cadastrar', component: CadastraPacientesComponent, canActivate: [roleGuard], data: { roles: ['MEDICO', 'ADMINISTRATIVO'] } },
 
-        { path: 'medicos', component: MedicosComponent },
-        { path: 'medicos/editar/:id', component: EditarMedicoComponent },
-        { path: 'medicos/cadastrar', component: CadastraMedicosComponent },
+        { path: 'medicos', component: MedicosComponent, canActivate: [roleGuard], data: { roles: ['ADMINISTRATIVO'] } },
+        { path: 'medicos/editar/:id', component: EditarMedicoComponent, canActivate: [roleGuard], data: { roles: ['ADMINISTRATIVO'] } },
+        { path: 'medicos/cadastrar', component: CadastraMedicosComponent, canActivate: [roleGuard], data: { roles: ['ADMINISTRATIVO'] } },
 
-        { path: 'agendamentos', component: AgendamentosComponent },
-        { path: 'agendamentos/editar/:id', component: EditarAgendamentosComponent },
-        { path: 'agendamentos/cadastrar', component: CadastrarAgendamentosComponent },
+        { path: 'agendamentos', component: AgendamentosComponent, canActivate: [roleGuard], data: { roles: ['MEDICO', 'ADMINISTRATIVO'] } },
+        { path: 'agendamentos/editar/:id', component: EditarAgendamentosComponent, canActivate: [roleGuard], data: { roles: ['MEDICO', 'ADMINISTRATIVO'] } },
+        { path: 'agendamentos/cadastrar', component: CadastrarAgendamentosComponent, canActivate: [roleGuard], data: { roles: ['MEDICO', 'ADMINISTRATIVO'] } },
 
-        { path: 'consultas', component: ConsultasComponent },
-        { path: 'consultas/cadastrar', component: ManterConsultasComponent },
-        { path: 'consultas/editar/:id', component: ManterConsultasComponent },
+        { path: 'consultas', component: ConsultasComponent, canActivate: [roleGuard], data: { roles: ['MEDICO',] } },
+        { path: 'consultas/cadastrar', component: ManterConsultasComponent, canActivate: [roleGuard], data: { roles: ['MEDICO',] } },
+        { path: 'consultas/editar/:id', component: ManterConsultasComponent, canActivate: [roleGuard], data: { roles: ['MEDICO',] } },
 
         { path: '', redirectTo: 'home', pathMatch: 'full' }
       ]

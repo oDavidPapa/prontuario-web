@@ -7,6 +7,7 @@ import { PaginatedResponse } from "../../../models/pagination.model";
 import { Router } from "@angular/router";
 import { faNotesMedical } from "@fortawesome/free-solid-svg-icons";
 import { FilterField } from "../../../models/filter-field.model";
+import { AuthService } from "../../../services/auth.service";
 
 @Component({
   selector: 'app-agendamentos',
@@ -16,9 +17,13 @@ import { FilterField } from "../../../models/filter-field.model";
 
 export class AgendamentosComponent {
 
-  iconButtons = [
-    { icon: faNotesMedical, actionName: 'createConsulta', tooltip: 'Gerar consulta' },
-  ];
+  get iconButtons() {
+    const buttons = [];
+    if (this.showCreateConsultaButton()) {
+      buttons.push({ icon: faNotesMedical, actionName: 'createConsulta', tooltip: 'Gerar consulta' });
+    }
+    return buttons;
+  }
 
   agendamentos: Agendamento[] = [];
   columns: Column[] = [
@@ -45,7 +50,7 @@ export class AgendamentosComponent {
   pageSize: number = 10;
   totalItems: number = 0;
 
-  constructor(private agendamentoService: AgendamentoService, private router: Router) { }
+  constructor(private agendamentoService: AgendamentoService, private authService: AuthService, private router: Router) { }
 
 
   ngOnInit(): void {
@@ -106,5 +111,9 @@ export class AgendamentosComponent {
         )
         .subscribe();
     }
+  }
+
+  showCreateConsultaButton(): boolean {
+    return this.authService.hasRole('MEDICO');
   }
 }

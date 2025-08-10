@@ -1,26 +1,26 @@
 <div class="dashboard-container">
   <nav class="sidebar">
-    <a routerLink="/prontuario/home" class="menu-item">
+    <a routerLink="/prontuario/home" class="menu-item" *ngIf="hasRole('MEDICO', 'ADMINISTRATIVO')">
       <i class="fa fa-home"></i>
       <span class="menu-text">Home</span>
     </a>
-    <a routerLink="/prontuario/consultas" class="menu-item">
+    <a routerLink="/prontuario/consultas" class="menu-item" *ngIf="hasRole('MEDICO')">
       <i class="fa fa-medkit"></i>
       <span class="menu-text">Consultas</span>
     </a>
-    <a routerLink="/prontuario/agendamentos" class="menu-item">
+    <a routerLink="/prontuario/agendamentos" class="menu-item" *ngIf="hasRole('ADMINISTRATIVO', 'MEDICO')">
       <i class="fa fa-calendar"></i>
       <span class="menu-text">Agendamentos</span>
     </a>
-    <a routerLink="/prontuario/pacientes" class="menu-item">
+    <a routerLink="/prontuario/pacientes" class="menu-item" *ngIf="hasRole('ADMINISTRATIVO', 'MEDICO')">
       <i class="fa fa-user-md"></i>
       <span class="menu-text">Pacientes</span>
     </a>
-    <a routerLink="/prontuario/medicos" class="menu-item">
+    <a routerLink="/prontuario/medicos" class="menu-item" *ngIf="hasRole('ADMINISTRATIVO')">
       <i class="fa fa-stethoscope"></i>
       <span class="menu-text">Médicos</span>
     </a>
-    <a routerLink="/prontuario/usuarios" class="menu-item">
+    <a routerLink="/prontuario/usuarios" class="menu-item" *ngIf="hasRole('ADMINISTRATIVO')">
       <i class="fa fa-user"></i>
       <span class="menu-text">Usuários</span>
     </a>

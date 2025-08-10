@@ -24,4 +24,28 @@ export class AuthService {
     console.error('Erro no serviço de autenticação:', error);
     return throwError(() => new Error(error.message));
   }
+
+  saveAuthData(token: string, roles: string[]): void {
+    localStorage.setItem('token', token);
+    localStorage.setItem('roles', JSON.stringify(roles));
+  }
+
+  getRoles(): string[] {
+    const roles = localStorage.getItem('roles');
+    return roles ? JSON.parse(roles) : [];
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('roles');
+  }
+
+  hasRole(...roles: string[]): boolean {
+    const userRoles = this.getRoles();
+    return roles.some(role => userRoles.includes(role));
+  }
 }
