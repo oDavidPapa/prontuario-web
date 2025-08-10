@@ -67,6 +67,7 @@ export class HeaderComponent implements OnInit {
     } else {
       this.title = '';
       this.showRegisterButton = false;
+      this.showHeader = false;
     }
   }
 
