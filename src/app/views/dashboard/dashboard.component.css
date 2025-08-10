@@ -1,15 +1,3 @@
-body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #023047;
-    height: 100%;
-}
-
-html {
-    height: 100%;
-}
-
 .dashboard-container {
     display: flex;
     height: 100vh;
@@ -97,19 +85,120 @@ html {
     overflow-y: auto;
 }
 
-.header img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 15px;
+.sidebar-footer {
+    margin-top: auto;
+    padding: 15px 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    width: 100%;
+    color: #fff;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
 }
 
-.header h1 {
-    font-size: 28px;
-    font-weight: 600;
-    color: #023047;
-    margin: 0;
-    line-height: 1.2;
+/* Área com nome e login do usuário */
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Nome e login aparecem só quando sidebar aberta */
+.sidebar:hover .sidebar-footer .user-info > div {
+    display: block;
     text-align: center;
+    white-space: normal;
+    word-break: break-word;
+}
+
+/* Nome e login escondidos quando sidebar recolhida */
+.sidebar:not(:hover) .sidebar-footer .user-info > div {
+    display: none;
+}
+
+/* Quando recolhido, mostra só a inicial */
+.sidebar:not(:hover) .sidebar-footer .user-info::before {
+    content: attr(data-initial);
+    font-weight: 700;
+    font-size: 20px;
+    display: block;
+    color: white;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 2px;
+
+    white-space: normal;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 3em;
+    width: 100%;
+    text-align: center;
+}
+
+.user-login {
+    font-size: 12px;
+    opacity: 0.7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    text-align: center;
+}
+
+/* Botões Editar Perfil e Sair */
+.profile-btn, .logout-btn {
+    width: 100%;
+    padding: 8px 0;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: white;
+    background-color: #0288D1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+}
+
+/* Cor hover para os botões */
+.profile-btn:hover, .logout-btn:hover {
+    background-color: #0277BD;
+}
+
+/* Ícones sempre visíveis */
+.profile-btn i, .logout-btn i {
+    font-size: 18px;
+}
+
+/* Texto dos botões só aparece quando sidebar aberta */
+.sidebar:not(:hover) .profile-btn .btn-text,
+.sidebar:not(:hover) .logout-btn .btn-text {
+    display: none;
+}
+
+/* Quando sidebar aberta, alinha texto e ícone à esquerda */
+.sidebar:hover .profile-btn,
+.sidebar:hover .logout-btn {
+    justify-content: flex-start;
+    padding-left: 20px;
+}
+
+.sidebar:hover .profile-btn .btn-text,
+.sidebar:hover .logout-btn .btn-text {
+    display: inline;
 }

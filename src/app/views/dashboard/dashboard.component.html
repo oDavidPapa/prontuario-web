@@ -24,7 +24,25 @@
       <i class="fa fa-user"></i>
       <span class="menu-text">Usuários</span>
     </a>
+
+    <div class="sidebar-footer">
+      <div class="user-info" [attr.data-initial]="nomeUsuario.charAt(0)">
+        <div class="user-name">{{ nomeUsuario }}</div>
+        <div class="user-login">{{ loginUsuario }}</div>
+      </div>
+
+      <button class="profile-btn" (click)="editarPerfil()" title="Editar Perfil">
+        <i class="fa fa-pencil"></i>
+        <span class="btn-text">Editar Perfil</span>
+      </button>
+
+      <button class="logout-btn" (click)="logout()" title="Sair">
+        <i class="fa fa-sign-out"></i>
+        <span class="btn-text">Sair</span>
+      </button>
+    </div>
   </nav>
+
   <div class="content">
     <app-header></app-header>
     <router-outlet></router-outlet>
