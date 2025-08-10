@@ -12,11 +12,18 @@
         <!-- Formulário de Login -->
         <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
             <div class="input-container">
-                <input type="text" id="username" placeholder="Digite seu usuário" required [(ngModel)]="username" name="username">
+                <input type="text" id="username" placeholder="Digite seu usuário" required [(ngModel)]="username"
+                    name="username">
             </div>
             <div class="input-container">
-                <input type="password" id="password" placeholder="Digite sua senha" required [(ngModel)]="password" name="password">
+                <input type="password" id="password" placeholder="Digite sua senha" required [(ngModel)]="password"
+                    name="password">
             </div>
+
+            <div *ngIf="loginError" class="error-message">
+                {{ loginError }}
+            </div>
+
             <a href="#">Esqueceu a senha?</a>
             <button type="submit" class="btn">Entrar</button>
         </form>

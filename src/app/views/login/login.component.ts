@@ -13,6 +13,8 @@ import { jwtDecode } from 'jwt-decode';
 export class LoginComponent {
   username: string = '';
   password: string = '';
+  loginError: string | null = null; 
+
 
   constructor(private router: Router,
     private authService: AuthService
@@ -27,20 +29,26 @@ export class LoginComponent {
     };
 
     this.authService.login(authRequest).pipe(
+      tap(response => {
+        if (response?.token) {
+          this.storeToken(response.token);
+
+          const decoded: any = jwtDecode(response.token);
+          localStorage.setItem('roles', JSON.stringify(decoded.roles || decoded.authorities || []));
+
+          this.redirectToDashboard();
+        } else {
+          this.loginError = 'Usuário ou senha incorretos.';
+        }
+      }),
       catchError(error => {
+        // Em caso de erro (ex: 401)
+        this.loginError = 'Usuário ou senha incorretos.';
         return of(null);
       })
-    ).subscribe(response => {
-      if (response.token) {
-        this.storeToken(response.token);
-
-        const decoded: any = jwtDecode(response.token);
-        localStorage.setItem('roles', JSON.stringify(decoded.roles || decoded.authorities || []));
-
-        this.redirectToDashboard();
-      }
-    });
+    ).subscribe();
   }
+
   private redirectToDashboard(): void {
     this.router.navigate(['/prontuario']);
   }
