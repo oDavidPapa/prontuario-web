@@ -1,0 +1,18 @@
+<div class="page">
+    <div class="formRecover">
+        <h2>Recuperar Senha</h2>
+
+        <!-- Form aparece se não tiver mensagem de sucesso -->
+        <form *ngIf="!message" (ngSubmit)="onSubmit()" #formRecover="ngForm">
+            <input type="email" placeholder="Digite seu e-mail" name="email" [(ngModel)]="email" required />
+            <button type="submit" [disabled]="!formRecover.form.valid">Enviar link de recuperação</button>
+        </form>
+
+        <!-- Mensagens -->
+        <div *ngIf="message" class="message">{{ message }}</div>
+        <div *ngIf="error" class="error">{{ error }}</div>
+
+        <!-- Botão voltar aparece só após mensagem de sucesso -->
+        <button *ngIf="message" class="btn" (click)="goBack()">Voltar ao Login</button>
+    </div>
+</div>

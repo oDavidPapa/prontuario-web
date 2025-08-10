@@ -18,9 +18,11 @@ import { AgendamentosComponent } from './views/dashboard/agendamentos/agendament
 import { CadastrarAgendamentosComponent } from './views/dashboard/agendamentos/cadastrar-agendamentos/cadastrar-agendamentos.component';
 import { EditarAgendamentosComponent } from './views/dashboard/agendamentos/editar-agendamentos/editar-agendamentos.component';
 import { roleGuard } from './views/interceptors/role-guard';
+import { RecuperarSenhaRequestComponent } from './views/login/recuperacao-senha/recuperacao-senha.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'recuperar-senha', component: RecuperarSenhaRequestComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'prontuario', component: DashboardComponent, children:

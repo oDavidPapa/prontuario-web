@@ -52,6 +52,7 @@ import { PaginationControlComponent } from './views/dashboard/base/pagination/pa
 import { FilterComponent } from './views/dashboard/base/filter/filter.component';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { RecuperarSenhaRequestComponent } from './views/login/recuperacao-senha/recuperacao-senha.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +100,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     AgendamentosComponent,
     CadastrarAgendamentosComponent,
     EditarAgendamentosComponent,
+    RecuperarSenhaRequestComponent,
 
   ],
 
