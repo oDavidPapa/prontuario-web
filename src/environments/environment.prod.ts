@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://api-prd'
+    apiUrl: 'https://ufes-prontuario.onrender.com/'
   };
