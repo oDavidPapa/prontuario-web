@@ -61,9 +61,6 @@ export class EditarUsuariosComponent implements OnInit {
                         celular: usuario.contato?.celular,
                         idPessoa: usuario.pessoa.id
                     });
-
-                    console.log(response);
-
                 } else {
                     console.error('Erro ao carregar dados do usuário');
                 }

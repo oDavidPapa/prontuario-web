@@ -110,7 +110,6 @@ export class EditarMedicoComponent implements OnInit {
 
   onContatosAtualizados(contatos: any[]): void {
     console.log('Contatos atualizados:', contatos);
-    // Aqui você pode adicionar a lógica para integrar os dados de contatos com os dados do medico
   }
 }
 

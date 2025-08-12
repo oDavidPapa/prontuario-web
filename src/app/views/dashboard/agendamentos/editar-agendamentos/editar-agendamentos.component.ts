@@ -141,18 +141,15 @@ export class EditarAgendamentosComponent implements OnInit {
                         dataAgendamentoConsulta: this.formatToDatetimeLocal(agendamento.agenda.data),
                         descricao: agendamento.agenda.descricao,
                     });
-
-                    console.log(response);
-
                 } else {
                     console.error('Erro ao carregar dados do usuário');
                 }
             }),
             catchError(error => {
                 console.error('Erro ao carregar dados do usuário', error);
-                return of(null); // Retorna um Observable vazio em caso de erro
+                return of(null); 
             })
-        ).subscribe(); // Apenas para garantir que a pipe seja executada
+        ).subscribe();
     }
 
     private formatToDatetimeLocal(dateString: string): string {
@@ -162,7 +159,7 @@ export class EditarAgendamentosComponent implements OnInit {
         const pad = (n: number) => n.toString().padStart(2, '0');
 
         const year = date.getFullYear();
-        const month = pad(date.getMonth() + 1); // Mês começa do 0
+        const month = pad(date.getMonth() + 1);
         const day = pad(date.getDate());
         const hours = pad(date.getHours());
         const minutes = pad(date.getMinutes());
