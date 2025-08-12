@@ -48,7 +48,7 @@
             </div>
         </mat-tab>
 
-        <mat-tab label="Anamnèse">
+        <mat-tab label="Anamnèse" [disabled]="!isEditing">
             <div class="form-container">
                 <mat-form-field appearance="fill">
                     <mat-label>Relato do Paciente</mat-label>
@@ -61,7 +61,7 @@
             </div>
         </mat-tab>
 
-        <mat-tab label="Diagnósticos">
+        <mat-tab label="Diagnósticos" [disabled]="!isEditing">
             <div class="form-container">
                 <mat-form-field appearance="fill">
                     <mat-label>Diagnóstico</mat-label>
@@ -80,13 +80,13 @@
             </div>
 
         </mat-tab>
-        <mat-tab label="Alergias">
+        <mat-tab label="Alergias" [disabled]="!isEditing">
             <div class="form-container">
-                <app-alergia-paciente [idPaciente]="idPaciente"></app-alergia-paciente>
+                <app-alergia-paciente></app-alergia-paciente>
             </div>
         </mat-tab>
 
-        <mat-tab label="Prescrições Médicas">
+        <mat-tab label="Prescrições Médicas" [disabled]="!isEditing">
             <div class="form-container">
                 <mat-form-field appearance="fill">
                     <mat-label>Orientações Médicas</mat-label>
@@ -105,7 +105,7 @@
             </div>
         </mat-tab>
 
-        <mat-tab label="Tratamentos">
+        <mat-tab label="Tratamentos" [disabled]="!isEditing">
             <div class="form-container">
                 <mat-form-field appearance="fill">
                     <mat-label>Tratamento</mat-label>
@@ -117,12 +117,12 @@
                 </div>
             </div>
         </mat-tab>
-        <mat-tab label="Solicitação de Exames">
+        <mat-tab label="Solicitação de Exames" [disabled]="!isEditing">
             <div class="form-container">
                 <app-exame-consulta [idConsulta]="idConsulta"></app-exame-consulta>
             </div>
         </mat-tab>
-        <mat-tab label="Arquivos">
+        <mat-tab label="Arquivos" [disabled]="!isEditing">
             <div class="form-container">
                 <app-upload-arquivo [idConsulta]="idConsulta"></app-upload-arquivo>
             </div>

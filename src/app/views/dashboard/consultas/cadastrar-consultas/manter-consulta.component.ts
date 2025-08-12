@@ -16,6 +16,7 @@ import { TratamentoService } from "../../../../services/tratamento.service";
 import { PrescricaoConsultaService } from "../../../../services/prescricao-consulta.service";
 import { UploadArquivoComponent } from "../arquivo/upload-arquivo.component";
 import { ResumoComponent } from "../resumo/resumo.component";
+import { AlergiaPacienteComponent } from "../../pacientes/alergia-paciente/alergia-paciente.component";
 
 @Component({
     selector: 'app-manter-consulta',
@@ -26,6 +27,8 @@ export class ManterConsultasComponent implements OnInit {
 
     @ViewChild(UploadArquivoComponent) uploadArquivoComponent!: UploadArquivoComponent;
     @ViewChild(ResumoComponent) resumoComponent!: ResumoComponent;
+    @ViewChild(AlergiaPacienteComponent) alergiaPacienteComponent!: AlergiaPacienteComponent;
+
 
 
     consultaForm!: FormGroup;
@@ -88,7 +91,7 @@ export class ManterConsultasComponent implements OnInit {
     adicionarCid() {
         if (this.selectedCid && !this.diagnosticoCids.includes(this.selectedCid)) {
             this.diagnosticoCids.push(this.selectedCid);
-            this.selectedCid = null; 
+            this.selectedCid = null;
         }
     }
 
@@ -99,7 +102,7 @@ export class ManterConsultasComponent implements OnInit {
 
     onPacienteChange(event: any): void {
         this.selectedPaciente = this.pacientes.find(p => p.id == event.value.id);
-        this.searchTerm = ''; 
+        this.searchTerm = '';
         this.idPaciente = this.selectedPaciente?.id;
     }
 
@@ -532,7 +535,7 @@ export class ManterConsultasComponent implements OnInit {
 
     }
 
-    loadExame(): void {}
+    loadExame(): void { }
 
     loadPrescricao(): void {
         this.carregarPrescricao();
@@ -545,7 +548,7 @@ export class ManterConsultasComponent implements OnInit {
 
     loadAlergia(): void {
         this.idPaciente = this.selectedPaciente?.id;
-
+        this.alergiaPacienteComponent.ngOnInit();
     }
 
     loadArquivo(): void {

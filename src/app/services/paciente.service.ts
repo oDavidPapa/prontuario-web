@@ -34,6 +34,11 @@ export class PacienteService {
     return this.http.get<Paciente>(`${this.apiUrl}/${id}`);
   }
 
+    getPacienteByConsultaId(idConsulta: number): Observable<any> {
+    return this.http.get<Paciente>(`${this.apiUrl}/consulta/${idConsulta}`);
+  }
+
+
   updatePaciente(id: number, paciente: PacienteCadastroDTO): Observable<any> {
     return this.http.put<void>(`${this.apiUrl}/${id}`, paciente);
   }

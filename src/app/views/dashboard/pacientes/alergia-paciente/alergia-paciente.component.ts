@@ -6,18 +6,21 @@ import { AlertService } from '../../base/alert/alert.service';
 import { PaginatedResponse } from '../../../../models/pagination.model';
 import { AlergiaPaciente } from '../../../../models/alergia-paciente.model';
 import { AlergiaPacienteService } from '../../../../services/alergia-paciente.service';
+import { PacienteService } from '../../../../services/paciente.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-alergia-paciente',
   templateUrl: './alergia-paciente.component.html',
   styleUrls: ['./alergia-paciente.component.css']
 })
-export class AlergiaPacienteComponent implements OnInit, OnChanges {
+export class AlergiaPacienteComponent implements OnInit {
   alergiaPacienteForm!: FormGroup;
-
+  idConsulta: any;
+  @Input() idPaciente?: any;
   alergias: AlergiaPaciente[] = [];
 
-  @Input() idPaciente!: number;
+
   @Output() alergiasAtualizadas = new EventEmitter<any[]>();
 
   columns: Column[] = [
@@ -27,18 +30,15 @@ export class AlergiaPacienteComponent implements OnInit, OnChanges {
   constructor(
     private fb: FormBuilder,
     private alergiaPacienteService: AlergiaPacienteService,
+    private pacienteService: PacienteService,
+    private route: ActivatedRoute,
     private alertService: AlertService) { }
 
   ngOnInit(): void {
+    this.reloadConsultaId();
+    this.loadPaciente();
     this.initializeForm();
     this.loadAlergias()
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['idPaciente'] && this.idPaciente) {
-      this.initializeForm();
-      this.loadAlergias()
-    }
   }
 
   private initializeForm(): void {
@@ -84,7 +84,7 @@ export class AlergiaPacienteComponent implements OnInit, OnChanges {
         }),
         catchError(error => {
           this.alertService.error('Erro!', 'Erro ao cadastrar a alergia.');
-          return of(null); // Retorna um Observable vazio para continuar o fluxo
+          return of(null); 
         })
       ).subscribe();
     }
@@ -102,5 +102,29 @@ export class AlergiaPacienteComponent implements OnInit, OnChanges {
         console.error('Erro ao remover alergia:', error);
       }
     );
+  }
+
+  private loadPaciente(): void {
+    if (!this.idConsulta) {
+      return;
+    }
+    this.pacienteService.getPacienteByConsultaId(this.idConsulta).pipe(
+      tap(response => {
+        if (response.success) {
+          const paciente = response.data;
+          this.idPaciente = paciente.id;
+        } else {
+          console.error('Erro ao carregar dados do paciente');
+        }
+      }),
+      catchError(error => {
+        return of(null);
+      })
+    ).subscribe();
+  }
+
+
+  private reloadConsultaId() {
+    this.idConsulta = this.route.snapshot.paramMap.get('id');
   }
 }

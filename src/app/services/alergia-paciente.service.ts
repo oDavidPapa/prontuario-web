@@ -30,6 +30,20 @@ export class AlergiaPacienteService {
         return this.http.get<PaginatedResponse<AlergiaPaciente>>(this.apiUrl, { params });
     }
 
+    
+    getAlergiasByConsulta (idConsulta: number, page: number = 0, size: number = 10): Observable<PaginatedResponse<AlergiaPaciente>> {
+        if (!idConsulta) {
+            return EMPTY;
+        }
+
+        const params = new HttpParams()
+            .set('idConsulta', idConsulta.toString())
+            .set('page', page.toString())
+            .set('size', size.toString());
+
+        return this.http.get<PaginatedResponse<AlergiaPaciente>>(`${this.apiUrl}/consulta`, { params });
+    }
+
     delete(id: number): Observable<void> {
         return this.http.delete<void>(`${this.apiUrl}/${id}`);
     }
